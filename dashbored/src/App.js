@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useReducer, useEffect} from 'react';
+import { storeReducer, data, db, actions } from './Store'
 import logo from './logo.svg';
 import './App.css';
-import firebase from './API/firebase';
+import Dashbrd from './Dashbrd'
+import {fdb,fstorage} from './API/firebase';
 
 const pdf = {
   name: "testfile",
@@ -9,34 +11,30 @@ const pdf = {
   createdAt: Date.now()
 }
 
-const pdfs = [];
+
 
 function App() {
-const [pdfdocument, setpdfdocument] = useState([]);
+  const [state, dispatch] = useReducer(storeReducer, data)
+    //firebase.ref("pdflist").push(pdf);
 
-  firebase.ref("pdflist").push(pdf);
-
-  useEffect(() => {
-    const PEvents = snapshot => {
-      snapshot.forEach(function (data) {
-        pdfs.push(data.val());
-      });
-      
-      setpdfdocument(pdfs);
-      debugger;
-
-    }
-    firebase.ref("pdflist").on("value", PEvents);
-  },[setpdfdocument]);
+    useEffect(() => {
+      const PEvents = snapshot => {
+          const pdfs = [];
+          snapshot.forEach(function (data) {
+              pdfs.push(data.val());
+          });
+          dispatch({type:actions.SetPdfs, pdfs:pdfs, Loading:false});
+        debugger;
+      }
+      fdb.ref("pdflist").on("value", PEvents);
+    },[dispatch]);
 
   return (
+    <db.Provider value={{ state, dispatch }}>
     <div className="App">
-      <header className="App-header">
-         {pdfs.map(pdfitem => pdfitem.name)}
-
-
-      </header>
+     {(state.Loading)?(<>Loading...</>):(<Dashbrd />)}
     </div>
+    </db.Provider>
   );
 }
 
