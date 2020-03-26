@@ -1,5 +1,7 @@
 const actions = {
-   SetPdfs:"SetPdfs"
+   SetPdfs:"SetPdfs",
+   AddPdf:"AddPdf",
+   DeletePdf:"DeletePdf"
 }
 
 export default actions
