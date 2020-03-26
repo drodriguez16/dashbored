@@ -1,42 +1,72 @@
-import React, {useState, useEffect} from 'react';
+import React, {useReducer, useEffect} from 'react';
+import { storeReducer, data, db, actions } from './Store'
 import logo from './logo.svg';
 import './App.css';
-import firebase from './API/firebase';
+import Dashbrd from './Dashbrd'
+import {fdb,fstorage} from './API/firebase';
 
-const pdf = {
-  name: "testfile",
-  uploadedBy: "John",
-  createdAt: Date.now()
-}
 
-const pdfs = [];
+
 
 function App() {
-const [pdfdocument, setpdfdocument] = useState([]);
+  const [state, dispatch] = useReducer(storeReducer, data);
 
-  firebase.ref("pdflist").push(pdf);
+    //firebase.ref("pdflist").push(pdf);
 
-  useEffect(() => {
-    const PEvents = snapshot => {
-      snapshot.forEach(function (data) {
-        pdfs.push(data.val());
-      });
-      
-      setpdfdocument(pdfs);
-      debugger;
+    // useEffect(() => {
+    //   const PEvents = snapshot => {
+    //       const pdfs = [];
+    //       snapshot.forEach(function (data) {
+    //           pdfs.push(data.val());
+    //       });
+    //       dispatch({type:actions.SetPdfs, pdfs:pdfs, Loading:false});
 
+    //   }
+    //   fdb.ref("pdflist").on("value", PEvents);
+    // },[dispatch]);
+
+
+useEffect(()=>{
+  debugger;
+  fdb.ref("pdfs").on("value",children=>
+  {
+    debugger;
+    const pdfs = [];
+    children.forEach(child=>{
+
+      console.log("new child" + child.key);
+      const pdf = {
+        name: child.val().name,
+        uploadedBy: child.val().uploadedBy,
+        createdAt: child.val().createdAt
     }
-    firebase.ref("pdflist").on("value", PEvents);
-  },[setpdfdocument]);
+
+    pdfs.push(pdf);
+    fstorage.ref("pdfs").child(child.key).getDownloadURL().then(url=>{
+      debugger;
+        pdf.downloadUrl=url;
+        pdf.id = child.key;
+        dispatch({type:actions.AddPdf,pdf:pdf, Loading:false});
+      });
+    });
+});
+},[])
+useEffect(
+  ()=>
+  {
+    fdb.ref("pdfs")
+    .on("child_removed",child=>
+    {
+      dispatch({type:actions.DeletePdf,pdfKey:child.key});
+    });
+},[]);
 
   return (
+    <db.Provider value={{ state, dispatch }}>
     <div className="App">
-      <header className="App-header">
-         {pdfs.map(pdfitem => pdfitem.name)}
-
-
-      </header>
+    <Dashbrd />
     </div>
+    </db.Provider>
   );
 }
 
