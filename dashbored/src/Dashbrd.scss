@@ -1,0 +1,92 @@
+
+[data-theme="web-large"]
+{
+    --Dashbrd-grid-template-areas: 'fileUpload files';
+}
+
+[data-theme="mobile"]
+{
+    --Dashbrd-grid-template-areas: 'fileUpload'
+                                    'files';
+}
+.Dashbrd{
+    grid-area:Dashbrd;
+
+    display: grid;
+    grid-template-areas: var(--Dashbrd-grid-template-areas);
+    grid-template-rows: 1fr 4fr;
+  }
+  .fileUpload{
+  grid-area:fileUpload;
+  outline:1px dashed blue;
+  }
+
+ //Grand Parent
+.files{
+    grid-area:files;
+    // outline:1px dashed blue;
+
+    background-color: white;
+    margin:6%;
+    padding:6%;
+    border-radius:10px;
+
+    display:grid;
+    grid-template-areas:    "file-header"
+                            "file-rows";
+
+}
+//Parent
+.file-header
+{
+    grid-area:file-header;
+
+    display:grid;
+    grid-template-areas:"header-title header-date";
+}
+// Header - body
+.header-title
+{
+    grid-area:header-title;
+}
+.header-date{
+    grid-area:header-date;
+}
+
+//parent
+.file-rows
+{
+    grid-area:file-rows;
+
+    display:grid;
+    grid-template-areas:"the-file-row";
+    -ms-flex-line-pack: center;
+
+}
+
+//Rows
+.the-file-row
+{
+    grid-area:the-file-row;
+
+    border-bottom:1px solid grey;
+
+
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows:45px;
+    grid-template-areas:"the-file the-file-send the-file-date the-file-delete";
+}
+.the-file{
+    grid-area:the-file;
+}
+.the-file-send{
+    grid-area:the-file-send;
+}
+.the-file-date{
+    grid-area:the-file-date;
+}
+.the-file-delete{
+    grid-area:the-file-delete;
+}
+

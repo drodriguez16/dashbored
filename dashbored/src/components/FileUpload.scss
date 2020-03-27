@@ -1,9 +1,5 @@
 .FileUpload {
-    display: flex;
-    flex-flow: column;
-    align-items: left;
-    flex: 30vw;
-    margin-right: 10vw;
+    display: grid;
 }
 
 .form-inline input {
@@ -16,10 +12,37 @@
     border-bottom: 1px solid;
     color: #fff;
     margin-bottom: 4vh;
+    text-indent: -999em;
+
+    z-index:2;
+  }
+
+  .FileDropOverlay
+  {
+    position:absolute;
+    bottom:100px;
+    height:400px;
+    width:400px;
+    background-color:#67bdf175;
+
+    z-index:1;
+
   }
 
   .form-inline input:focus {
     outline: none;
+  }
+
+  .form-inline input::-webkit-input-placeholder {
+    color: #fff;
+  }
+
+  .form-inline input:-ms-input-placeholder {
+    color: #fff;
+  }
+
+  .form-inline input::-ms-input-placeholder {
+    color: #fff;
   }
 
   .form-inline input::placeholder {
@@ -29,9 +52,9 @@
   #item-drop {
       outline: 1px dashed #fff;
       height: 40vh;
-      
-      
+
+
   }
 
 
-  
+

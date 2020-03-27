@@ -1,0 +1,54 @@
+@import url("https://use.typekit.net/iiq8orb.css");
+
+
+[data-theme="web-large"]
+{
+  --Sender-Render-background-color: #0091EA;
+  --Sender-Render-width: 100vw;
+  --Sender-Render-height: 100vh;
+  --Sender-Render-background: #0091EA url("./assets/bkcloud.svg");
+  --Sender-Render-background-repeat: no-repeat;
+  --Sender-Render-background-size: auto;
+  --Sender-Render-background-position: -500px -405px;
+}
+
+[data-theme="mobile"]
+{
+  --Sender-Render-background-color: #0091EA;
+  --Sender-Render-width: 100vw;
+  --Sender-Render-height: 100vh;
+  --Sender-Render-background: #0091EA url("./assets/bkcloud.svg");
+  --Sender-Render-background-repeat: no-repeat;
+  --Sender-Render-background-size: auto;
+  --Sender-Render-background-position: -500px -405px;
+}
+
+
+.Sender-Render {
+  display:grid;
+  grid-template-areas: 'Sender-Component'
+                        'Dashbrd';
+  background-color: var(--Sender-Render-background-color);
+  width: var(--Sender-Render-width);
+  height: var(Sender-Render-height);
+  background:var(--Sender-Render-background);
+  background-repeat: var(--Sender-Render-background-repeat);
+  background-size: var(--Sender-Render-background-size);
+  background-position: var(--Sender-Render-background-position);
+
+}
+.Dashbrd{
+  grid-area:Dashbrd;
+}
+.Sender-Component{
+  grid-area:Sender-Component;
+outline:1px dashed blue;
+}
+
+
+.Logo-Section {
+  padding-top: 4vw;
+  padding-left: 10vh;
+  margin-bottom: 8vh;;
+}
+

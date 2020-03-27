@@ -2,13 +2,17 @@ import React,{useState,useContext} from 'react'
 import {fdb, fstorage} from '../API/firebase'
 import { db, actions } from '../Store'
 import useForm from '../hooks/useForm';
-import "./FileUpload.css";
+import "./FileUpload.scss";
 
 const FileUpload = ()=>
 {
     const {state, dispatch} = useContext(db);
     const [image, setImage] = useState(null);
     const [fields, setFields,reset] = useForm({pdfname:''});
+
+    const [dragging, setDragging] = useState(false);
+    const [draggingOver, setdraggingOver] = useState(false);
+    const [dropit, setDropit] = useState(false);
 
     const hchange=e=>
     {
@@ -24,12 +28,12 @@ const FileUpload = ()=>
           }
         fdb.ref("pdfs").push(pdf).then(child=>
             {
-                
+
                 const uploadTask =  fstorage.ref(`pdfs/${child.key}`).put(image);
                 uploadTask.on('state_changed', progress=>{
-             
+
                 }, err=>{
-          
+
                 }, complete=>{
                     fstorage.ref("pdfs").child(child.key).getDownloadURL().then(url=>{
                         const newpdf = {
@@ -42,36 +46,51 @@ const FileUpload = ()=>
                     })
                 });
         });
- 
+
 
     reset({pdfname:'',Uploader:''});
     }
 
+    const filedropStyle = {
+        backgroundColor:'black'
+    }
     const handleDrop = e=>{
+      //  setDropit(true);
         console.log("handleDrop")
     }
     const handleDragEnter = e=>{
+        setDragging(true)
         console.log("handleDrop")
     }
     const handleDragOver = e=>{
+        setdraggingOver(true)
         console.log("handleDrop")
     }
     const handleDragLeave = e=>{
+        setDragging(true)
+        setdraggingOver(false)
         console.log("handleDrop")
     }
 
     return(
-        <div className="FileUpload form-inline">
-            
-            <input type="text" name="pdfname"  placeholder="Title" value={fields.pdfname} onChange={setFields}
-                onDrop={handleDrop}
-                onDragEnter={handleDragEnter}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
+        <div className="fileUpload form-inline ">
+            <input type="text" name="pdfname"   placeholder="Title" value={fields.pdfname} onChange={setFields}
             />
-            
-            <input type="file" id="item-drop" onChange={hchange} />
-
+            {(dragging)&&(<div className="FileDropOverlay"
+            onDrop={handleDrop}
+            onDragEnter={handleDragEnter}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            >
+                {(draggingOver)?(<div className="DraggingOverContent">Drop it!</div>):((<div className="DraggingOverContent">Teasing me</div>))}
+                </div>)}
+            <input type="file"
+            style={{}}
+            onDrop={handleDrop}
+            onDragEnter={handleDragEnter}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            id="item-drop" onChange={hchange} />
             <button type="button" id="righ-col" onClick={up}>Upload PDF</button>
         </div>
     );

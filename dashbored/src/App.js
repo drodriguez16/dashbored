@@ -1,13 +1,31 @@
-import React, {useReducer, useEffect} from 'react';
+import React, {useReducer, useEffect,useState} from 'react';
 import { storeReducer, data, db, actions } from './Store'
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import Dashbrd from './Dashbrd'
 import {fdb,fstorage} from './API/firebase';
 import Logo from './assets/logo.svg'
+import useViewport from './hooks/useViewport'
 
 function App() {
   const [state, dispatch] = useReducer(storeReducer, data);
+  const {width} = useViewport();
+  const [theme, setTheme] = useState("web-large")
+
+
+useEffect(()=>{
+
+if(width<620)
+{
+  setTheme('mobile')
+}
+else
+{
+  setTheme('web-large')
+}
+
+},[width]);
+
 
 useEffect(()=>{
   debugger;
@@ -43,7 +61,7 @@ useEffect(
 
   return (
     <db.Provider value={{ state, dispatch }}>
-    <div className="Sender-Render">
+    <div className="Sender-Render" data-theme={theme}>
         <div className="Logo-Section">
             <img src={Logo} />
         </div>
