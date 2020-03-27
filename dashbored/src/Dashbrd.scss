@@ -16,11 +16,11 @@
 
     grid-template-areas: var(--Dashbrd-grid-template-areas);
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 4fr;
+
   }
   .fileUpload{
   grid-area:fileUpload;
-  outline:1px dashed blue;
+
   }
 
  //Grand Parent

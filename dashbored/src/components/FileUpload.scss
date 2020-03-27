@@ -9,13 +9,12 @@
 
 .fileUpload{
   display: grid;
-    grid-template-columns: 22vw;
-    justify-self: center;
-    grid-template-rows: 50px auto 50px;
-    grid-area: fileUpload;
-    outline: 1px dashed blue;
-    margin:6%;
-    padding:6%;
+  width: 76%;
+  grid-template-columns: 100%;
+  justify-self: center;
+  grid-template-rows: 50px 237px 46px;
+  margin: 6%;
+  padding: 6%;
 }
 
 
@@ -52,12 +51,21 @@
 
   .FileDropOverlay
   {
-    position:absolute;
-    height: 200px;
-    width: 400px;
-    background-color:#67bdf175;
-
-    z-index:1;
+    display: grid;
+    position: absolute;
+    height: 219px;
+    width: 414px;
+    margin-top: 51px;
+    background-color: #67bdf175;
+    z-index: 1;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    color: #366891;
+    font-size: 1.5em;
+    font-weight: 700;
 
   }
 
@@ -90,6 +98,17 @@
 
 
   }
-
+  .upload-pdf{
+    display:grid;
+  }
+.upload-pdf button
+{
+  background: none;
+    border: none;
+    background-color: #7fc9f566;
+    justify-self: center;
+    padding: 14px 31px;
+    border-radius: 6px;
+}
 
 
