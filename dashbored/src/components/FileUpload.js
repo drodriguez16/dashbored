@@ -74,8 +74,8 @@ const FileUpload = ()=>
 
     return(
         <div className="fileUpload form-inline ">
-            <input type="text" name="pdfname"   placeholder="Title" value={fields.pdfname} onChange={setFields}
-            />
+            <div><input type="text" name="pdfname"   placeholder="Title" value={fields.pdfname} onChange={setFields}
+            /></div>
             {(dragging)&&(<div className="FileDropOverlay"
             onDrop={handleDrop}
             onDragEnter={handleDragEnter}
@@ -84,14 +84,14 @@ const FileUpload = ()=>
             >
                 {(draggingOver)?(<div className="DraggingOverContent">Drop it!</div>):((<div className="DraggingOverContent">Teasing me</div>))}
                 </div>)}
-            <input type="file"
+            <div><input type="file"
             style={{}}
             onDrop={handleDrop}
             onDragEnter={handleDragEnter}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
-            id="item-drop" onChange={hchange} />
-            <button type="button" id="righ-col" onClick={up}>Upload PDF</button>
+            id="item-drop" onChange={hchange} /></div>
+            <div><button type="button" id="righ-col" onClick={up}>Upload PDF</button></div>
         </div>
     );
 }

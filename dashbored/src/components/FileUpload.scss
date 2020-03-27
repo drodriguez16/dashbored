@@ -1,8 +1,41 @@
-.FileUpload {
-    display: grid;
+// .FileUpload {
+//   grid-area: fileUpload;
+//   outline: 1px dashed blue;
+//   display: grid;
+//   padding: 4% 20%;
+// }
+
+
+
+.fileUpload{
+  display: grid;
+    grid-template-columns: 22vw;
+    justify-self: center;
+    grid-template-rows: 50px auto 50px;
+    grid-area: fileUpload;
+    outline: 1px dashed blue;
+    margin:6%;
+    padding:6%;
 }
 
-.form-inline input {
+
+.file-fileUpload{
+  grid-area:files;
+  // outline:1px dashed blue;
+
+  background-color: white;
+  margin:6%;
+  padding:6%;
+  border-radius:10px;
+
+  display:grid;
+  grid-template-areas:    "file-header"
+                          "file-rows";
+                          grid-template-rows: 40px auto;
+
+}
+
+.form-inline  div input {
     background: none;
     font-size: 18px;
     padding: 10px 10px 10px 5px;
@@ -12,7 +45,7 @@
     border-bottom: 1px solid;
     color: #fff;
     margin-bottom: 4vh;
-    text-indent: -999em;
+
 
     z-index:2;
   }
@@ -20,9 +53,8 @@
   .FileDropOverlay
   {
     position:absolute;
-    bottom:100px;
-    height:400px;
-    width:400px;
+    height: 200px;
+    width: 400px;
     background-color:#67bdf175;
 
     z-index:1;
@@ -50,8 +82,11 @@
   }
 
   #item-drop {
+    position:absolute;
       outline: 1px dashed #fff;
-      height: 40vh;
+      height: 200px;
+      width: 400px;
+      text-indent: -999em;
 
 
   }

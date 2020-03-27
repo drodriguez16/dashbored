@@ -27,7 +27,7 @@ const removepdf = (id)=>
                 </div>
             }
             {
-              <div>
+              <div className="file-rows">
                 {
                   state.pdfs.map((pdfitem,key) =>
                   {
@@ -35,7 +35,7 @@ const removepdf = (id)=>
                   return(
                     <div key={key} className="the-file-row">
                         <div className="the-file" >
-                          <a href={`${pdfitem.downloadUrl}`}  download>{pdfitem.name}</a>
+                          <a href={`${pdfitem.downloadUrl}`}  download={`${pdfitem.name}.pdf`}>{pdfitem.name}</a>
                         </div>
                         <div className="the-file-send">
                         <button>Send</button>
@@ -44,7 +44,10 @@ const removepdf = (id)=>
                           {new Date(pdfitem.createdAt).toLocaleString()}
                         </div>
                         <div className="the-file-delete">
-                          <button onClick={e=>removepdf(pdfitem.id)}>Delete</button>
+                          <button onClick={e=>removepdf(pdfitem.id)}>
+                            <div></div>
+                            <div>X</div>
+                            </button>
                         </div>
                         </div>);
                   })

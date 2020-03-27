@@ -13,7 +13,9 @@
     grid-area:Dashbrd;
 
     display: grid;
+
     grid-template-areas: var(--Dashbrd-grid-template-areas);
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 4fr;
   }
   .fileUpload{
@@ -34,6 +36,7 @@
     display:grid;
     grid-template-areas:    "file-header"
                             "file-rows";
+                            grid-template-rows: 40px auto;
 
 }
 //Parent
@@ -43,6 +46,7 @@
 
     display:grid;
     grid-template-areas:"header-title header-date";
+    border-bottom:1px solid #c7c7c7;
 }
 // Header - body
 .header-title
@@ -58,35 +62,122 @@
 {
     grid-area:file-rows;
 
-    display:grid;
-    grid-template-areas:"the-file-row";
-    -ms-flex-line-pack: center;
+
+
+    //grid-template-areas:"the-file-row";
+    height: 100%;
+
+
 
 }
 
 //Rows
 .the-file-row
 {
+
     grid-area:the-file-row;
 
-    border-bottom:1px solid grey;
+    border-bottom:0.5px solid #c7c7c7;
 
 
     display:grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows:45px;
+    grid-auto-rows: minmax(100px, auto);
     grid-template-areas:"the-file the-file-send the-file-date the-file-delete";
 }
 .the-file{
     grid-area:the-file;
+
+    display:grid;
 }
+.the-file > a{
+   text-decoration: none;
+   font-size:1.3em;
+   font-weight:600;
+   letter-spacing: 0.5px;
+   color:grey;
+
+   justify-self: start;
+    -ms-flex-item-align: center;
+        align-self: center;
+}
+.the-file > a:hover{
+
+    color:orangered;
+
+
+
+ }
 .the-file-send{
     grid-area:the-file-send;
+    display:grid;
+}
+.the-file-send > button{
+    justify-self: center;
+    -ms-flex-item-align: center;
+        align-self: center;
+    border:none;
+    background-color:#2bb0ff;
+    border-radius: 14px;
+    padding:4px 20px;
 }
 .the-file-date{
+    display:grid;
     grid-area:the-file-date;
+    align-self: center;
 }
 .the-file-delete{
+    display:grid;
+
     grid-area:the-file-delete;
+
 }
+.the-file-delete button{
+    justify-self: center;
+
+    background: none;
+    border:none;
+    padding:0px;
+position: relative;
+    top:-6px;
+
+}
+.the-file-delete > button div:nth-child(1){
+    position: absolute;
+    border-bottom:1px solid red;
+    border-left:1px solid red;
+    border-top-left-radius:4px;
+    border-bottom-right-radius:4px;
+    height:15px;
+    width:15px;
+-webkit-transform: scale(1.3) rotate(21deg) translate(14px, 0px) skew(-36deg, 10deg);
+transform: scale(1.32) rotate(30deg) translate(3px, -2.5px) skew(-20deg, 10deg);
+
+    z-index:1;
+}
+.the-file-delete > button div:nth-child(2){
+    position: absolute;
+
+display:grid;
+-ms-flex-line-pack: center;
+    align-content: center;
+
+    border-top:1px solid red;
+    border-right:1px solid red;
+    border-bottom:1px solid red;
+
+
+    height:22px;
+    width:40px;
+    z-index:2;
+    margin-left:10px;
+    -webkit-transform: scale(1) translate(2px, -5px);
+            transform: scale(1) translate(2px, -5px);
+
+}
+.the-file-delete > button div:nth-child(2):hover{
+    color:blue;
+}
+
 
