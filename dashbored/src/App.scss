@@ -1,6 +1,5 @@
 @import url("https://use.typekit.net/iiq8orb.css");
 
-
 [data-theme="web-large"]
 {
   --Sender-Render-background-color: #0091EA;
@@ -23,7 +22,6 @@
   --Sender-Render-background-position: -500px -405px;
 }
 
-
 .Sender-Render {
   display:grid;
   grid-template-rows: 20vh 80vh;
@@ -36,17 +34,13 @@
   background-repeat: var(--Sender-Render-background-repeat);
   background-size: var(--Sender-Render-background-size);
   background-position: var(--Sender-Render-background-position);
-
 }
 .Dashbrd{
   grid-area:Dashbrd;
 }
 .Sender-Component{
   grid-area:Sender-Component;
-
 }
-
-
 .Logo-Section {
   -ms-flex-item-align: center;
       align-self: center;

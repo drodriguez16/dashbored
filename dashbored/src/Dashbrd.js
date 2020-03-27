@@ -1,4 +1,4 @@
-import React, {useContext,useEffect} from 'react';
+import React, {useContext,useEffect, useState} from 'react';
 import {db, actions } from './Store'
 import {fdb,fstorage} from './API/firebase';
 import FileUpload from './components/FileUpload';
@@ -8,6 +8,7 @@ import "./Dashbrd.scss";
 function Dashbrd() {
 
 const {state, dispatch} = useContext(db);
+const [color, setColor] = useState('transparent')
 
 const removepdf = (id)=>
 {
@@ -44,9 +45,9 @@ const removepdf = (id)=>
                           {new Date(pdfitem.createdAt).toLocaleString()}
                         </div>
                         <div className="the-file-delete">
-                          <button onClick={e=>removepdf(pdfitem.id)}>
-                            <div></div>
-                            <div>X</div>
+                          <button onClick={e=>removepdf(pdfitem.id)} >
+                            <div  onMouseEnter={() => setColor('transparent')}  onMouseLeave={() => setColor('transparent')} style={{backgroundColor:`${color}`}}></div>
+                            <div onMouseEnter={() => setColor('transparent')}  onMouseLeave={() => setColor('transparent')} style={{backgroundColor:`${color}`}}>X</div>
                             </button>
                         </div>
                         </div>);

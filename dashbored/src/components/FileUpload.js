@@ -69,7 +69,7 @@ const FileUpload = ()=>
         console.log("handleDrop")
     }
     const handleDragLeave = e=>{
-        setDragging(false)
+        setDragging(true)
         setdraggingOver(false)
         console.log("handleDrop")
     }
@@ -79,14 +79,14 @@ const FileUpload = ()=>
 
             <div><input type="text" name="pdfname"   placeholder="Title" value={fields.pdfname} onChange={setFields}
             /></div>
-            {(dragging)&&(<div className="FileDropOverlay"
+            {(dragging )&&(<div className="FileDropOverlay"
             onDrop={handleDrop}
             onDragEnter={handleDragEnter}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             >
                 {(draggingOver)?(<div className="DraggingOverContent">Drop it!</div>):(<div className="DraggingOverContent">
-                   {(dropit)? (<div>{fields.pdfname}</div>):(<div>Teasing me</div>)}
+                   {(dropit && fields.image!==null)? (<div>{`${fields.pdfname===""?'Whatismyname':fields.pdfname}.pdf`}</div>):(<div>Teasing me</div>)}
                     </div>)}
                 </div>)}
             <div><input type="file"
@@ -96,7 +96,10 @@ const FileUpload = ()=>
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             id="item-drop" onChange={hchange} /></div>
-            <div className="upload-pdf"><button type="button" id="righ-col" onClick={up}>Upload PDF</button></div>
+            <div className="upload-pdf">
+                {(fields.pdfname!=="" && image !==null)&&(<button type="button" id="righ-col" onClick={up}>Upload</button>)}
+                {(fields.pdfname ==="" || image=== null)&&(<button style={{backgroundColor:'#80808087'}} disabled type="button" id="righ-col" onClick={up}>Upload</button>)}
+                </div>
         </div>
     );
 }

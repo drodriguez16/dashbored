@@ -156,20 +156,22 @@ transform: scale(1.32) rotate(30deg) translate(3px, -2.5px) skew(-20deg, 10deg);
 
     z-index:1;
 }
+.the-file-delete > button div:nth-child(1):hover{
+     color:white;
+    background-color: red;
+}
 .the-file-delete > button div:nth-child(2){
     position: absolute;
 
 display:grid;
 -ms-flex-line-pack: center;
     align-content: center;
-
     border-top:1px solid red;
     border-right:1px solid red;
     border-bottom:1px solid red;
-
-
+    color:red;
     height:22px;
-    width:40px;
+    width:25px;
     z-index:2;
     margin-left:10px;
     -webkit-transform: scale(1) translate(2px, -5px);
@@ -177,7 +179,8 @@ display:grid;
 
 }
 .the-file-delete > button div:nth-child(2):hover{
-    color:blue;
+    color:orange;
+    background-color: red;
 }
 
 
