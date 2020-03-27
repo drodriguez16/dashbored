@@ -1,83 +1,19 @@
-.App {
-  text-align: center;
+@import url("https://use.typekit.net/iiq8orb.css");
+
+.Sender-Render {
+  background-color: #0091EA;
+  width: 100vw;
+  height: 100vh;
+  background: #0091EA url("./assets/bkcloud.svg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: -500px -405px;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Logo-Section {
+  padding-top: 4vw;
+  padding-left: 10vh; 
+  margin-bottom: 8vh;;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    -webkit-animation: App-logo-spin infinite 20s linear;
-            animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@-webkit-keyframes App-logo-spin {
-  from {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-
-@keyframes App-logo-spin {
-  from {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-
-.ListOfFiles > div
-{
-  display:grid;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
-}
-.ListOfFiles
-{
-  display:grid;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
-}
-.ListOfFiles > div
-{
-  display:grid;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
-}

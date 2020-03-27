@@ -2,36 +2,13 @@ import React,{useState,useContext} from 'react'
 import {fdb, fstorage} from '../API/firebase'
 import { db, actions } from '../Store'
 import useForm from '../hooks/useForm';
+import "./FileUpload.css";
 
 const FileUpload = ()=>
 {
     const {state, dispatch} = useContext(db);
     const [image, setImage] = useState(null);
-    const [fields, setFields,reset] = useForm({pdfname:'',Uploader:''});
-
-
-    const styles = {
-        inputWrapper: 'input-wrapper',
-        inputCover: 'input-cover',
-        helpText: 'help-text',
-        fileName: 'file-name',
-        fileNameStretch: 'file-name spacer',
-        fileExt: 'file-ext',
-        fileDrag: 'file-drag',
-        input: 'input',
-        loader: 'loader',
-        disabled: 'disabled',
-        loading: 'loading',
-        loaderItem: 'loader-item',
-        spacer: 'spacer',
-        button: 'button',
-        hover: 'hover',
-        imagePreview: 'image-preview',
-        preview: 'preview',
-        previewItem: 'preview-item',
-        previews: 'previews'
-      };
-
+    const [fields, setFields,reset] = useForm({pdfname:''});
 
     const hchange=e=>
     {
@@ -43,23 +20,21 @@ const FileUpload = ()=>
 
         const pdf = {
             name: fields.pdfname,
-            uploadedBy: fields.Uploader,
             createdAt: Date.now()
           }
         fdb.ref("pdfs").push(pdf).then(child=>
             {
-                console.log("new child" + child.key);
+                
                 const uploadTask =  fstorage.ref(`pdfs/${child.key}`).put(image);
                 uploadTask.on('state_changed', progress=>{
-                console.log(progress);
+             
                 }, err=>{
-                console.log(err);
+          
                 }, complete=>{
                     fstorage.ref("pdfs").child(child.key).getDownloadURL().then(url=>{
                         const newpdf = {
                                 id:child.key,
                                 name: pdf.name,
-                                uploadedBy: pdf.uploadedBy,
                                 createdAt: pdf.createdAt,
                                 downloadUrl:url
                         }
@@ -67,12 +42,7 @@ const FileUpload = ()=>
                     })
                 });
         });
-        // fdb.ref("pdfs").on("child_added", snapshot=>{
-        //
-
-        // });
-
-
+ 
 
     reset({pdfname:'',Uploader:''});
     }
@@ -91,19 +61,18 @@ const FileUpload = ()=>
     }
 
     return(
-        <div className="FileUpload">
-            <div>FileName</div>
-            <input type="text" name="pdfname" value={fields.pdfname} onChange={setFields}
+        <div className="FileUpload form-inline">
+            
+            <input type="text" name="pdfname"  placeholder="Title" value={fields.pdfname} onChange={setFields}
                 onDrop={handleDrop}
                 onDragEnter={handleDragEnter}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
             />
-            <div>Uploaded by</div>
-            <input type="text" name="Uploader" value={fields.Uploader} onChange={setFields}/>
-            <div>Choose a pdf</div>
-            <input type="file" onChange={hchange} />
-            <button type="button" onClick={up}>Upload PDF</button>
+            
+            <input type="file" id="item-drop" onChange={hchange} />
+
+            <button type="button" id="righ-col" onClick={up}>Upload PDF</button>
         </div>
     );
 }

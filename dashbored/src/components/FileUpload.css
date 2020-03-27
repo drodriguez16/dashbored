@@ -1,0 +1,37 @@
+.FileUpload {
+    display: flex;
+    flex-flow: column;
+    align-items: left;
+    flex: 30vw;
+    margin-right: 10vw;
+}
+
+.form-inline input {
+    background: none;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid;
+    color: #fff;
+    margin-bottom: 4vh;
+  }
+
+  .form-inline input:focus {
+    outline: none;
+  }
+
+  .form-inline input::placeholder {
+    color: #fff;
+  }
+
+  #item-drop {
+      outline: 1px dashed #fff;
+      height: 40vh;
+      
+      
+  }
+
+
+  

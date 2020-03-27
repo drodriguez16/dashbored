@@ -1,0 +1,31 @@
+
+.Sender-Component {
+    padding-left: 10vh; 
+    padding-right: 10vh;
+}
+
+.Sender-Row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.Sender-Column {
+    flex: 50%;
+
+}
+.FileUpload {
+    width: 50vw;
+    height: 60vh;
+}
+
+.ListOfFiles {
+    background-color: #ffffff;
+    width: 50vw;
+    height: 50vh;
+    border-radius: 4px;
+    padding: 40px 20px;
+
+}
+
