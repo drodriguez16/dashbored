@@ -13,51 +13,53 @@ function App() {
   const [theme, setTheme] = useState("web-large")
 
 
-useEffect(()=>{
+  useEffect(()=>{
 
-if(width<620)
-{
-  setTheme('mobile')
-}
-else
-{
-  setTheme('web-large')
-}
-
-},[width]);
-
-
-useEffect(()=>{
-  debugger;
-  fdb.ref("pdfs").on("value",children=>
+  if(width<620)
   {
-    const pdfs = [];
-    children.forEach(child=>{
-
-      console.log("new child" + child.key);
-      const pdf = {
-        name: child.val().name,
-        createdAt: child.val().createdAt
-    }
-
-    pdfs.push(pdf);
-    fstorage.ref("pdfs").child(child.key).getDownloadURL().then(url=>{
-        pdf.downloadUrl=url;
-        pdf.id = child.key;
-        dispatch({type:actions.AddPdf,pdf:pdf, Loading:false});
-      });
-    });
-});
-},[])
-useEffect(
-  ()=>
+    setTheme('mobile')
+  }
+  else
   {
-    fdb.ref("pdfs")
-    .on("child_removed",child=>
+    setTheme('web-large')
+  }
+
+  },[width]);
+
+
+  useEffect(()=>{
+
+    fdb.ref("pdfs").on("value",children=>
     {
-      dispatch({type:actions.DeletePdf,pdfKey:child.key});
+
+      if(!state.fdbInitialized)
+      {
+      dispatch({type:actions.fdbInitialized});
+      const pdfs = [];
+      children.forEach(item=> {
+          pdfs.push({
+          name: item.val().name,
+          createdAt: item.val().createdAt,
+          id:item.key,
+          downloadUrl:item.val().downloadUrl
+
+      })
     });
-},[]);
+      dispatch({type:actions.SetPdfs,pdfs:pdfs, Loading:false});
+    }
+  });
+  },[]);
+
+  useEffect(
+    ()=>
+    {
+      fdb.ref("pdfs")
+      .on("child_removed",child=>
+      {
+        console.log("fdb child_removed")
+        dispatch({type:actions.DeletePdf,pdfKey:child.key});
+      });
+  },[]);
 
   return (
     <db.Provider value={{ state, dispatch }}>

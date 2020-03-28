@@ -1,11 +1,44 @@
+[data-theme="web-large"]
+{
+  --fileUpload-margin: 6%;
+  --fileUpload-padding: 6%;
+  --fileUpload-grid-template-columns: 100%;
+  --fileUpload-div-nth-child2-padding:0px;
+  --fileUpload-div-nth-child1-margin-left: 0px;
+  --fileUpload-div-nth-child1-item-drop-width:400px;
+  --item-drop-width:400px;
+}
+
+[data-theme="mobile"]
+{
+  --fileUpload-margin: 0%;
+  --fileUpload-padding: 0%;
+  --fileUpload-grid-template-columns: 100vw;
+  --fileUpload-div-nth-child1-item-drop-width:77vw;
+  --item-drop-width:82vw;
+  --fileUpload-div-nth-child1-padding:10px 10px;
+  --fileUpload-div-nth-child2-padding:0px 7vw;
+
+  --fileUpload-div-nth-child1-margin-left: 7vw;
+}
+
+[data-file="no-file"]{
+  --fileupload-content:'You can also drag \00000a item here to upload'
+}
+[data-file="file"]{
+  --fileupload-content:''
+}
+.fileUpload div:nth-child(2){
+  padding:var(--fileUpload-div-nth-child2-padding);
+}
 .fileUpload{
   display: grid;
-  width: 76%;
-  grid-template-columns: 100%;
+
+  grid-template-columns:var(--fileUpload-grid-template-columns);
   justify-self: center;
   grid-template-rows: 50px 237px 46px;
-  margin: 6%;
-  padding: 6%;
+  margin: var(--fileUpload-margin);
+  padding: var(--fileUpload-padding);
 }
 .file-fileUpload{
   grid-area:files;
@@ -20,10 +53,10 @@
 
 }
 
-.form-inline  div input {
+.form-inline  div:nth-child(1) input {
     background: none;
     font-size: 18px;
-    padding: 10px 10px 10px 5px;
+    padding: var(--fileUpload-div-nth-child1-padding);
     display: block;
     border: none;
     border-radius: 0;
@@ -31,23 +64,26 @@
     color: #fff;
     margin-bottom: 4vh;
     z-index:2;
-    width: 400px;
+    width:var(--fileUpload-div-nth-child1-item-drop-width);
+    margin-left: var(--fileUpload-div-nth-child1-margin-left)
+
+
   }
 
   .FileDropOverlay
   {
     display: grid;
     position: absolute;
-    height: 219px;
-    width: 414px;
+    height: 200px;
+    width: var(--item-drop-width);
     margin-top: 51px;
     background-color: #67bdf175;
-    z-index: 1;
+
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
     -ms-flex-line-pack: center;
-        align-content: end;
+        align-content: center;
     color: #366891;
     font-size: 1.5em;
     font-weight: 700;
@@ -80,20 +116,21 @@
     position:absolute;
       outline: 1px dashed #fff;
       height: 200px;
-      width: 400px;
+      width: var(--item-drop-width);
+
       color: transparent;
 
 
   }
   #item-drop::before
    {
-    content: 'You can also drag \00000a item here to upload';
+   // content: 'You can also drag \00000a item here to upload';
+    content: var(--fileupload-content);
     display: grid;
     cursor: pointer;
     text-align: center;
     color: white;
     -ms-flex-line-pack: center;
-    /* align-self: center; */
     white-space: pre;
     align-content: center;
     height: 100%;
