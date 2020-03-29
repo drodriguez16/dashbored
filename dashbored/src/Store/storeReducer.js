@@ -1,12 +1,14 @@
-
-
 const storeReducer = (state, action) => {
     switch (action.type) {
+        case "fdbInitialized":
+            return {...state, fdbInitialized:true}
         case "DeletePdf":
             let temppdfs = state.pdfs.filter(item=>item.id!==action.pdfKey);
             return {...state,pdfs: temppdfs}
         case "AddPdf":
-                let templPdfs = state.pdfs;
+            debugger;
+                let templPdfs = state.pdfs.filter(item=>!item.id!==action.pdf.id);
+
                 templPdfs.push(action.pdf);
             return {...state, pdfs:templPdfs, Loading:false}
         case "SetPdfs":

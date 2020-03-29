@@ -2,77 +2,85 @@ import React,{useState,useContext} from 'react'
 import {fdb, fstorage} from '../API/firebase'
 import { db, actions } from '../Store'
 import useForm from '../hooks/useForm';
-import "./FileUpload.css";
+import "./FileUpload.scss";
 
 const FileUpload = ()=>
 {
     const {state, dispatch} = useContext(db);
     const [image, setImage] = useState(null);
     const [fields, setFields,reset] = useForm({pdfname:''});
-
+    const [dragging, setDragging] = useState(false);
+    const [draggingOver, setdraggingOver] = useState(false);
+    const [dropit, setDropit] = useState(false);
     const hchange=e=>
     {
         const upimage =  e.target.files[0];
         setImage(upimage);
     }
-    const up = ()=>
+    const up = e=>
     {
-
-        const pdf = {
-            name: fields.pdfname,
-            createdAt: Date.now()
-          }
-        fdb.ref("pdfs").push(pdf).then(child=>
-            {
-                
-                const uploadTask =  fstorage.ref(`pdfs/${child.key}`).put(image);
-                uploadTask.on('state_changed', progress=>{
-             
-                }, err=>{
-          
-                }, complete=>{
-                    fstorage.ref("pdfs").child(child.key).getDownloadURL().then(url=>{
-                        const newpdf = {
-                                id:child.key,
-                                name: pdf.name,
-                                createdAt: pdf.createdAt,
-                                downloadUrl:url
-                        }
-                        dispatch({type:actions.AddPdf,pdf:newpdf});
-                    })
-                });
+        const key = fdb.ref("pdfs").push().key;
+        const uploadTask =  fstorage.ref(`pdfs/${key}`).put(image);
+        uploadTask.on('state_changed', progress=>{
+        }, err=>{
+        }, complete=>{
+            fstorage.ref("pdfs").child(key).getDownloadURL().then(url=>{
+                const pdf= {
+                        id:key,
+                        name: fields.pdfname,
+                        createdAt: Date.now(),
+                        downloadUrl:url
+                }
+                fdb.ref(`pdfs/${key}`).update(pdf);
+                dispatch({type:actions.AddPdf,pdf:pdf});
+            })
         });
- 
+        reset({pdfname:'',Uploader:''});
 
-    reset({pdfname:'',Uploader:''});
+        setDropit(false);
+        setDragging(false)
+        setdraggingOver(false)
+        image.value = null;
     }
-
     const handleDrop = e=>{
-        console.log("handleDrop")
+      setDropit(true);
+      setdraggingOver(false)
     }
     const handleDragEnter = e=>{
-        console.log("handleDrop")
+        setDragging(true)
     }
     const handleDragOver = e=>{
-        console.log("handleDrop")
+        setdraggingOver(true)
     }
     const handleDragLeave = e=>{
-        console.log("handleDrop")
+        setDragging(true)
+        setdraggingOver(false)
     }
 
     return(
-        <div className="FileUpload form-inline">
-            
-            <input type="text" name="pdfname"  placeholder="Title" value={fields.pdfname} onChange={setFields}
-                onDrop={handleDrop}
-                onDragEnter={handleDragEnter}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-            />
-            
-            <input type="file" id="item-drop" onChange={hchange} />
-
-            <button type="button" id="righ-col" onClick={up}>Upload PDF</button>
+        <div className="fileUpload form-inline " data-file={(fields.pdfname ==="" && !dragging)?"no-file":"file"}>
+            <div><input type="text" name="pdfname"   placeholder="Title" value={fields.pdfname} onChange={setFields}
+            /></div>
+            {(dragging )&&(<div className="FileDropOverlay"
+            onDrop={handleDrop}
+            onDragEnter={handleDragEnter}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            >
+                {(draggingOver)?(<div className="DraggingOverContent">Drop it!</div>):(<div className="DraggingOverContent">
+                   {(dropit && fields.image!==null)? (<div>{`${fields.pdfname===""?'WhatismynameBitch':fields.pdfname}.pdf`}</div>):(<div>Teasing me</div>)}
+                    </div>)}
+                </div>)}
+            <div><input type="file"
+            onDrop={handleDrop}
+            onDragEnter={handleDragEnter}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            id="item-drop" onChange={hchange} /></div>
+            <div className="upload-pdf">
+                {(fields.pdfname!=="" && image !==null)&&(<button type="button" id="righ-col" onClick={up}>Upload</button>)}
+                {(fields.pdfname ==="" || image=== null)&&(<button style={{backgroundColor:'#80808087'}} disabled type="button" id="righ-col" onClick={up}>Upload</button>)}
+                </div>
         </div>
     );
 }

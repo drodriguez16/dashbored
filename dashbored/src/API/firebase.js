@@ -2,8 +2,8 @@ import firebase from 'firebase';
 
 
 var firebaseConfig = {
-    apiKey: "AIzaSyBvK_IH1czkKXsksgZk4TsvYXpzU3MUeC0",
-    authDomain: "dashbrd-152dc.firebaseapp.com",
+    apiKey: `${process.env.REACT_APP_FBKEY}`,
+    authDomain: `${process.env.REACT_APP_AUTHDOMAIN}`,
     databaseURL: "https://dashbrd-152dc.firebaseio.com",
     projectId: "dashbrd-152dc",
     storageBucket: "dashbrd-152dc.appspot.com",

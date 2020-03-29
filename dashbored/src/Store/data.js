@@ -1,4 +1,5 @@
 const data = {
+  fdbInitialized:false,
 Loading:true,
 pdfs:[],
 pdf :{
