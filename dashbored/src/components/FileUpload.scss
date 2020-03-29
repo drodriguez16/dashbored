@@ -7,6 +7,16 @@
   --fileUpload-div-nth-child1-margin-left: 0px;
   --fileUpload-div-nth-child1-item-drop-width:400px;
   --item-drop-width:400px;
+  --webkit-file-upload-button-visibility:hidden;
+
+  --item-drop-color: transparent;
+}
+
+[data-file="no-file"]{
+  --fileupload-content:'You can also drag \00000a item here to upload'
+}
+[data-file="file"]{
+  --fileupload-content:''
 }
 
 [data-theme="mobile"]
@@ -20,14 +30,13 @@
   --fileUpload-div-nth-child2-padding:0px 7vw;
 
   --fileUpload-div-nth-child1-margin-left: 7vw;
+  --webkit-file-upload-button-visibility:visible;
+
+  --item-drop-color: black;
+  --fileupload-content:'';
 }
 
-[data-file="no-file"]{
-  --fileupload-content:'You can also drag \00000a item here to upload'
-}
-[data-file="file"]{
-  --fileupload-content:''
-}
+
 .fileUpload div:nth-child(2){
   padding:var(--fileUpload-div-nth-child2-padding);
 }
@@ -109,7 +118,7 @@
     color: #fff;
   }
   #item-drop::-webkit-file-upload-button {
-    visibility: hidden;
+    visibility:var(--webkit-file-upload-button-visibility);
   }
 
   #item-drop {
@@ -118,7 +127,7 @@
       height: 200px;
       width: var(--item-drop-width);
 
-      color: transparent;
+      color: var(--item-drop-color);
 
 
   }

@@ -12,53 +12,39 @@ function App() {
   const {width} = useViewport();
   const [theme, setTheme] = useState("web-large")
 
-
   useEffect(()=>{
-
-  if(width<620)
-  {
-    setTheme('mobile')
-  }
-  else
-  {
-    setTheme('web-large')
-  }
-
+    if(width<620){
+      setTheme('mobile')
+    }
+    else{
+      setTheme('web-large')
+    }
   },[width]);
 
-
   useEffect(()=>{
-
-    fdb.ref("pdfs").on("value",children=>
-    {
-
-      if(!state.fdbInitialized)
-      {
+    fdb.ref("pdfs").once("value",children=>{
+    if(!state.fdbInitialized){
       dispatch({type:actions.fdbInitialized});
       const pdfs = [];
       children.forEach(item=> {
-          pdfs.push({
+        pdfs.push({
           name: item.val().name,
           createdAt: item.val().createdAt,
           id:item.key,
           downloadUrl:item.val().downloadUrl
-
-      })
-    });
+        })
+      });
       dispatch({type:actions.SetPdfs,pdfs:pdfs, Loading:false});
     }
   });
   },[]);
 
-  useEffect(
-    ()=>
-    {
-      fdb.ref("pdfs")
-      .on("child_removed",child=>
-      {
-        console.log("fdb child_removed")
-        dispatch({type:actions.DeletePdf,pdfKey:child.key});
-      });
+  useEffect(()=>{
+    fdb.ref("pdfs")
+    .on("child_removed",child=>{
+      console.log("fdb child_removed")
+      dispatch({type:actions.DeletePdf,pdfKey:child.key});
+    });
   },[]);
 
   return (
