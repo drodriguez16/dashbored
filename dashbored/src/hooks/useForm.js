@@ -15,6 +15,10 @@ export function useForm(initState) {
   const reset = (model) => {
     setState(model);
   }
-  return [state, handleChange, reset]
+  const isNew =(isnew)=>
+  {
+    setState({...state,isNew:isnew});
+  }
+  return [state, handleChange, reset,isNew]
 }
 export default useForm;

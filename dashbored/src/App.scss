@@ -52,19 +52,63 @@
   grid-area:Sender-Component;
 }
 .Logo-Section {
+  display: grid;
+  align-self: center;
+  grid-template-rows: 136px;
+  grid-template-columns: 200px auto 200px;
+
+}
+.Logo-Section img:nth-child(1) {
+  width: var(--Logo-Section-img-width);
+  justify-self: var(--Logo-Section-img-justify-self);
+  -ms-flex-item-align: var(--Logo-Section-img-align-self);
+      align-self: var(--Logo-Section-img-align-self);
+}
+.Logo-Section img:nth-child(2) {
+  width: 13%;
+  height: 22%;
+}
+
+
+.LoggedOut
+{
+  height:100vh;
+  width:100vw;
   display:grid;
-  justify-self: var(--Logo-Section-justify-self);
+
+  background-color: var(--Sender-Render-background-color);
+  background:var(--Sender-Render-background);
+  background-repeat: var(--Sender-Render-background-repeat);
+  background-size: var(--Sender-Render-background-size);
+  background-position: var(--Sender-Render-background-position);
+}
+
+.LoginForm
+{
+  justify-self: center;
+}
+
+
+.LoggedOut > .Logo-Section{
+  display:grid;
+  justify-self:center;
   -ms-flex-item-align: center;
   align-self: center;
-      margin-left: 6%;
+      margin-left: 0px;
   grid-template-rows: 136px;
 
 }
-.Logo-Section img {
+.LoggedOut img {
   width: var(--Logo-Section-img-width);
   justify-self: var(--Logo-Section-img-justify-self);
   -ms-flex-item-align: var(--Logo-Section-img-align-self);
       align-self: var(--Logo-Section-img-align-self);
 }
 
-
+.logout{
+  width: 50px;
+  height: 50px;
+  grid-column: 3;
+  justify-self: center;
+  align-self: center;
+}
