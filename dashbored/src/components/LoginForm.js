@@ -1,8 +1,10 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import './LoginForm.scss'
-import {fauth} from '../Store';
+import {fauth, firebase} from '../Store';
 import useForm from '../hooks/useForm'
 import validateEmail from  '../Store/utils'
+import SigninProviders from './SigninProviders'
+
 
 const LoginForm = ()=>
 {
@@ -60,6 +62,9 @@ const LoginForm = ()=>
             <div className="Loginbtns">
                 <button onClick={newAccount}>{!fields.isNew?"New":"I have one"}</button>
                 <button onClick={!fields.isNew?login:create}>{!fields.isNew?"Login":"create one"}</button>
+            </div>
+            <div className="Loginbtns">
+                <button onClick={!fields.isNew?login:create}>{!fields.isNew?"Signin with...":"create one"}</button>
             </div>
           </div>
     );

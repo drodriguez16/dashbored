@@ -3,7 +3,7 @@ import firebase from 'firebase';
 
 var firebaseConfig = {
     apiKey: `AIzaSyDqAduBE0OfWKY9X-LqL86lI9rLHOOGBrg`,
-    authDomain: `${process.env.REACT_APP_AUTHDOMAIN}`,
+    authDomain: `dashbrd-152dc.firebaseapp.com`,
     databaseURL: "https://dashbrd-152dc.firebaseio.com",
     projectId: "dashbrd-152dc",
     storageBucket: "dashbrd-152dc.appspot.com",
@@ -18,6 +18,7 @@ var firebaseConfig = {
   const fdb = firebase.database();
   const fstorage = firebase.storage();
 
-  const fauth = firebase.auth();
+  const fauth =new firebase.auth();
+  const auth =firebase.auth;
 
-export {fdb, fstorage, fauth};
+export {firebase,fdb, fstorage, fauth, auth};
