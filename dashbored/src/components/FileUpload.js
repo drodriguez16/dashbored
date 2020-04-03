@@ -19,7 +19,8 @@ const FileUpload = ()=>
     }
     const up = e=>
     {
-        const key = fdb.ref("pdfs").push().key;
+        debugger;
+        const key = fdb.ref(`pdfs/${state.CurrentUser.email.replace(".","")}/`).push().key;
         const uploadTask =  fstorage.ref(`pdfs/${key}`).put(image);
         uploadTask.on('state_changed', progress=>{
         }, err=>{
@@ -31,7 +32,7 @@ const FileUpload = ()=>
                         createdAt: Date.now(),
                         downloadUrl:url
                 }
-                fdb.ref(`pdfs/${key}`).update(pdf);
+                fdb.ref(`pdfs/${state.CurrentUser.email.replace(".","")}/${key}`).update(pdf);
                 dispatch({type:actions.AddPdf,pdf:pdf});
             })
         });

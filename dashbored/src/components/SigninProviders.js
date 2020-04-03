@@ -1,30 +1,37 @@
-import React from 'react'
+import React,{useContext, useState, useCallback} from 'react'
 import './LoginForm.scss'
 import {auth} from '../API/firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-var uiConfig = {
-    signInFlow:"popup",
-    signInOptions: [
-      auth.GoogleAuthProvider.PROVIDER_ID,
-      auth.FacebookAuthProvider.PROVIDER_ID,
-      auth.TwitterAuthProvider.PROVIDER_ID,
-       auth.GithubAuthProvider.PROVIDER_ID,
-      auth.EmailAuthProvider.PROVIDER_ID,
-      auth.PhoneAuthProvider.PROVIDER_ID
-    ],
-    callbacks:{
-        signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-           alert("signInSuccessWithAuthResult")
-            // User successfully signed in.
-            // Return type determines whether we continue the redirect automatically
-            // or whether we leave that to developer to handle.
-            return true;
-          }
-    }
+import {db, actions} from '../Store';
 
-  };
 const SigninProviders = ()=>
-{    return(<StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth()} />);
+{
+    const {state, dispatch}= useContext(db);
+    const [config, setConfig] = useState(null)
+
+    const cb =useCallback((authResult, redirectUrl)=>
+    {
+        debugger;
+        dispatch({type:actions.SetCurrentUser,CurrentUser:{email:authResult.user.email}});
+
+    },[]);
+    const uiConfig = ()=>{
+        return {
+            signInFlow:"popup",
+            signInOptions: [
+                auth.GoogleAuthProvider.PROVIDER_ID,
+                auth.FacebookAuthProvider.PROVIDER_ID,
+                auth.TwitterAuthProvider.PROVIDER_ID,
+                auth.GithubAuthProvider.PROVIDER_ID,
+                // auth.EmailAuthProvider.PROVIDER_ID,
+                auth.PhoneAuthProvider.PROVIDER_ID
+            ],
+            callbacks:{
+                signInSuccessWithAuthResult:cb
+            }
+        };
+    }
+    return(<StyledFirebaseAuth uiConfig={uiConfig()} firebaseAuth={auth()} />);
 }
 
 export default SigninProviders;

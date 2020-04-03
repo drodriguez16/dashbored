@@ -14,7 +14,7 @@ const {width} = useViewport();
 const removepdf = (id)=>
 {
 
-  fdb.ref(`pdfs/${id}`).remove();
+  fdb.ref(`pdfs/${state.CurrentUser.email.replace(".","")}/${id}`).remove();
   fstorage.ref(`pdfs/${id}`).delete();
 }
 

@@ -3,7 +3,10 @@ const storeReducer = (state, action) => {
         case "LogOut":
             return {...state,SignedIn:false}
         case "SignedIn":
-        return {...state,SignedIn:true}
+            return {...state,SignedIn:true}
+        case "SetCurrentUser":
+            debugger;
+            return {...state,CurrentUser:action.CurrentUser}
         case "SignedOut":
             return {...state,SignedOut:false}
         case "fdbInitialized":

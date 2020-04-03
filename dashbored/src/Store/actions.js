@@ -4,7 +4,8 @@ const actions = {
    AddPdf:"AddPdf",
    DeletePdf:"DeletePdf",
    SignedIn:"SignedIn",
-   LogOut:"LogOut"
+   LogOut:"LogOut",
+   SetCurrentUser:"SetCurrentUser"
 
 }
 

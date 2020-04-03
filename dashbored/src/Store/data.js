@@ -1,4 +1,5 @@
 const data = {
+  CurrentUser:{},
   fdbInitialized:false,
   SignedIn:false,
 Loading:true,
