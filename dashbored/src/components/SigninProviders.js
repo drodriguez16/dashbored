@@ -13,14 +13,18 @@ var uiConfig = {
       auth.PhoneAuthProvider.PROVIDER_ID
     ],
     callbacks:{
-        signInSuccess:()=>false
+        signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+           alert("signInSuccessWithAuthResult")
+            // User successfully signed in.
+            // Return type determines whether we continue the redirect automatically
+            // or whether we leave that to developer to handle.
+            return true;
+          }
     }
 
   };
 const SigninProviders = ()=>
-{    return(<div className="LoginForm">
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth()} />
-        </div>);
+{    return(<StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth()} />);
 }
 
 export default SigninProviders;

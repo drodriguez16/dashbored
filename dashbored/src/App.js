@@ -34,6 +34,8 @@ const signout = ()=>
 
 
     fauth.onAuthStateChanged(function(user) {
+
+
       if (user) {
         if (user != null) {
 
