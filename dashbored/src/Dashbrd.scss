@@ -5,7 +5,7 @@
     --Dashbrd-grid-template-areas: 'fileUpload files';
     --file-header-grid-template-areas:"header-title header-date";
     --the-file-row-grid-template-areas:"the-file the-file-send the-file-date the-file-delete";
-    --the-file-row-grid-template-columns: 1fr 1fr 1fr 1fr;
+    --the-file-row-grid-template-columns: 11fr 9fr 4fr 4fr;
     --the-file-row-grid-template-rows:45px;
     --the-file-row-grid-auto-rows: minmax(100px, auto);
 
@@ -123,7 +123,7 @@
     grid-area:the-file-send;
     display:grid;
 }
-.the-file-send > button{
+.the-file-send  button{
     justify-self: var(--the-file-send-button-align-self);
     -ms-flex-item-align: var(--the-file-send-button-align-self);
         align-self: var(--the-file-send-button-align-self);
@@ -131,6 +131,7 @@
     background-color:#2bb0ff;
     border-radius: 14px;
     padding:4px 20px;
+    margin-right:4px;
 }
 .the-file-date{
     display:grid;
@@ -197,4 +198,26 @@
 .the-file-delete > button div:nth-child(2):hover{
     color:orange;
     background-color: red;
+}
+.SendTo input
+{
+    padding-left:10px;
+    padding-right:10px;
+    border-radius: 10px;
+    border:none;
+    box-shadow: 1px 1px 3px -1px #4b3939;
+}
+.SendTo input:focus
+{
+    outline: none;
+    border-radius: 10px;
+    border:0.5px solid #0091EA;
+    box-shadow: 1px 1px 3px -1px #4b3939;
+}
+.SendTo
+{
+    display:grid;
+    grid-template-columns: 4fr 1fr;
+    align-content: center;
+    grid-gap:14px;
 }

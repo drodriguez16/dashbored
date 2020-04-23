@@ -11,7 +11,7 @@ const SigninProviders = ()=>
 
     const cb =useCallback((authResult, redirectUrl)=>
     {
-        debugger;
+        
         dispatch({type:actions.SetCurrentUser,CurrentUser:{email:authResult.user.email}});
 
     },[]);

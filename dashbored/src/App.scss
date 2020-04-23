@@ -45,6 +45,11 @@
   background-size: var(--Sender-Render-background-size);
   background-position: var(--Sender-Render-background-position);
 }
+#InCog{
+ grid-column:3; 
+}
+
+
 .Dashbrd{
   grid-area:Dashbrd;
 }

@@ -1,13 +1,15 @@
 const data = {
-  CurrentUser:{},
-  fdbInitialized:false,
-  SignedIn:false,
-Loading:true,
-pdfs:[],
-pdf :{
+  Settings: { isSettings: true, fullname: '' },
+  CurrentUser: {},
+  fdbInitialized: false,
+  SignedIn: false,
+  Loading: true,
+  pdfs: [],
+  pdf: {
     name: "",
     uploadedBy: "",
-    createdAt: null
+    createdAt: null,
+    size: 0
   }
 }
 export default data
