@@ -8,6 +8,7 @@ import LoginForm from './components/LoginForm';
 import Setting from './components/Settings'
 import HeaderAuthIn from './components/HeaderAuthIn'
 import HeaderAuthOut from './components/HeaderAuthOut'
+import SelectSendTo from './components/SelectSendTo'
 
 function App() {
   const [state, dispatch] = useReducer(storeReducer, data);
@@ -37,7 +38,7 @@ function App() {
             if (!state.fdbInitialized) {
               dispatch({ type: actions.fdbInitialized });
               const pdfs = [];
-              debugger;
+
               children.forEach(item => {
                 pdfs.push({
                   name: item.val().name,
@@ -66,7 +67,7 @@ function App() {
         if (!state.fdbInitialized) {
           dispatch({ type: actions.fdbInitialized });
           const pdfs = [];
-          debugger;
+
           children.forEach(item => {
             pdfs.push({
               name: item.val().name,
@@ -100,6 +101,7 @@ function App() {
           {state.Settings.isSettings ? (<><Setting /></>) :
             (<>
               <Dashbrd />
+              <SelectSendTo />
             </>)}
         </div>)}
     </db.Provider>

@@ -7,7 +7,10 @@ const actions = {
    LogOut: "LogOut",
    SetCurrentUser: "SetCurrentUser",
    UpdateSettings: "UpdateSettings",
-   isSettings: "isSettings"
+   isSettings: "isSettings",
+   isPdfSettings: "isPdfSettings",
+   AssignRecipient: "AssignRecipient",
+   Assign: "Assign"
 
 
 }

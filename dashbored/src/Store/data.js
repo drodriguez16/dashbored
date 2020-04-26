@@ -1,5 +1,6 @@
 const data = {
-  Settings: { isSettings: true, fullname: '' },
+  Settings: { isSettings: false, fullname: '', AvatarName: 'Avatar.jpg' },
+  PdfSettings: { isSettings: false, AssignRecipient: false, Recipient: '' },
   CurrentUser: {},
   fdbInitialized: false,
   SignedIn: false,

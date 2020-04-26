@@ -10,7 +10,7 @@ const HeaderAuthOut = () => {
     }
     return (
         <div className="Logo-Section">
-            <img src={Logo} Style="grid-column:1/4; height: 140px;" alt="" />
+            <img src={Logo} style={{ gridColumn: '1/4', height: '140px' }} alt="" />
         </div>
     )
 }
