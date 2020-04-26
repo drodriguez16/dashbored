@@ -10,7 +10,8 @@ const actions = {
    isSettings: "isSettings",
    isPdfSettings: "isPdfSettings",
    AssignRecipient: "AssignRecipient",
-   Assign: "Assign"
+   Assign: "Assign",
+   Sent: "Sent"
 
 
 }

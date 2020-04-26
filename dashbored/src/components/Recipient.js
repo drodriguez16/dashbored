@@ -5,29 +5,31 @@ import Fab from '@material-ui/core/Fab';
 import CloseIcon from '@material-ui/icons/Close';
 import { SimpleDialog } from './SelectSendTo';
 import DoneIcon from '@material-ui/icons/Done';
+import LinkOffIcon from '@material-ui/icons/LinkOff';
 
 const Recipient = (props) => {
     const { classes, state, dispatch, actions, pdfitem } = props;
     const [open, setOpen] = React.useState(false);
-    const [selectedValue, setSelectedValue] = React.useState("");
+    //const [selectedValue, setSelectedValue] = React.useState("");
     const handleClickOpen = () => {
         setOpen(prv => !prv);
     };
 
     const handleClose = (value) => {
         setOpen(false);
-        setSelectedValue(value);
+        // setSelectedValue(value);
         dispatch({ type: actions.Assign, Recipient: value, id: pdfitem.id })
 
     };
     const clear = () => {
-        setSelectedValue("");
+        // setSelectedValue("");
+        dispatch({ type: actions.Assign, Recipient: "", id: pdfitem.id })
     }
 
     return (
         <div className="Recipient">
 
-            {selectedValue === "" ?
+            {pdfitem.SendTo === "" ?
                 <div className="SendTo">
                     <IconButton aria-label="delete" className={classes.sendTo} onClick={handleClickOpen}>
                         <ContactMailIcon fontSize="small" />
@@ -35,10 +37,13 @@ const Recipient = (props) => {
                 </div> :
                 <div className="SendTo" style={{ fontSize: '10px' }}>
                     <Fab variant="extended" onClick={() => { dispatch({ type: actions.AssignRecipient }) }} className={classes.recipient}>
-                        <ContactMailIcon fontSize="small" className={classes.contactIcon} />   {selectedValue} <CloseIcon className={classes.closebtn} onClick={clear} />
+                        <ContactMailIcon fontSize="small" className={classes.contactIcon} />
+                        {pdfitem.SendTo}
+                        {pdfitem.Transactions[0].isLink && <LinkOffIcon />}
+                        <CloseIcon className={classes.closebtn} onClick={clear} />
                     </Fab>
                 </div>}
-            <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
+            <SimpleDialog selectedValue={pdfitem.SendTo} open={open} onClose={handleClose} />
         </div>
     )
 }

@@ -46,7 +46,8 @@ function App() {
                   id: item.key,
                   downloadUrl: item.val().downloadUrl,
                   size: item.val().size,
-                  SendTo: ""
+                  SendTo: "", // Todo: needs to be added the to db                
+                  Transactions: [{ id: 0, SendTo: "", isLink: false }] // Todo: needs to be added the to db
                 })
               });
               dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });
@@ -76,7 +77,8 @@ function App() {
               id: item.key,
               downloadUrl: item.val().downloadUrl,
               size: item.val().size,
-              SendTo: ""
+              SendTo: "", // Todo: needs to be added the to db
+              Transactions: [{ id: 0, SendTo: "", isLink: false }] // Todo: needs to be added the to db
             })
           });
           dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });

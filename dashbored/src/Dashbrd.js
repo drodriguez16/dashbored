@@ -15,6 +15,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import SendIcon from '@material-ui/icons/Send';
 
 import SendFile from './components/SendFile'
+import { green } from '@material-ui/core/colors';
 
 
 
@@ -50,6 +51,16 @@ const useStyles = makeStyles((theme) => ({
   extendedIcon: {
     marginRight: theme.spacing(1),
   },
+  fabProgress: {
+    color: '#0091ea',
+    position: 'absolute',
+    left: '7px',
+
+    zIndex: 1,
+  },
+  LinkOffIcon: {
+    marginLeft: '2px'
+  }
 }));
 
 function Dashbrd() {

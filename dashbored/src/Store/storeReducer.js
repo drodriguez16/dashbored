@@ -1,11 +1,27 @@
 const storeReducer = (state, action) => {
     switch (action.type) {
+        case "Sent":
+            debugger;
+            const Sentupdatepdf = state.pdfs.find(pdf => pdf.id === action.id);
+            const Sentindex = state.pdfs.findIndex(pdf => pdf.id === action.id);
+            const Sentupdatepdfs = state.pdfs;
+
+            const tranIndex = Sentupdatepdfs[Sentindex].Transactions.findIndex(trans => trans.id === action.transId);
+            const tran = Sentupdatepdfs[Sentindex].Transactions.find(trans => trans.id === action.transId);
+            const trans = Sentupdatepdfs[Sentindex].Transactions;
+            debugger;
+            tran.isLink = action.isLink;
+            trans[tranIndex] = tran;
+            Sentupdatepdfs[Sentindex].Transactions = trans;
+
+            return { ...state, pdfs: Sentupdatepdfs }
         case "Assign":
             debugger;
             const updatepdf = state.pdfs.find(pdf => pdf.id === action.id);
-            const updatepdfs = state.pdfs.filter(pdf => pdf.id !== action.id);
+            const index = state.pdfs.findIndex(pdf => pdf.id === action.id);
+            const updatepdfs = state.pdfs;
             updatepdf.SendTo = action.Recipient;
-            updatepdfs.push(updatepdf);
+            updatepdfs[index] = updatepdf;
             return { ...state, pdfs: updatepdfs }
         case "AssignRecipient":
 
