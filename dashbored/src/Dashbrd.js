@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { db, actions } from './Store'
 import { fdb, fstorage } from './API/firebase';
 import FileUpload from './components/FileUpload';
+import Recipient from './components/Recipient'
 import "./Dashbrd.scss";
 import useViewport from './hooks/useViewport'
 import useForm from './hooks/useForm'
@@ -13,6 +14,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SendIcon from '@material-ui/icons/Send';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
+import Fab from '@material-ui/core/Fab';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 const cloudFuncSendEmail = "https://us-central1-dashbrd-152dc.cloudfunctions.net/sendMail?";
@@ -20,6 +23,26 @@ const cloudFuncSendEmail = "https://us-central1-dashbrd-152dc.cloudfunctions.net
 const useStyles = makeStyles((theme) => ({
   send: { color: '#2391e9', margin: theme.spacing(1) },
   sendTo: { color: '#000000', margin: theme.spacing(1) },
+  recipient:
+  {
+    padding: '3px 15px',
+    fontSize: '10px',
+    height: '28px',
+    backgroundColor: 'white',
+    color: '#0068a9',
+    boxShadow: '0px 1px 4px -2px #383838'
+  },
+  closebtn: {
+    color: 'red',
+    marginLeft: '2px',
+    fontSize: '16px',
+    outline: '1px solid #fbfbfb'
+  },
+  contactIcon: {
+    color: '#bfbfbf',
+    marginRight: '5px',
+    fontSize: '17px'
+  },
   margin: {
     margin: theme.spacing(1),
   },
@@ -37,7 +60,6 @@ function Dashbrd() {
   const removepdf = (id) => {
 
     fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${id}`).remove();
-    fstorage.ref(`pdfs/${id}`).delete();
   }
 
   const sendLink = ({ To, fileLink, fileName, size }) => {
@@ -77,17 +99,21 @@ function Dashbrd() {
                       </div>
                       <a href={`${pdfitem.downloadUrl}`} rel="noopener noreferrer" target="_blank" download={`${pdfitem.name}.pdf`}>{`${pdfitem.name}.pdf`}</a>
                     </div>
-                    <div className="the-file-send" >
-                      <div className="SendTo">To:
-                        <IconButton aria-label="delete" className={classes.sendTo} onClick={() => { dispatch({ type: actions.AssignRecipient }) }}>
-                          <ContactMailIcon fontSize="small" />
-                        </IconButton>
-                      </div>
-                      <div className="SendTo" style={{ fontSize: '10px' }}>
-                        {state.PdfSettings.Recipient}
-                      </div>
+                    {/* <div className="the-file-send" >
+                      {state.PdfSettings.AssignRecipient ?
+                        <div className="SendTo">
+                          <IconButton aria-label="delete" className={classes.sendTo} onClick={() => { dispatch({ type: actions.AssignRecipient }) }}>
+                            <ContactMailIcon fontSize="small" />
+                          </IconButton>
+                        </div> :
+                        <div className="SendTo" style={{ fontSize: '10px' }}>
 
-                    </div>
+                          <Fab variant="extended" onClick={() => { dispatch({ type: actions.AssignRecipient }) }} className={classes.recipient}>
+                            <ContactMailIcon fontSize="small" className={classes.contactIcon} />   {state.PdfSettings.Recipient} <CloseIcon className={classes.closebtn} />
+                          </Fab>
+                        </div>}
+                    </div> */}
+                    <Recipient classes={classes} state={state} dispatch={dispatch} actions={actions} />
                     {(width < 620) && (<div className="mobile-header-date"></div>)}
                     <div className="the-file-date">
                       {new Date(pdfitem.createdAt).toLocaleDateString('en-US')}

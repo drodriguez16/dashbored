@@ -40,7 +40,7 @@ export default function SwipeableTemporaryDrawer() {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-        debugger;
+
         setmenuState({ ...menuState, [anchor]: open });
     };
     useEffect(() => {

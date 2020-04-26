@@ -8,7 +8,7 @@ import LoginForm from './components/LoginForm';
 import Setting from './components/Settings'
 import HeaderAuthIn from './components/HeaderAuthIn'
 import HeaderAuthOut from './components/HeaderAuthOut'
-import SelectSendTo from './components/SelectSendTo'
+// import SelectSendTo from './components/SelectSendTo'
 
 function App() {
   const [state, dispatch] = useReducer(storeReducer, data);
@@ -101,7 +101,7 @@ function App() {
           {state.Settings.isSettings ? (<><Setting /></>) :
             (<>
               <Dashbrd />
-              <SelectSendTo />
+              {/* <SelectSendTo /> */}
             </>)}
         </div>)}
     </db.Provider>

@@ -1,4 +1,5 @@
 const data = {
+  Contacts: [{ email: 'Dioscarr@gmail.com' }, { email: 'DionelRodriguez16@gmail.com' }],
   Settings: { isSettings: false, fullname: '', AvatarName: 'Avatar.jpg' },
   PdfSettings: { isSettings: false, AssignRecipient: false, Recipient: '' },
   CurrentUser: {},

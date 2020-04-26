@@ -4,11 +4,11 @@ const storeReducer = (state, action) => {
             const PdfsettingsRecipient = { ...state.PdfSettings, Recipient: action.Recipient }
             return { ...state, PdfSettings: PdfsettingsRecipient }
         case "AssignRecipient":
-            debugger;
+
             const PdfsettingsAssignRecipient = { ...state.PdfSettings, AssignRecipient: !state.PdfSettings.AssignRecipient }
             return { ...state, PdfSettings: PdfsettingsAssignRecipient }
         case "isPdfSettings":
-            debugger;
+
             const Pdfsettings = { ...state.PdfSettings, isSettings: !state.PdfSettings.isSettings }
             return { ...state, PdfSettings: Pdfsettings }
         case "isSettings":

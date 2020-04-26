@@ -15,7 +15,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 import { blue } from '@material-ui/core/colors';
 
-const emails = ['Dioscarr@gmail.com', 'DionelRodriguez16@gmail.com'];
+// const emails = ['Dioscarr@gmail.com', 'DionelRodriguez16@gmail.com'];
 const useStyles = makeStyles({
     avatar: {
         backgroundColor: blue[100],
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 });
 
 function SimpleDialog(props) {
-
+    const { state, dispatch } = useContext(db);
     const classes = useStyles();
     const { onClose, selectedValue, open } = props;
 
@@ -42,14 +42,14 @@ function SimpleDialog(props) {
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
             <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
             <List>
-                {emails.map((email) => (
-                    <ListItem button onClick={() => handleListItemClick(email)} key={email}>
+                {state.Contacts.map((contact) => (
+                    <ListItem button onClick={() => handleListItemClick(contact.email)} key={contact.email}>
                         <ListItemAvatar>
                             <Avatar className={classes.avatar}>
                                 <PersonIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary={email} />
+                        <ListItemText primary={contact.email} />
                     </ListItem>
                 ))}
 
@@ -72,23 +72,22 @@ SimpleDialog.propTypes = {
     selectedValue: PropTypes.string.isRequired,
 };
 
-export default function SelectSendTo() {
+const SelectSendTo = () => {
     const { state, dispatch } = useContext(db);
     const [open, setOpen] = React.useState(false);
-    const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+    const [selectedValue, setSelectedValue] = React.useState([]);
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
     const handleClose = (value) => {
+        alert();
         setOpen(false);
         dispatch({ type: actions.Assign, Recipient: selectedValue })
         setSelectedValue(value);
     };
-    useEffect(() => {
-        setOpen(true);
-    }, [state.PdfSettings.AssignRecipient])
+
     return (
         <div>
             <Typography variant="subtitle1">Selected: {selectedValue}</Typography>
@@ -100,3 +99,4 @@ export default function SelectSendTo() {
         </div>
     );
 }
+export { SelectSendTo, SimpleDialog }
