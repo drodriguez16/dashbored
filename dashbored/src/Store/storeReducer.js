@@ -1,8 +1,12 @@
 const storeReducer = (state, action) => {
     switch (action.type) {
         case "Assign":
-            const PdfsettingsRecipient = { ...state.PdfSettings, Recipient: action.Recipient }
-            return { ...state, PdfSettings: PdfsettingsRecipient }
+            debugger;
+            const updatepdf = state.pdfs.find(pdf => pdf.id === action.id);
+            const updatepdfs = state.pdfs.filter(pdf => pdf.id !== action.id);
+            updatepdf.SendTo = action.Recipient;
+            updatepdfs.push(updatepdf);
+            return { ...state, pdfs: updatepdfs }
         case "AssignRecipient":
 
             const PdfsettingsAssignRecipient = { ...state.PdfSettings, AssignRecipient: !state.PdfSettings.AssignRecipient }

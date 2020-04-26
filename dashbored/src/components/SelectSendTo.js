@@ -84,7 +84,7 @@ const SelectSendTo = () => {
     const handleClose = (value) => {
         alert();
         setOpen(false);
-        dispatch({ type: actions.Assign, Recipient: selectedValue })
+
         setSelectedValue(value);
     };
 

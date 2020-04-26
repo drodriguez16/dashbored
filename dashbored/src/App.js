@@ -45,7 +45,8 @@ function App() {
                   createdAt: item.val().createdAt,
                   id: item.key,
                   downloadUrl: item.val().downloadUrl,
-                  size: item.val().size
+                  size: item.val().size,
+                  SendTo: ""
                 })
               });
               dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });
@@ -74,7 +75,8 @@ function App() {
               createdAt: item.val().createdAt,
               id: item.key,
               downloadUrl: item.val().downloadUrl,
-              size: item.val().size
+              size: item.val().size,
+              SendTo: ""
             })
           });
           dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });

@@ -3,9 +3,11 @@ import IconButton from '@material-ui/core/IconButton';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import Fab from '@material-ui/core/Fab';
 import CloseIcon from '@material-ui/icons/Close';
-import { SimpleDialog } from './SelectSendTo'
+import { SimpleDialog } from './SelectSendTo';
+import DoneIcon from '@material-ui/icons/Done';
+
 const Recipient = (props) => {
-    const { classes, state, dispatch, actions } = props;
+    const { classes, state, dispatch, actions, pdfitem } = props;
     const [open, setOpen] = React.useState(false);
     const [selectedValue, setSelectedValue] = React.useState("");
     const handleClickOpen = () => {
@@ -15,6 +17,8 @@ const Recipient = (props) => {
     const handleClose = (value) => {
         setOpen(false);
         setSelectedValue(value);
+        dispatch({ type: actions.Assign, Recipient: value, id: pdfitem.id })
+
     };
     const clear = () => {
         setSelectedValue("");
