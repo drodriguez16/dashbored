@@ -1,18 +1,43 @@
 const storeReducer = (state, action) => {
     switch (action.type) {
-        case "fdbInitialized":
-            return {...state, fdbInitialized:true}
-        case "DeletePdf":
-            let temppdfs = state.pdfs.filter(item=>item.id!==action.pdfKey);
-            return {...state,pdfs: temppdfs}
-        case "AddPdf":
+        case "Assign":
+            const PdfsettingsRecipient = { ...state.PdfSettings, Recipient: action.Recipient }
+            return { ...state, PdfSettings: PdfsettingsRecipient }
+        case "AssignRecipient":
             debugger;
-                let templPdfs = state.pdfs.filter(item=>!item.id!==action.pdf.id);
+            const PdfsettingsAssignRecipient = { ...state.PdfSettings, AssignRecipient: !state.PdfSettings.AssignRecipient }
+            return { ...state, PdfSettings: PdfsettingsAssignRecipient }
+        case "isPdfSettings":
+            debugger;
+            const Pdfsettings = { ...state.PdfSettings, isSettings: !state.PdfSettings.isSettings }
+            return { ...state, PdfSettings: Pdfsettings }
+        case "isSettings":
+            const settings = { ...state.Settings, isSettings: !state.Settings.isSettings }
+            return { ...state, Settings: settings }
+        case "UpdateSettings":
+            debugger
+            const sett = { isSettings: false, fullname: action.Settings.fullname };
+            return { ...state, Settings: sett }
+        case "LogOut":
+            return { ...state, SignedIn: false }
+        case "SignedIn":
+            return { ...state, SignedIn: true }
+        case "SetCurrentUser":
 
-                templPdfs.push(action.pdf);
-            return {...state, pdfs:templPdfs, Loading:false}
+            return { ...state, CurrentUser: action.CurrentUser }
+        case "SignedOut":
+            return { ...state, SignedOut: false }
+        case "fdbInitialized":
+            return { ...state, fdbInitialized: true }
+        case "DeletePdf":
+            let temppdfs = state.pdfs.filter(item => item.id !== action.pdfKey);
+            return { ...state, pdfs: temppdfs }
+        case "AddPdf":
+            let templPdfs = state.pdfs.filter(item => !item.id !== action.pdf.id);
+            templPdfs.push(action.pdf);
+            return { ...state, pdfs: templPdfs, Loading: false }
         case "SetPdfs":
-            return {...state,pdfs:action.pdfs,Loading:action.Loading}
+            return { ...state, pdfs: action.pdfs, Loading: action.Loading }
         default:
             return { ...state }
     }
