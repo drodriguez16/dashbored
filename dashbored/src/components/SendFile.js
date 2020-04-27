@@ -15,7 +15,7 @@ const SendFile = (props) => {
     const timer = React.useRef();
 
     useEffect(() => {
-        debugger;
+
         setCloudFuncSendEmail("https://us-central1-dashbrd-152dc.cloudfunctions.net/sendMail?");
     }, [])
 
@@ -24,11 +24,11 @@ const SendFile = (props) => {
 
 
         if (To.indexOf("@") !== -1) {
-            const url = `${CloudFuncSendEmail}dest=${To}&downloadlink=${fileLink}&useremail=${state.CurrentUser.email}&sendername=${state.Settings.fullname}&fileName=${fileName}&size=${size}`;
-            var xhr = new XMLHttpRequest()
-            xhr.open('GET', url)
-            xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
-            xhr.send()
+            // const url = `${CloudFuncSendEmail}dest=${To}&downloadlink=${fileLink}&useremail=${state.CurrentUser.email}&sendername=${state.Settings.fullname}&fileName=${fileName}&size=${size}`;
+            // var xhr = new XMLHttpRequest()
+            // xhr.open('GET', url)
+            // xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
+            // xhr.send()
             if (!loading) {
                 setSuccess(false);
                 setLoading(true);

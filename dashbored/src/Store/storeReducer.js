@@ -1,7 +1,21 @@
 const storeReducer = (state, action) => {
     switch (action.type) {
+        case "LinkOff":
+
+
+            const LinkOffupdatepdf = state.pdfs.find(pdf => pdf.id === action.id);
+            const LinkOffindex = state.pdfs.findIndex(pdf => pdf.id === action.id);
+            const LinkOffupdatepdfs = state.pdfs;
+
+            const LinkOffIndex = LinkOffupdatepdfs[LinkOffindex].Transactions.findIndex(trans => trans.id === action.transId);
+            const LinkOfftran = LinkOffupdatepdfs[LinkOffindex].Transactions.find(trans => trans.id === action.transId);
+            const LinkOfftrans = LinkOffupdatepdfs[LinkOffindex].Transactions;
+
+            LinkOfftran.LinkOff = !LinkOfftran.LinkOff;
+            LinkOfftrans[LinkOffIndex] = LinkOfftran;
+            LinkOffupdatepdfs[LinkOffindex].Transactions = LinkOfftrans;
+            return { ...state, pdfs: LinkOffupdatepdfs }
         case "Sent":
-            debugger;
             const Sentupdatepdf = state.pdfs.find(pdf => pdf.id === action.id);
             const Sentindex = state.pdfs.findIndex(pdf => pdf.id === action.id);
             const Sentupdatepdfs = state.pdfs;
@@ -9,14 +23,15 @@ const storeReducer = (state, action) => {
             const tranIndex = Sentupdatepdfs[Sentindex].Transactions.findIndex(trans => trans.id === action.transId);
             const tran = Sentupdatepdfs[Sentindex].Transactions.find(trans => trans.id === action.transId);
             const trans = Sentupdatepdfs[Sentindex].Transactions;
-            debugger;
+
             tran.isLink = action.isLink;
+            tran.LinkOff = !tran.LinkOff;
             trans[tranIndex] = tran;
             Sentupdatepdfs[Sentindex].Transactions = trans;
 
             return { ...state, pdfs: Sentupdatepdfs }
         case "Assign":
-            debugger;
+
             const updatepdf = state.pdfs.find(pdf => pdf.id === action.id);
             const index = state.pdfs.findIndex(pdf => pdf.id === action.id);
             const updatepdfs = state.pdfs;

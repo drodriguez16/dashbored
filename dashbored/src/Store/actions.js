@@ -11,9 +11,8 @@ const actions = {
    isPdfSettings: "isPdfSettings",
    AssignRecipient: "AssignRecipient",
    Assign: "Assign",
-   Sent: "Sent"
-
-
+   Sent: "Sent",
+   LinkOff: "LinkOff"
 }
 
 export default actions

@@ -7,7 +7,7 @@ import "./Dashbrd.scss";
 import useViewport from './hooks/useViewport'
 import useForm from './hooks/useForm'
 
-import SwipeableTemporaryDrawer from './components/MenuDrawer'
+
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -15,6 +15,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import SendIcon from '@material-ui/icons/Send';
 
 import SendFile from './components/SendFile'
+import FileSettings from './components/FileSettings'
 import { green } from '@material-ui/core/colors';
 
 
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'red',
     marginLeft: '2px',
     fontSize: '16px',
-    outline: '1px solid #fbfbfb'
+
   },
   contactIcon: {
     color: '#bfbfbf',
@@ -59,8 +60,19 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1,
   },
   LinkOffIcon: {
-    marginLeft: '2px'
-  }
+    marginLeft: '4px',
+    color: '#FF9800'
+  },
+  LinkOnIcon: {
+    marginLeft: '4px',
+    color: 'green'
+  },
+  popover: {
+    pointerEvents: 'none',
+  },
+  paper: {
+    padding: theme.spacing(1),
+  },
 }));
 
 function Dashbrd() {
@@ -78,7 +90,6 @@ function Dashbrd() {
   const classes = useStyles();
   return (
     <div className="Sender-Component Dashbrd">
-      <SwipeableTemporaryDrawer />
       <FileUpload />
       <div className="files">
         {(width > 620) && (
@@ -101,12 +112,14 @@ function Dashbrd() {
                       {new Date(pdfitem.createdAt).toLocaleDateString('en-US')}
                     </div>
                     <div className="the-file-delete settings-pdfs-list">
-
+                      <FileSettings classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} />
+                      {/* 
                       <div>
                         <IconButton aria-label="delete" className={classes.margin} onClick={e => dispatch({ type: actions.isPdfSettings })}>
                           <SettingsIcon fontSize="small" />
                         </IconButton>
-                      </div>
+                        <MenuDrawer state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} />
+                      </div> */}
                       <div>
                         <IconButton aria-label="delete" className={classes.margin} onClick={e => removepdf(pdfitem.id)}>
                           <DeleteIcon fontSize="small" />
@@ -114,12 +127,15 @@ function Dashbrd() {
                       </div>
 
                     </div>
+
                   </div>);
+
               })
             }
           </div>
         }
       </div>
+
     </div>
   );
 }

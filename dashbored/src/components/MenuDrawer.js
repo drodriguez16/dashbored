@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -15,7 +15,6 @@ import ScheduleIcon from '@material-ui/icons/Schedule';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import EventBusyIcon from '@material-ui/icons/EventBusy';
 
-import { db, actions } from '../Store'
 
 const useStyles = makeStyles({
     list: {
@@ -26,9 +25,8 @@ const useStyles = makeStyles({
     },
 });
 
-export default function SwipeableTemporaryDrawer() {
-    const { state, dispatch } = useContext(db);
-
+export default function MenuDrawer(props) {
+    const { state, dispatch, actions, pdfitem, open } = props;
     const classes = useStyles();
     const [menuState, setmenuState] = React.useState({
         top: false,
@@ -44,8 +42,11 @@ export default function SwipeableTemporaryDrawer() {
         setmenuState({ ...menuState, [anchor]: open });
     };
     useEffect(() => {
+
         setmenuState({ ...menuState, 'right': true });
-    }, [state.PdfSettings.isSettings])
+
+
+    }, [open])
 
     const list = (anchor) => (
         <div
@@ -90,6 +91,7 @@ export default function SwipeableTemporaryDrawer() {
 
     return (
         <div>
+
             {['left', 'right', 'top', 'bottom'].map((anchor) => (
                 <React.Fragment key={anchor}>
 
