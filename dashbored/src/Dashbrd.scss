@@ -1,7 +1,7 @@
 
 [data-theme="web-large"]
 {
-    --Dashbrd-grid-template-columns: 1fr 2fr;
+    --Dashbrd-grid-template-columns: 8fr 28fr;
     --Dashbrd-grid-template-areas: 'fileUpload files';
     --file-header-grid-template-areas:"header-title header-date";
     --the-file-row-grid-template-areas:"the-file Recipient the-file-date settings-pdfs-list";

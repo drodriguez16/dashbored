@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(1),
-  },
+  }
 }));
 
 function Dashbrd() {
@@ -81,9 +81,12 @@ function Dashbrd() {
   const [color, setColor] = useState('transparent')
 
   const { width } = useViewport();
-  const removepdf = (id) => {
+  const removepdf = (id, filename) => {
 
-    fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${id}`).remove();
+    fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${id}/`).remove();
+    ;
+    fstorage.ref(`pdfs/${id}/`).delete();
+    fstorage.ref().child(`pdfs/${id}/`).delete();
   }
 
 
@@ -102,6 +105,7 @@ function Dashbrd() {
           <div className="file-rows">
             {
               state.pdfs.map((pdfitem, key) => {
+                ;
                 return (
                   <div key={key} className="the-file-row">
                     {(width < 620) && (<div className="mobile-header-title">My Files</div>)}

@@ -8,7 +8,6 @@ import LoginForm from './components/LoginForm';
 import Setting from './components/Settings'
 import HeaderAuthIn from './components/HeaderAuthIn'
 import HeaderAuthOut from './components/HeaderAuthOut'
-// import SelectSendTo from './components/SelectSendTo'
 
 function App() {
   const [state, dispatch] = useReducer(storeReducer, data);
@@ -38,8 +37,9 @@ function App() {
             if (!state.fdbInitialized) {
               dispatch({ type: actions.fdbInitialized });
               const pdfs = [];
-
               children.forEach(item => {
+                const Trans = [];
+                Object.keys(item.val().Transactions).forEach(key => Trans.push(item.val().Transactions[key]));
                 pdfs.push({
                   name: item.val().name,
                   createdAt: item.val().createdAt,
@@ -47,9 +47,10 @@ function App() {
                   downloadUrl: item.val().downloadUrl,
                   size: item.val().size,
                   SendTo: "", // Todo: needs to be added the to db                
-                  Transactions: [{ id: 0, SendTo: "", isLink: false, LinkOff: false }] // Todo: needs to be added the to db
+                  Transactions: Trans //[{ id: 0, SendTo: "", isLink: false, LinkOff: false }, { id: 1, SendTo: "", isLink: false, LinkOff: false }] // Todo: needs to be added the to db
                 })
               });
+              ;
               dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });
             }
           });
@@ -69,8 +70,9 @@ function App() {
         if (!state.fdbInitialized) {
           dispatch({ type: actions.fdbInitialized });
           const pdfs = [];
-
           children.forEach(item => {
+            const Trans = [];
+            Object.keys(item.val().Transactions).forEach(key => Trans.push(item.val().Transactions[key]));
             pdfs.push({
               name: item.val().name,
               createdAt: item.val().createdAt,
@@ -78,7 +80,7 @@ function App() {
               downloadUrl: item.val().downloadUrl,
               size: item.val().size,
               SendTo: "", // Todo: needs to be added the to db
-              Transactions: [{ id: 0, SendTo: "", isLink: false, LinkOff: false }] // Todo: needs to be added the to db
+              Transactions: Trans //[{ id: 0, SendTo: "", isLink: false, LinkOff: false }, { id: 1, SendTo: "", isLink: false, LinkOff: false }] // Todo: needs to be added the to db
             })
           });
           dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });
@@ -91,7 +93,6 @@ function App() {
         });
     }
   }, [state.SignedIn]);
-
   return (
     <db.Provider value={{ state, dispatch }}>
       {(!state.SignedIn) && (

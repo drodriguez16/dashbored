@@ -12,7 +12,8 @@ const actions = {
    AssignRecipient: "AssignRecipient",
    Assign: "Assign",
    Sent: "Sent",
-   LinkOff: "LinkOff"
+   LinkOff: "LinkOff",
+   CelearAssigned: "CelearAssigned"
 }
 
 export default actions

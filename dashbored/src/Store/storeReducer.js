@@ -25,16 +25,35 @@ const storeReducer = (state, action) => {
             const trans = Sentupdatepdfs[Sentindex].Transactions;
 
             tran.isLink = action.isLink;
-            tran.LinkOff = !tran.LinkOff;
+            tran.LinkOff = action.LinkOff;
             trans[tranIndex] = tran;
             Sentupdatepdfs[Sentindex].Transactions = trans;
 
             return { ...state, pdfs: Sentupdatepdfs }
+        case "CelearAssigned":
+            const CelearAssignedupdatepdf = state.pdfs.find(pdf => pdf.id === action.id);
+            const CelearAssignedindex = state.pdfs.findIndex(pdf => pdf.id === action.id);
+            const CelearAssignedupdatepdfs = state.pdfs;
+            CelearAssignedupdatepdf.SendTo = action.Recipient;
+            CelearAssignedupdatepdfs[CelearAssignedindex] = CelearAssignedupdatepdf;
+            return { ...state, pdfs: CelearAssignedupdatepdfs }
         case "Assign":
-
+            debugger;
             const updatepdf = state.pdfs.find(pdf => pdf.id === action.id);
             const index = state.pdfs.findIndex(pdf => pdf.id === action.id);
             const updatepdfs = state.pdfs;
+            let AssigntranIndex = 0;
+            let Assigntran = null;
+            let Assigntrans = [];
+
+            if (updatepdfs[index].Transactions !== "undefined")
+                if (updatepdfs[index].Transactions.length > 0) {
+                    AssigntranIndex = updatepdfs[index].Transactions.findIndex(trans => trans.id === action.transId);
+                    Assigntran = updatepdfs[index].Transactions.find(trans => trans.id === action.transId);
+                    Assigntrans = updatepdfs[index].Transactions;
+                }
+            Assigntrans.push({ id: 0, SendTo: action.Recipient, isLink: false, LinkOff: false, CreatedAt: Date.now() })
+            updatepdfs[index].Transactions = Assigntrans;
             updatepdf.SendTo = action.Recipient;
             updatepdfs[index] = updatepdf;
             return { ...state, pdfs: updatepdfs }
@@ -50,7 +69,7 @@ const storeReducer = (state, action) => {
             const settings = { ...state.Settings, isSettings: !state.Settings.isSettings }
             return { ...state, Settings: settings }
         case "UpdateSettings":
-            debugger
+
             const sett = { isSettings: false, fullname: action.Settings.fullname };
             return { ...state, Settings: sett }
         case "LogOut":

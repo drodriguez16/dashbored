@@ -17,21 +17,23 @@ const FileUpload = () => {
     }
     const up = e => {
 
-        const key = fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/`).push().key;
+        const key = fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}`).push().key;
         const uploadTask = fstorage.ref(`pdfs/${key}`).put(image);
         uploadTask.on('state_changed', progress => {
         }, err => {
         }, complete => {
-
-            fstorage.ref("pdfs").child(key).getDownloadURL().then(url => {
+            fstorage.ref(`pdfs`).child(key).getDownloadURL().then(url => {
                 const pdf = {
                     id: key,
                     name: fields.pdfname,
                     createdAt: Date.now(),
                     downloadUrl: url,
-                    size: image.size
+                    size: image.size,
+                    SendTo: ""
                 }
                 fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${key}`).update(pdf);
+                const transId = fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${key}/Transactions`).push().key;
+                fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${key}/Transactions/${transId}`).update({ id: transId, SendTo: "", isLink: false, LinkOff: false, CreatedAt: Date.now() });
                 dispatch({ type: actions.AddPdf, pdf: pdf });
             })
         });
