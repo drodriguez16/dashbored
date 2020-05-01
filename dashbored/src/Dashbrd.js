@@ -72,6 +72,15 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(1),
+  },
+  TransPaper: {
+    width: 230,
+  },
+  orange: {
+    backgroundColor: 'orange'
+  },
+  transMenu: {
+    fontSize: '12px'
   }
 }));
 
@@ -84,7 +93,7 @@ function Dashbrd() {
   const removepdf = (id, filename) => {
 
     fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${id}/`).remove();
-    ;
+
     fstorage.ref(`pdfs/${id}/`).delete();
     fstorage.ref().child(`pdfs/${id}/`).delete();
   }
@@ -105,25 +114,17 @@ function Dashbrd() {
           <div className="file-rows">
             {
               state.pdfs.map((pdfitem, key) => {
-                ;
                 return (
                   <div key={key} className="the-file-row">
                     {(width < 620) && (<div className="mobile-header-title">My Files</div>)}
                     <SendFile classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} />
-                    <Recipient classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} />
+                    <Recipient classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} fdb={fdb} />
                     {(width < 620) && (<div className="mobile-header-date"></div>)}
                     <div className="the-file-date">
                       {new Date(pdfitem.createdAt).toLocaleDateString('en-US')}
                     </div>
                     <div className="the-file-delete settings-pdfs-list">
                       <FileSettings classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} />
-                      {/* 
-                      <div>
-                        <IconButton aria-label="delete" className={classes.margin} onClick={e => dispatch({ type: actions.isPdfSettings })}>
-                          <SettingsIcon fontSize="small" />
-                        </IconButton>
-                        <MenuDrawer state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} />
-                      </div> */}
                       <div>
                         <IconButton aria-label="delete" className={classes.margin} onClick={e => removepdf(pdfitem.id)}>
                           <DeleteIcon fontSize="small" />

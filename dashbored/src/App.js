@@ -39,15 +39,25 @@ function App() {
               const pdfs = [];
               children.forEach(item => {
                 const Trans = [];
+                let Queue = item.val().TransactionQueue;
                 Object.keys(item.val().Transactions).forEach(key => Trans.push(item.val().Transactions[key]));
+                if (Trans.length > 0) {
+                  Trans.forEach(i => {
+                    if (i.SendTo !== "") {
+                      Queue = i;
+                      return;
+                    }
+                  });
+                }
                 pdfs.push({
                   name: item.val().name,
                   createdAt: item.val().createdAt,
                   id: item.key,
                   downloadUrl: item.val().downloadUrl,
                   size: item.val().size,
-                  SendTo: "", // Todo: needs to be added the to db                
-                  Transactions: Trans //[{ id: 0, SendTo: "", isLink: false, LinkOff: false }, { id: 1, SendTo: "", isLink: false, LinkOff: false }] // Todo: needs to be added the to db
+                  SendTo: "",
+                  Transactions: Trans,
+                  TransactionQueue: Queue
                 })
               });
               ;
@@ -72,15 +82,26 @@ function App() {
           const pdfs = [];
           children.forEach(item => {
             const Trans = [];
+            let Queue = item.val().TransactionQueue;
             Object.keys(item.val().Transactions).forEach(key => Trans.push(item.val().Transactions[key]));
+            if (Trans.length > 0) {
+              Trans.forEach(i => {
+                if (i.SendTo !== "") {
+                  Queue = i;
+                  return;
+                }
+              });
+            }
+
             pdfs.push({
               name: item.val().name,
               createdAt: item.val().createdAt,
               id: item.key,
               downloadUrl: item.val().downloadUrl,
               size: item.val().size,
-              SendTo: "", // Todo: needs to be added the to db
-              Transactions: Trans //[{ id: 0, SendTo: "", isLink: false, LinkOff: false }, { id: 1, SendTo: "", isLink: false, LinkOff: false }] // Todo: needs to be added the to db
+              SendTo: "",
+              Transactions: Trans,
+              TransactionQueue: Queue
             })
           });
           dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });

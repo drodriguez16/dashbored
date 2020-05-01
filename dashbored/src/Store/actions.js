@@ -13,7 +13,9 @@ const actions = {
    Assign: "Assign",
    Sent: "Sent",
    LinkOff: "LinkOff",
-   CelearAssigned: "CelearAssigned"
+   CelearAssigned: "CelearAssigned",
+   TransactionQueue: "TransactionQueue",
+   SwitchTransac: "SwitchTransac"
 }
 
 export default actions

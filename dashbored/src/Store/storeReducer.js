@@ -1,44 +1,53 @@
 const storeReducer = (state, action) => {
     switch (action.type) {
+        case "SwitchTransac":
+            let ST_Queue = action.TransactionQueue;
+            let ST_pdfId = action.pdfId;
+            let ST_Queueindex = state.pdfs.findIndex(pdf => pdf.id === ST_pdfId);
+            let ST_Queueupdatepdfs = state.pdfs;
+            ST_Queueupdatepdfs[ST_Queueindex].TransactionQueue = ST_Queue;
+            return { ...state, pdfs: ST_Queueupdatepdfs };
+        case "TransactionQueue":
+            let Queue = action.Queue;
+            let pdfId = action.pdfId;
+            let Queueindex = state.pdfs.findIndex(pdf => pdf.id === pdfId);
+            let Queueupdatepdfs = state.pdfs;
+            Queueupdatepdfs[Queueindex].TransactionQueue = Queue;
+            return { ...state, pdfs: Queueupdatepdfs };
         case "LinkOff":
 
+            const Lf_indx = state.pdfs.findIndex(pdf => pdf.id === action.pdfId); //pdfs index
 
-            const LinkOffupdatepdf = state.pdfs.find(pdf => pdf.id === action.id);
-            const LinkOffindex = state.pdfs.findIndex(pdf => pdf.id === action.id);
-            const LinkOffupdatepdfs = state.pdfs;
+            const LF_trans = state.pdfs[Lf_indx].Transactions; // pdf trans
 
-            const LinkOffIndex = LinkOffupdatepdfs[LinkOffindex].Transactions.findIndex(trans => trans.id === action.transId);
-            const LinkOfftran = LinkOffupdatepdfs[LinkOffindex].Transactions.find(trans => trans.id === action.transId);
-            const LinkOfftrans = LinkOffupdatepdfs[LinkOffindex].Transactions;
+            const T_Lf_indx = state.pdfs[Lf_indx].Transactions.findIndex(trans => trans.id === action.TransactionQueue.id); // trans Index
+            LF_trans[T_Lf_indx] = action.TransactionQueue; // set trans[i]
 
-            LinkOfftran.LinkOff = !LinkOfftran.LinkOff;
-            LinkOfftrans[LinkOffIndex] = LinkOfftran;
-            LinkOffupdatepdfs[LinkOffindex].Transactions = LinkOfftrans;
-            return { ...state, pdfs: LinkOffupdatepdfs }
+            const LF_pdfs = state.pdfs;
+            LF_pdfs[Lf_indx].TransactionQueue = action.TransactionQueue;
+            LF_pdfs[Lf_indx].Transactions = LF_trans;
+
+            return { ...state, pdfs: LF_pdfs }
         case "Sent":
-            const Sentupdatepdf = state.pdfs.find(pdf => pdf.id === action.id);
-            const Sentindex = state.pdfs.findIndex(pdf => pdf.id === action.id);
-            const Sentupdatepdfs = state.pdfs;
 
-            const tranIndex = Sentupdatepdfs[Sentindex].Transactions.findIndex(trans => trans.id === action.transId);
-            const tran = Sentupdatepdfs[Sentindex].Transactions.find(trans => trans.id === action.transId);
+            const Sentindex = state.pdfs.findIndex(pdf => pdf.id === action.pdfId);
+            const Sentupdatepdfs = state.pdfs;
             const trans = Sentupdatepdfs[Sentindex].Transactions;
 
-            tran.isLink = action.isLink;
-            tran.LinkOff = action.LinkOff;
-            trans[tranIndex] = tran;
+            trans.push(action.TransactionQueue)
             Sentupdatepdfs[Sentindex].Transactions = trans;
-
+            Sentupdatepdfs[Sentindex].TransactionQueue = action.TransactionQueue
             return { ...state, pdfs: Sentupdatepdfs }
         case "CelearAssigned":
-            const CelearAssignedupdatepdf = state.pdfs.find(pdf => pdf.id === action.id);
-            const CelearAssignedindex = state.pdfs.findIndex(pdf => pdf.id === action.id);
-            const CelearAssignedupdatepdfs = state.pdfs;
-            CelearAssignedupdatepdf.SendTo = action.Recipient;
-            CelearAssignedupdatepdfs[CelearAssignedindex] = CelearAssignedupdatepdf;
-            return { ...state, pdfs: CelearAssignedupdatepdfs }
+            const ClearQueue = { id: 0, SendTo: "", isLink: false, LinkOff: false, CreatedAt: Date.now(), init: true };
+            const ClearpdfId = action.pdfId;
+            let ClearQueueindex = state.pdfs.findIndex(pdf => pdf.id === ClearpdfId);
+            const ClearQueueupdatepdfs = state.pdfs;
+
+            ClearQueueupdatepdfs[ClearQueueindex].TransactionQueue = ClearQueue;
+            return { ...state, pdfs: ClearQueueupdatepdfs };
         case "Assign":
-            debugger;
+
             const updatepdf = state.pdfs.find(pdf => pdf.id === action.id);
             const index = state.pdfs.findIndex(pdf => pdf.id === action.id);
             const updatepdfs = state.pdfs;

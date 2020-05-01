@@ -22,9 +22,6 @@ const SendFile = (props) => {
     }, [])
 
     const sendLink = ({ To, fileLink, fileName, size }) => {
-
-
-
         if (To.indexOf("@") !== -1) {
             // const url = `${CloudFuncSendEmail}dest=${To}&downloadlink=${fileLink}&useremail=${state.CurrentUser.email}&sendername=${state.Settings.fullname}&fileName=${fileName}&size=${size}`;
             // var xhr = new XMLHttpRequest()
@@ -37,25 +34,19 @@ const SendFile = (props) => {
                 timer.current = setTimeout(() => {
                     setSuccess(true);
                     setLoading(false);
-                    dispatch({ type: actions.Sent, transId: 0, isLink: true, LinkOff: true, id: pdfitem.id });
-                    ;
-
-
 
                     // let pdf = fstorage.ref("pdfs").child(pdfitem.id);
                     // pdf.getDownloadURL().then(url => {
                     //     console.log(url)
                     // });
 
-                    fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${pdfitem.id}/Transactions`)
-                        .push({
-                            SendTo: To,
-                            isLink: false,
-                            LinkOff: false,
-                            CreateAt: Date.now(),
-                            //AccessToken: 
-                        })
-
+                    const transKey = fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${pdfitem.id}/Transactions`).push().key;
+                    pdfitem.TransactionQueue.id = transKey;
+                    pdfitem.TransactionQueue.init = false;
+                    pdfitem.TransactionQueue.isLink = true;
+                    pdfitem.TransactionQueue.LinkOff = true;
+                    fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${pdfitem.id}/Transactions/${transKey}`).update(pdfitem.TransactionQueue);
+                    dispatch({ type: actions.Sent, TransactionQueue: pdfitem.TransactionQueue, pdfId: pdfitem.id });
                 }, 2000);
             }
         }
@@ -64,7 +55,7 @@ const SendFile = (props) => {
 
     return (<div className="the-file" >
         <div className="SendTo">
-            <IconButton aria-label="delete" className={classes.send} onClick={() => { sendLink({ To: pdfitem.SendTo, fileLink: pdfitem.downloadUrl, fileName: pdfitem.name, size: pdfitem.size }) }}>
+            <IconButton aria-label="delete" className={classes.send} onClick={() => { sendLink({ To: pdfitem.TransactionQueue.SendTo, fileLink: pdfitem.downloadUrl, fileName: pdfitem.name, size: pdfitem.size }) }}>
                 <SendIcon fontSize="small" />  {loading && <CircularProgress size={26} className={classes.fabProgress} />}
             </IconButton>
 
