@@ -8,7 +8,6 @@ import LoginForm from './components/LoginForm';
 import Setting from './components/Settings'
 import HeaderAuthIn from './components/HeaderAuthIn'
 import HeaderAuthOut from './components/HeaderAuthOut'
-import SelectSendTo from './components/SelectSendTo'
 
 function App() {
   const [state, dispatch] = useReducer(storeReducer, data);
@@ -38,16 +37,30 @@ function App() {
             if (!state.fdbInitialized) {
               dispatch({ type: actions.fdbInitialized });
               const pdfs = [];
-
               children.forEach(item => {
+                const Trans = [];
+                let Queue = item.val().TransactionQueue;
+                Object.keys(item.val().Transactions).forEach(key => Trans.push(item.val().Transactions[key]));
+                if (Trans.length > 0) {
+                  Trans.forEach(i => {
+                    if (i.SendTo !== "") {
+                      Queue = i;
+                      return;
+                    }
+                  });
+                }
                 pdfs.push({
                   name: item.val().name,
                   createdAt: item.val().createdAt,
                   id: item.key,
                   downloadUrl: item.val().downloadUrl,
-                  size: item.val().size
+                  size: item.val().size,
+                  SendTo: "",
+                  Transactions: Trans,
+                  TransactionQueue: Queue
                 })
               });
+              ;
               dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });
             }
           });
@@ -67,14 +80,28 @@ function App() {
         if (!state.fdbInitialized) {
           dispatch({ type: actions.fdbInitialized });
           const pdfs = [];
-
           children.forEach(item => {
+            const Trans = [];
+            let Queue = item.val().TransactionQueue;
+            Object.keys(item.val().Transactions).forEach(key => Trans.push(item.val().Transactions[key]));
+            if (Trans.length > 0) {
+              Trans.forEach(i => {
+                if (i.SendTo !== "") {
+                  Queue = i;
+                  return;
+                }
+              });
+            }
+
             pdfs.push({
               name: item.val().name,
               createdAt: item.val().createdAt,
               id: item.key,
               downloadUrl: item.val().downloadUrl,
-              size: item.val().size
+              size: item.val().size,
+              SendTo: "",
+              Transactions: Trans,
+              TransactionQueue: Queue
             })
           });
           dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });
@@ -87,7 +114,6 @@ function App() {
         });
     }
   }, [state.SignedIn]);
-
   return (
     <db.Provider value={{ state, dispatch }}>
       {(!state.SignedIn) && (
@@ -101,7 +127,7 @@ function App() {
           {state.Settings.isSettings ? (<><Setting /></>) :
             (<>
               <Dashbrd />
-              <SelectSendTo />
+              {/* <SelectSendTo /> */}
             </>)}
         </div>)}
     </db.Provider>

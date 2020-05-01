@@ -10,9 +10,12 @@ const actions = {
    isSettings: "isSettings",
    isPdfSettings: "isPdfSettings",
    AssignRecipient: "AssignRecipient",
-   Assign: "Assign"
-
-
+   Assign: "Assign",
+   Sent: "Sent",
+   LinkOff: "LinkOff",
+   CelearAssigned: "CelearAssigned",
+   TransactionQueue: "TransactionQueue",
+   SwitchTransac: "SwitchTransac"
 }
 
 export default actions

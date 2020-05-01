@@ -1,10 +1,10 @@
 
 [data-theme="web-large"]
 {
-    --Dashbrd-grid-template-columns: 1fr 1fr;
+    --Dashbrd-grid-template-columns: 8fr 28fr;
     --Dashbrd-grid-template-areas: 'fileUpload files';
     --file-header-grid-template-areas:"header-title header-date";
-    --the-file-row-grid-template-areas:"the-file the-file-send the-file-date settings-pdfs-list";
+    --the-file-row-grid-template-areas:"the-file Recipient the-file-date settings-pdfs-list";
     --the-file-row-grid-template-columns: 11fr 9fr 4fr 4fr;
     --the-file-row-grid-template-rows:45px;
     --the-file-row-grid-auto-rows: minmax(100px, auto);
@@ -30,7 +30,7 @@
     //                                     " header-date";
     --the-file-row-grid-template-areas: "settings-pdfs-list"
                                         "the-file"
-                                        "the-file-send"
+                                        "Recipient"
                                         "mobile-header-date"
                                         "the-file-date";
     --the-file-row-grid-template-columns: 1fr;
@@ -121,13 +121,14 @@
 .the-file > a:hover{
     color:orangered;
  }
-.the-file-send{
-    grid-area:the-file-send;
+.Recipient{
+    grid-area:Recipient;
     display:grid;
     grid-template-columns:auto auto auto;
     
+    align-self:center;
     align-content: center;
-    justify-content: start;;
+    justify-content: start;
 }
 // .the-file-send  button{
 //     justify-self: var(--the-file-send-button-align-self);
