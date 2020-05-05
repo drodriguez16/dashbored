@@ -2,14 +2,14 @@ import firebase from 'firebase';
 
 
 var firebaseConfig = {
-  apiKey: `AIzaSyDqAduBE0OfWKY9X-LqL86lI9rLHOOGBrg`,
-  authDomain: `dashbrd-152dc.firebaseapp.com`,
-  databaseURL: "https://dashbrd-152dc.firebaseio.com",
-  projectId: "dashbrd-152dc",
-  storageBucket: "dashbrd-152dc.appspot.com",
-  messagingSenderId: "290858058295",
-  appId: "1:290858058295:web:f33fe582f2f4b1a15cb5b2",
-  measurementId: "G-ZN9FQBRY7S"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASEURL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_FIREBASE_APPID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID
 };
 
 // Initialize Firebase
