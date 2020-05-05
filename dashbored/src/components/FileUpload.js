@@ -34,7 +34,7 @@ const FileUpload = () => {
                 }
                 fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${key}`).update(pdf);
                 const transId = fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${key}/Transactions`).push().key;
-                fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${key}/Transactions/${transId}`).update({ id: transId, SendTo: "", isLink: false, LinkOff: false, CreatedAt: Date.now(), init: true });
+                fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${key}/Transactions/${transId}`).update({ id: transId, SendTo: "", DownloadUrl: "", isLink: false, LinkOff: false, CreatedAt: Date.now(), init: true });
                 pdf.Transactions = [{ id: transId, SendTo: "", isLink: false, LinkOff: false, CreatedAt: Date.now(), init: true }];
 
                 dispatch({ type: actions.AddPdf, pdf: pdf });

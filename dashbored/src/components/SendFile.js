@@ -7,6 +7,9 @@ import { fdb, fstorage } from '../API/firebase';
 
 
 
+
+
+
 const CloudFuncSendEmail = process.env.REACT_APP_FUNCSENDEMAIL;
 
 const SendFile = (props) => {
@@ -28,12 +31,19 @@ const SendFile = (props) => {
             // xhr.open('GET', url)
             // xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
             // xhr.send()
+
+
+
             if (!loading) {
                 setSuccess(false);
                 setLoading(true);
                 timer.current = setTimeout(() => {
                     setSuccess(true);
                     setLoading(false);
+
+
+
+
 
                     // let pdf = fstorage.ref("pdfs").child(pdfitem.id);
                     // pdf.getDownloadURL().then(url => {

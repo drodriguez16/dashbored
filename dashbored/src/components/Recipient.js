@@ -104,14 +104,14 @@ const Recipient = (props) => {
                     <Paper className={classes.TransPaper}>
                         <Menu id="fade-menu" anchorEl={openTransListEl} keepMounted open={isMenu} onClose={CloseTransMenu} TransitionComponent={Fade} >
                             {pdfitem.Transactions.filter(i => i.SendTo !== "" && i.id !== pdfitem.TransactionQueue.id).map(trans => {
-                                return (<>
-                                    <MenuItem onClick={() => SwitchTransac(trans)}>
+                                return (
+                                    <MenuItem onClick={() => SwitchTransac(trans)} key={`${trans.id}`}>
                                         <ListItemIcon>
                                             <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.orange}>{trans.SendTo.substring(0, 2)}</Avatar>
                                         </ListItemIcon>
                                         <Typography variant="inherit" className={classes.transMenu}> {trans.SendTo}</Typography>
                                     </MenuItem>
-                                </>)
+                                )
                             })}
                         </Menu>
                     </Paper>

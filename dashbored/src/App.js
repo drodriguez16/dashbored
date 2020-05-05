@@ -23,6 +23,7 @@ function App() {
   }, [width]);
   useEffect(() => {
     fauth.onAuthStateChanged(function (user) {
+      debugger;
       if (user) {
         if (user != null) {
           dispatch({ type: actions.SetCurrentUser, CurrentUser: { email: user.email } });

@@ -5,7 +5,31 @@ const cors = require('cors')({ origin: true });
 
 
 
-admin.initializeApp();
+
+
+
+admin.initializeApp(functions.config().firebase);
+
+
+exports.createDownloadLink = functions.firestore.document('pdfs').onUpdate((change, context) => {
+
+    const { Storage } = require('@google-cloud/storage');
+    const storage = new Storage();
+    const bucket = storage.bucket('dashbrd-152dc.appspot.com');
+
+    const options = {
+        destination: 'pdfs/hello_world.dog'
+    };
+
+    bucket.upload('hello_world.ogg', options).then(function (data) {
+        return 0;
+        // const file = data[0];
+    });
+
+    return 0;
+});
+
+
 
 /**
 * Here we're using Gmail to send 
