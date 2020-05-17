@@ -63,7 +63,7 @@ const Recipient = (props) => {
         const TransactionQueue = pdfitem.TransactionQueue;
         TransactionQueue.LinkOff = !TransactionQueue.LinkOff;
 
-        fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${pdfitem.id}/Transactions/${TransactionQueue.id}`).update(TransactionQueue);
+        fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/${pdfitem.id}/Transactions/${TransactionQueue.id}`).update(TransactionQueue);
         dispatch({ type: actions.LinkOff, pdfId: pdfitem.id, TransactionQueue: TransactionQueue })
     }
     const ShowTransMenu = (value) => {

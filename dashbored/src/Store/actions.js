@@ -8,14 +8,15 @@ const actions = {
    SetCurrentUser: "SetCurrentUser",
    UpdateSettings: "UpdateSettings",
    isSettings: "isSettings",
-      isPdfSettings: "isPdfSettings",
-         AssignRecipient: "AssignRecipient",
-            Assign: "Assign",
-               Sent: "Sent",
-                  LinkOff: "LinkOff",
-                     CelearAssigned: "CelearAssigned",
-                        TransactionQueue: "TransactionQueue",
-                           SwitchTransac: "SwitchTransac"
+   isPdfSettings: "isPdfSettings",
+   AssignRecipient: "AssignRecipient",
+   Assign: "Assign",
+   Sent: "Sent",
+   LinkOff: "LinkOff",
+   CelearAssigned: "CelearAssigned",
+   TransactionQueue: "TransactionQueue",
+   SwitchTransac: "SwitchTransac",
+   SetSettings: "SetSettings"
 }
 
 export default actions

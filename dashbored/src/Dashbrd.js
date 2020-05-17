@@ -92,7 +92,7 @@ function Dashbrd() {
   const { width } = useViewport();
   const removepdf = (id, filename) => {
 
-    fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${id}/`).remove();
+    fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/${id}/`).remove();
 
     fstorage.ref(`pdfs/${id}/`).delete();
     fstorage.ref().child(`pdfs/${id}/`).delete();

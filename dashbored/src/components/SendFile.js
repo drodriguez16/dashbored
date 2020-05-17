@@ -39,13 +39,13 @@ const SendFile = (props) => {
                     //     console.log(url)
                     // });
 
-                    const transKey = fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${pdfitem.id}/Transactions`).push().key;
+                    const transKey = fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/${pdfitem.id}/Transactions`).push().key;
                     pdfitem.TransactionQueue.id = transKey;
                     pdfitem.TransactionQueue.init = false;
                     pdfitem.TransactionQueue.isLink = true;
                     pdfitem.TransactionQueue.LinkOff = true;
                     pdfitem.TransactionQueue.DownloadUrl = fileLink;
-                    fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${pdfitem.id}/Transactions/${transKey}`).update(pdfitem.TransactionQueue);
+                    fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/${pdfitem.id}/Transactions/${transKey}`).update(pdfitem.TransactionQueue);
                     dispatch({ type: actions.Sent, TransactionQueue: pdfitem.TransactionQueue, pdfId: pdfitem.id });
                 }, 2000);
             }

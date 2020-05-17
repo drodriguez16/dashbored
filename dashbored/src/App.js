@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect, useState } from 'react';
-import { storeReducer, data, db, actions, fauth } from './Store'
+import { storeReducer, data, db, actions, fauth, documents } from './Store'
 import './App.scss';
 import Dashbrd from './Dashbrd'
 import { fdb, fstorage } from './API/firebase';
@@ -8,6 +8,7 @@ import LoginForm from './components/LoginForm';
 import Setting from './components/Settings'
 import HeaderAuthIn from './components/HeaderAuthIn'
 import HeaderAuthOut from './components/HeaderAuthOut'
+import { useIsFocusVisible } from '@material-ui/core';
 
 function App() {
   const [state, dispatch] = useReducer(storeReducer, data);
@@ -25,6 +26,18 @@ function App() {
     fauth.onAuthStateChanged(function (user) {
 
       if (user) {
+        fdb.ref(("/")).once("value", cb => {
+          debugger;
+          if (cb.val() === null) {
+            fdb.ref((documents.settings(user))).set(state.Settings)
+          }
+          else {
+            fdb.ref((documents.settings(user))).once("value", cb => {
+              const settings = cb.val();
+              dispatch({ type: actions.SetSettings, settings: settings })
+            })
+          }
+        });
         if (user != null) {
           dispatch({ type: actions.SetCurrentUser, CurrentUser: { email: user.email } });
           dispatch({ type: actions.SignedIn });
@@ -34,12 +47,10 @@ function App() {
           console.log(user.emailVerified);
           console.log(user.uid);  // The user's ID, unique to the Firebase project. Do NOT use
           // this value to authenticate with your backend server, if
-          fdb.ref(`pdfs/${user.email.replace(".", "")}`).once("value", children => {
+          fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/`).once("value", children => {
             if (!state.fdbInitialized) {
               dispatch({ type: actions.fdbInitialized });
               const pdfs = [];
-
-              const settings = children.val().Settings;
               children.forEach(item => {
                 const Trans = [];
                 let Queue = item.val().TransactionQueue;
@@ -63,8 +74,8 @@ function App() {
                   TransactionQueue: Queue
                 })
               });
-              ;
-              dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false, Settings: settings });
+
+              dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });
             }
           });
         }
@@ -79,12 +90,22 @@ function App() {
 
   useEffect(() => {
     if (state.SignedIn) {
-      fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}`).once("value", children => {
+      fdb.ref(("/")).once("value", cb => {
+        debugger;
+        if (cb.val() === null) {
+          fdb.ref((documents.settings(state.CurrentUser))).set(state.Settings)
+        } else {
+          fdb.ref((documents.settings(state.CurrentUser))).once("value", cb => {
+            const settings = cb.val();
+            dispatch({ type: actions.SetSettings, settings: settings })
+          })
+        }
+      })
+
+      fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/`).once("value", children => {
         if (!state.fdbInitialized) {
           dispatch({ type: actions.fdbInitialized });
           const pdfs = [];
-          // const rest = children.val();
-          const settings = children.val().Settings;
 
           children.forEach(item => {
             const Trans = [];
@@ -111,16 +132,17 @@ function App() {
               TransactionQueue: Queue
             })
           });
-          dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false, Settings: settings });
+          dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });
         }
       });
-      fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}`)
+      fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/`)
         .on("child_removed", child => {
           console.log("fdb child_removed")
           dispatch({ type: actions.DeletePdf, pdfKey: child.key });
         });
     }
   }, [state.SignedIn]);
+  debugger;
   return (
     <db.Provider value={{ state, dispatch }}>
       {(!state.SignedIn) && (

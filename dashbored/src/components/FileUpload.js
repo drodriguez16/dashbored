@@ -17,7 +17,7 @@ const FileUpload = () => {
     }
     const up = e => {
 
-        const key = fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}`).push().key;
+        const key = fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/`).push().key;
         const uploadTask = fstorage.ref(`pdfs/${key}`).put(image);
         uploadTask.on('state_changed', progress => {
         }, err => {
@@ -32,9 +32,9 @@ const FileUpload = () => {
                     SendTo: "",
                     TransactionQueue: { id: 0, SendTo: "", isLink: false, LinkOff: false, CreatedAt: Date.now(), init: true }
                 }
-                fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${key}`).update(pdf);
-                const transId = fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${key}/Transactions`).push().key;
-                fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${key}/Transactions/${transId}`).update({ id: transId, SendTo: "", DownloadUrl: "", isLink: false, LinkOff: false, CreatedAt: Date.now(), init: true });
+                fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/${key}`).update(pdf);
+                const transId = fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/${key}/Transactions`).push().key;
+                fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/${key}/Transactions/${transId}`).update({ id: transId, SendTo: "", DownloadUrl: "", isLink: false, LinkOff: false, CreatedAt: Date.now(), init: true });
                 pdf.Transactions = [{ id: transId, SendTo: "", isLink: false, LinkOff: false, CreatedAt: Date.now(), init: true }];
 
                 dispatch({ type: actions.AddPdf, pdf: pdf });

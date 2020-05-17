@@ -24,7 +24,7 @@ const Settings = () => {
     const { state, dispatch } = useContext(db);
     const [fields, setFields] = useForm({ fullname: state.Settings.fullname })
     const save = () => {
-        firebase.database().ref(documents.settings(state.CurrentUser)).set({ isSettings: true, fullname: fields.fullname, AvatarName: 'Avatar.jpg' })
+        firebase.database().ref(documents.settings(state.CurrentUser)).set({ isSettings: false, fullname: fields.fullname, AvatarName: 'Avatar.jpg' })
         const settings = { fullname: fields.fullname };
         dispatch({ type: actions.UpdateSettings, Settings: settings })
     }

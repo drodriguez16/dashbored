@@ -77,12 +77,33 @@ const storeReducer = (state, action) => {
         case "isSettings":
             const settings = { ...state.Settings, isSettings: !state.Settings.isSettings }
             return { ...state, Settings: settings }
-        case "UpdateSettings":
+        case "SetSettings":
 
+            return { ...state, Settings: action.settings }
+        case "UpdateSettings":
             const sett = { isSettings: false, fullname: action.Settings.fullname };
             return { ...state, Settings: sett }
         case "LogOut":
-            return { ...state, SignedIn: false }
+
+
+            return {
+                Contacts: [{ email: 'Dioscarr@gmail.com' }, { email: 'KellenOcana87@gmail.com' }, { email: 'DionelRodriguez16@gmail.com' }, { email: '3472009415@tmomail.net' }],
+                Settings: { isSettings: false, fullname: '', AvatarName: 'Avatar.jpg' },
+                PdfSettings: { isSettings: false, AssignRecipient: false, Recipient: '' },
+                CurrentUser: {},
+                fdbInitialized: false,
+                SignedIn: false,
+                Loading: true,
+                pdfs: [],
+                pdf: {
+                    name: "",
+                    uploadedBy: "",
+                    createdAt: null,
+                    size: 0
+                }
+            }
+
+
         case "SignedIn":
             return { ...state, SignedIn: true }
         case "SetCurrentUser":
@@ -100,8 +121,8 @@ const storeReducer = (state, action) => {
             templPdfs.push(action.pdf);
             return { ...state, pdfs: templPdfs, Loading: false }
         case "SetPdfs":
-
-            return { ...state, pdfs: action.pdfs, Loading: action.Loading, Settings: action.Settings }
+            debugger;
+            return { ...state, pdfs: action.pdfs, Loading: action.Loading }
         default:
             return { ...state }
     }
