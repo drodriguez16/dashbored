@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import useForm from '../hooks/useForm'
-import { db, actions, fauth } from '../Store'
+import { db, actions, fauth, firebase, documents } from '../Store'
 import './Settings.scss'
 import { MdSave } from 'react-icons/md'
 import { RiLogoutBoxLine } from 'react-icons/ri'
@@ -24,6 +24,7 @@ const Settings = () => {
     const { state, dispatch } = useContext(db);
     const [fields, setFields] = useForm({ fullname: state.Settings.fullname })
     const save = () => {
+        firebase.database().ref(documents.settings(state.CurrentUser)).set({ isSettings: true, fullname: fields.fullname, AvatarName: 'Avatar.jpg' })
         const settings = { fullname: fields.fullname };
         dispatch({ type: actions.UpdateSettings, Settings: settings })
     }

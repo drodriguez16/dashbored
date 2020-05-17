@@ -3,33 +3,7 @@ const admin = require('firebase-admin');
 const nodemailer = require('nodemailer');
 const cors = require('cors')({ origin: true });
 
-
-
-
-
-
 admin.initializeApp(functions.config().firebase);
-
-
-exports.createDownloadLink = functions.firestore.document('pdfs').onUpdate((change, context) => {
-
-    const { Storage } = require('@google-cloud/storage');
-    const storage = new Storage();
-    const bucket = storage.bucket('dashbrd-152dc.appspot.com');
-
-    const options = {
-        destination: 'pdfs/hello_world.dog'
-    };
-
-    bucket.upload('hello_world.ogg', options).then(function (data) {
-        return 0;
-        // const file = data[0];
-    });
-
-    return 0;
-});
-
-
 
 /**
 * Here we're using Gmail to send 
@@ -52,7 +26,7 @@ exports.sendMail = functions.https.onRequest((req, res) => {
             from: 'dashbrd <noreply@apt3k.com>', // Something like: Jane Doe <janedoe@gmail.com>
             replyTo: 'dashbrd <noreply@apt3k.com>',
             to: dest,
-            subject: 'Dashbrd doing its thing!', // email subject
+            subject: `Filebyrd is giving you acess to ${fileName}`, // email subject
             html: `
             <div style="display: grid; background-color: #f7f7f7; padding:10px 0px 30px;" >
             <img src="https://user-images.githubusercontent.com/6876354/79923933-9b645180-8404-11ea-8472-f55508dcbf5a.png" 
@@ -94,3 +68,22 @@ exports.sendMail = functions.https.onRequest((req, res) => {
         });
     });
 });
+
+
+// exports.createDownloadLink = functions.firestore.document('pdfs').onUpdate((change, context) => {
+
+//     const { Storage } = require('@google-cloud/storage');
+//     const storage = new Storage();
+//     const bucket = storage.bucket('dashbrd-152dc.appspot.com');
+
+//     const options = {
+//         destination: 'pdfs/hello_world.dog'
+//     };
+
+//     bucket.upload('hello_world.ogg', options).then(function (data) {
+//         return 0;
+//         // const file = data[0];
+//     });
+
+//     return 0;
+// });

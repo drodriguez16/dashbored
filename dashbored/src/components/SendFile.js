@@ -4,12 +4,6 @@ import SendIcon from '@material-ui/icons/Send';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { fdb, fstorage } from '../API/firebase';
 
-
-
-
-
-
-
 const CloudFuncSendEmail = process.env.REACT_APP_FUNCSENDEMAIL;
 
 const SendFile = (props) => {
@@ -26,11 +20,11 @@ const SendFile = (props) => {
 
     const sendLink = ({ To, fileLink, fileName, size }) => {
         if (To.indexOf("@") !== -1) {
-            // const url = `${CloudFuncSendEmail}dest=${To}&downloadlink=${fileLink}&useremail=${state.CurrentUser.email}&sendername=${state.Settings.fullname}&fileName=${fileName}&size=${size}`;
-            // var xhr = new XMLHttpRequest()
-            // xhr.open('GET', url)
-            // xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
-            // xhr.send()
+            const url = `${CloudFuncSendEmail}dest=${To}&downloadlink=${fileLink}&useremail=${state.CurrentUser.email}&sendername=${state.Settings.fullname}&fileName=${fileName}&size=${size}`;
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', url)
+            xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
+            xhr.send()
 
 
 
@@ -40,11 +34,6 @@ const SendFile = (props) => {
                 timer.current = setTimeout(() => {
                     setSuccess(true);
                     setLoading(false);
-
-
-
-
-
                     // let pdf = fstorage.ref("pdfs").child(pdfitem.id);
                     // pdf.getDownloadURL().then(url => {
                     //     console.log(url)
@@ -55,6 +44,7 @@ const SendFile = (props) => {
                     pdfitem.TransactionQueue.init = false;
                     pdfitem.TransactionQueue.isLink = true;
                     pdfitem.TransactionQueue.LinkOff = true;
+                    pdfitem.TransactionQueue.DownloadUrl = fileLink;
                     fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}/${pdfitem.id}/Transactions/${transKey}`).update(pdfitem.TransactionQueue);
                     dispatch({ type: actions.Sent, TransactionQueue: pdfitem.TransactionQueue, pdfId: pdfitem.id });
                 }, 2000);

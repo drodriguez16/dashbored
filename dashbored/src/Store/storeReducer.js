@@ -100,7 +100,8 @@ const storeReducer = (state, action) => {
             templPdfs.push(action.pdf);
             return { ...state, pdfs: templPdfs, Loading: false }
         case "SetPdfs":
-            return { ...state, pdfs: action.pdfs, Loading: action.Loading }
+
+            return { ...state, pdfs: action.pdfs, Loading: action.Loading, Settings: action.Settings }
         default:
             return { ...state }
     }

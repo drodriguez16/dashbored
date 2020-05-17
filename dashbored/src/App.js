@@ -23,7 +23,7 @@ function App() {
   }, [width]);
   useEffect(() => {
     fauth.onAuthStateChanged(function (user) {
-      debugger;
+
       if (user) {
         if (user != null) {
           dispatch({ type: actions.SetCurrentUser, CurrentUser: { email: user.email } });
@@ -38,6 +38,8 @@ function App() {
             if (!state.fdbInitialized) {
               dispatch({ type: actions.fdbInitialized });
               const pdfs = [];
+
+              const settings = children.val().Settings;
               children.forEach(item => {
                 const Trans = [];
                 let Queue = item.val().TransactionQueue;
@@ -62,7 +64,7 @@ function App() {
                 })
               });
               ;
-              dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });
+              dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false, Settings: settings });
             }
           });
         }
@@ -81,9 +83,13 @@ function App() {
         if (!state.fdbInitialized) {
           dispatch({ type: actions.fdbInitialized });
           const pdfs = [];
+          // const rest = children.val();
+          const settings = children.val().Settings;
+
           children.forEach(item => {
             const Trans = [];
             let Queue = item.val().TransactionQueue;
+            debugger;
             Object.keys(item.val().Transactions).forEach(key => Trans.push(item.val().Transactions[key]));
             if (Trans.length > 0) {
               Trans.forEach(i => {
@@ -105,7 +111,7 @@ function App() {
               TransactionQueue: Queue
             })
           });
-          dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false });
+          dispatch({ type: actions.SetPdfs, pdfs: pdfs, Loading: false, Settings: settings });
         }
       });
       fdb.ref(`pdfs/${state.CurrentUser.email.replace(".", "")}`)

@@ -15,10 +15,10 @@ const LoginForm = () => {
         isNew(!fields.isNew);
     }
     const login = () => {
-        debugger;
+
         if (validateEmail(fields.username) && fields.password !== "") {
             fauth.signInWithEmailAndPassword(fields.username, fields.password).then(r => {
-                debugger;
+
                 setPwdErr("")
                 setUsernameErr("")
             }).catch(err => {
