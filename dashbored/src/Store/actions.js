@@ -16,7 +16,11 @@ const actions = {
    CelearAssigned: "CelearAssigned",
    TransactionQueue: "TransactionQueue",
    SwitchTransac: "SwitchTransac",
-   SetSettings: "SetSettings"
+   SetSettings: "SetSettings",
+   SetContacts: "SetContacts",
+   AddNewAccount: "AddNewAccount",
+   InputRecipient: "InputRecipient",
+   ResetInputRecipient: "ResetInputRecipient"
 }
 
 export default actions

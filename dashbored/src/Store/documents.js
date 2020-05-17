@@ -5,7 +5,9 @@ const documents = {
     transactionQueue: ({ user, pdfId }) => { return `Accounts/${user.email.replace(".", "")}/pdfs/${pdfId}/transactionQueue/` },//todo: Parameter no resolved
     transactions: ({ user, pdfId }) => { return `Accounts/${user.email.replace(".", "")}/pdfs/${pdfId}/Transactions` },//todo: Parameter no resolved
     transaction: ({ user, pdfId, transId }) => { return `Accounts/${user.email.replace(".", "")}/pdfs/${pdfId}/Transactions/${transId}` },//todo: Parameter no resolved
-    settings: (user) => { return `Accounts/${user.email.replace(".", "")}/Settings`; },
+    settings: (user) => { return `Accounts/${user.email.replace(".", "")}/Settings` },
+    contactBook: (user) => { return `Accounts/${user.email.replace(".", "")}/ContactBooks/` },
+
 }
 
 export { documents }

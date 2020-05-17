@@ -1,5 +1,13 @@
 const storeReducer = (state, action) => {
     switch (action.type) {
+        case "ResetInputRecipient":
+            return { ...state, InputRecipient: action.value, AddNew: action.AddNew }
+        case "InputRecipient":
+            return { ...state, InputRecipient: action.value }
+        case "AddNewAccount":
+            return { ...state, AddNew: action.AddNew }
+        case "SetContacts":
+            return { ...state, Contacts: action.Contacts }
         case "SwitchTransac":
             let ST_Queue = action.TransactionQueue;
             let ST_pdfId = action.pdfId;

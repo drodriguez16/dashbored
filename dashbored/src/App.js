@@ -30,12 +30,23 @@ function App() {
           debugger;
           if (cb.val() === null) {
             fdb.ref((documents.settings(user))).set(state.Settings)
+
+            // fdb.ref(documents.contactBook(user)).push({ email: user.email })
           }
           else {
             fdb.ref((documents.settings(user))).once("value", cb => {
               const settings = cb.val();
               dispatch({ type: actions.SetSettings, settings: settings })
             })
+
+            fdb.ref((documents.contactBook(user))).once("value", cb => {
+              const contactBook = [];
+              cb.forEach(item => contactBook.push(item.val()))
+              dispatch({ type: actions.SetContacts, Contacts: contactBook })
+            })
+
+
+
           }
         });
         if (user != null) {
@@ -94,10 +105,18 @@ function App() {
         debugger;
         if (cb.val() === null) {
           fdb.ref((documents.settings(state.CurrentUser))).set(state.Settings)
+          fdb.ref(documents.contactBook(state.CurrentUser)).set({ email: state.CurrentUser.email })
         } else {
           fdb.ref((documents.settings(state.CurrentUser))).once("value", cb => {
             const settings = cb.val();
             dispatch({ type: actions.SetSettings, settings: settings })
+
+            fdb.ref((documents.contactBook(state.CurrentUser))).once("value", cb => {
+              const contactBook = [];
+              cb.forEach(item => contactBook.push(item.val()))
+              dispatch({ type: actions.SetContacts, Contacts: contactBook })
+            })
+
           })
         }
       })
@@ -142,7 +161,7 @@ function App() {
         });
     }
   }, [state.SignedIn]);
-  debugger;
+
   return (
     <db.Provider value={{ state, dispatch }}>
       {(!state.SignedIn) && (

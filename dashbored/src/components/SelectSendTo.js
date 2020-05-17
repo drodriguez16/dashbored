@@ -33,7 +33,18 @@ function SimpleDialog(props) {
     };
 
     const handleListItemClick = (value) => {
+        if (value === "addAccount") {
+            dispatch({ type: actions.AddNewAccount, AddNew: true });
+            value = "";
+        }
+        else {
+            dispatch({ type: actions.AddNewAccount, AddNew: false });
+        }
+
         onClose(value);
+
+
+
     };
 
 

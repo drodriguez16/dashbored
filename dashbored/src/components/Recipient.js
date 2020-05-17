@@ -20,9 +20,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import SendIcon from '@material-ui/icons/Send';
 import Avatar from '@material-ui/core/Avatar';
-import './Recipient.scss'
-
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
+import './Recipient.scss'
 const StyledBadge = withStyles((theme) => ({
     badge: {
         right: -3,
@@ -39,6 +39,17 @@ const Recipient = (props) => {
 
     const [isMenu, setIsMenu] = React.useState(false);
     const [openTransListEl, setOpenTransListEl] = React.useState(null);
+    const [recipient, SetRecipient] = React.useState(state.InputRecipient)
+    // const [Addnew, SetAddNew] = React.useState(state.AddNew);
+
+    React.useMemo(() => {
+        debugger;
+        dispatch({ type: actions.InputRecipient, value: recipient })
+    }, [recipient])
+    React.useMemo(() => {
+        SetRecipient("")
+    }, [state.AddNew])
+
 
     const handleClickOpen = () => {
         setOpen(prv => !prv);
@@ -83,9 +94,17 @@ const Recipient = (props) => {
         <div className="Recipient">
             {pdfitem.TransactionQueue.SendTo === "" ?
                 <div className="SendTo">
-                    <IconButton aria-label="delete" className={classes.sendTo} onClick={handleClickOpen}>
-                        <ContactMailIcon fontSize="small" />
-                    </IconButton>
+                    {!state.AddNew ?
+                        <IconButton aria-label="delete" className={classes.sendTo} onClick={handleClickOpen}>
+                            <ContactMailIcon fontSize="small" />
+                        </IconButton>
+                        :
+                        <>
+                            <IconButton aria-label="delete" className={classes.sendTo} onClick={handleClickOpen}>
+                                <ContactMailIcon fontSize="small" />
+                            </IconButton>
+                            <input type="text" value={recipient} onChange={e => { SetRecipient(e.currentTarget.value) }} />
+                        </>}
                 </div> :
                 <div className="SendTo" style={{ fontSize: '10px' }}>
                     <Fab variant="extended" onClick={() => { dispatch({ type: actions.AssignRecipient }) }} className={classes.recipient}>
