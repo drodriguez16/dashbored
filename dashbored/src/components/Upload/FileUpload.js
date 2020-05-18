@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
-import { fdb, fstorage } from '../API/firebase'
-import { db, actions } from '../Store'
-import useForm from '../hooks/useForm';
+import { fdb, fstorage } from '../../API/firebase'
+import { db, actions } from '../../Store'
+import useForm from '../../hooks/useForm';
 import "./FileUpload.scss";
 
 const FileUpload = () => {

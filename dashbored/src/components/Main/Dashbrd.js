@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { db, actions } from './Store'
-import { fdb, fstorage } from './API/firebase';
-import FileUpload from './components/FileUpload';
-import Recipient from './components/Recipient'
+import { db, actions } from '../../Store'
+import { fdb, fstorage } from '../../API/firebase';
+import FileUpload from '../Upload/FileUpload';
+import Recipient from '../FileDashboard/Recipient'
 import "./Dashbrd.scss";
-import useViewport from './hooks/useViewport'
-import useForm from './hooks/useForm'
+import useViewport from '../../hooks/useViewport'
+import useForm from '../../hooks/useForm'
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,14 +14,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SendIcon from '@material-ui/icons/Send';
 
-import SendFile from './components/SendFile'
-import FileSettings from './components/FileSettings'
+import SendFile from '../FileDashboard/SendFile'
+import FileSettings from '../FileDashboard/FileSettings'
 import { green } from '@material-ui/core/colors';
-
-
-
-
-
 
 const useStyles = makeStyles((theme) => ({
   send: { color: '#2391e9', margin: theme.spacing(1) },
@@ -87,8 +82,6 @@ const useStyles = makeStyles((theme) => ({
 function Dashbrd() {
 
   const { state, dispatch } = useContext(db);
-  const [color, setColor] = useState('transparent')
-
   const { width } = useViewport();
   const removepdf = (id, filename) => {
 
@@ -146,6 +139,3 @@ function Dashbrd() {
 }
 
 export default Dashbrd;
-
-
-//<input type="text" name="sendTo" onChange={setFields} value={fields.sendTo} />

@@ -1,13 +1,13 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import { storeReducer, data, db, actions, fauth, documents } from './Store'
 import './App.scss';
-import Dashbrd from './Dashbrd'
+import Dashbrd from './components/Main/Dashbrd'
 import { fdb, fstorage } from './API/firebase';
 import useViewport from './hooks/useViewport'
-import LoginForm from './components/LoginForm';
-import Setting from './components/Settings'
-import HeaderAuthIn from './components/HeaderAuthIn'
-import HeaderAuthOut from './components/HeaderAuthOut'
+import LoginForm from './components/LogIn/LoginForm';
+import Setting from './components/Header/Settings'
+import HeaderAuthIn from './components/Header/HeaderAuthIn'
+import HeaderAuthOut from './components/LogIn/HeaderAuthOut'
 import { useIsFocusVisible } from '@material-ui/core';
 
 function App() {
@@ -36,7 +36,8 @@ function App() {
           else {
             fdb.ref((documents.settings(user))).once("value", cb => {
               const settings = cb.val();
-              dispatch({ type: actions.SetSettings, settings: settings })
+              if (settings != null)
+                dispatch({ type: actions.SetSettings, settings: settings })
             })
 
             fdb.ref((documents.contactBook(user))).once("value", cb => {
@@ -44,9 +45,6 @@ function App() {
               cb.forEach(item => contactBook.push(item.val()))
               dispatch({ type: actions.SetContacts, Contacts: contactBook })
             })
-
-
-
           }
         });
         if (user != null) {
@@ -109,7 +107,8 @@ function App() {
         } else {
           fdb.ref((documents.settings(state.CurrentUser))).once("value", cb => {
             const settings = cb.val();
-            dispatch({ type: actions.SetSettings, settings: settings })
+            if (settings != null)
+              dispatch({ type: actions.SetSettings, settings: settings })
 
             fdb.ref((documents.contactBook(state.CurrentUser))).once("value", cb => {
               const contactBook = [];
@@ -161,15 +160,15 @@ function App() {
         });
     }
   }, [state.SignedIn]);
-
+  debugger;
   return (
     <db.Provider value={{ state, dispatch }}>
-      {(!state.SignedIn) && (
+      {state.Settings?.isSettings !== null && (!state.SignedIn) && (
         <div className="LoggedOut" data-theme={theme} >
           <HeaderAuthOut />
           <LoginForm />
         </div>)}
-      {(state.SignedIn) && (
+      {state.Settings?.isSettings !== null && (state.SignedIn) && (
         <div className="Sender-Render" data-theme={theme}>
           <HeaderAuthIn />
           {state.Settings.isSettings ? (<><Setting /></>) :

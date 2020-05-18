@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
-import { db, actions } from '../Store'
-import Logo from '../assets/logo.svg'
+import { db, actions } from '../../Store'
+import Logo from '../../assets/logo.svg'
 import { FaCog } from 'react-icons/fa'
 import { MdClose } from 'react-icons/md'
 import Fab from '@material-ui/core/Fab';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Avatar from '@material-ui/core/Avatar';
-import avaImg from '../assets/Avatar.jpg'
+import avaImg from '../../assets/Avatar.jpg'
 import './Header.scss'
 
 const useStyles = makeStyles(() => ({

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { db, actions } from '../Store'
-import Logo from '../assets/logo.svg'
+import { db, actions } from '../../Store'
+import Logo from '../../assets/logo.svg'
 import Fab from '@material-ui/core/Fab'
 
 const HeaderAuthOut = () => {

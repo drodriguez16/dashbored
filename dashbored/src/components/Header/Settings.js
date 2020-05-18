@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import useForm from '../hooks/useForm'
-import { db, actions, fauth, firebase, documents } from '../Store'
+import useForm from '../../hooks/useForm'
+import { db, actions, fauth, firebase, documents } from '../../Store'
 import './Settings.scss'
 import { MdSave } from 'react-icons/md'
 import { RiLogoutBoxLine } from 'react-icons/ri'

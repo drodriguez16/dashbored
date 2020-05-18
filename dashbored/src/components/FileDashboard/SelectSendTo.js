@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useCallback } from 'react';
-import { db, actions } from '../Store'
+import { db, actions } from '../../Store'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';

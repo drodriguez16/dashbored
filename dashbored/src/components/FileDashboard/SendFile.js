@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import IconButton from '@material-ui/core/IconButton';
 import SendIcon from '@material-ui/icons/Send';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { fdb, fstorage } from '../API/firebase';
-import validateEmail from '../Store/utils/index'
+import { fdb, fstorage } from '../../API/firebase';
+import validateEmail from '../../Store/utils/index'
 
 const CloudFuncSendEmail = process.env.REACT_APP_FUNCSENDEMAIL;
 
@@ -63,7 +63,6 @@ const SendFile = (props) => {
             <IconButton aria-label="delete" className={classes.send} onClick={() => { sendLink({ To: pdfitem.TransactionQueue.SendTo, AltEmail: state.InputRecipient, fileLink: pdfitem.downloadUrl, fileName: pdfitem.name, size: pdfitem.size }) }}>
                 <SendIcon fontSize="small" />  {loading && <CircularProgress size={26} className={classes.fabProgress} />}
             </IconButton>
-
         </div>
         <a href={`${pdfitem.downloadUrl}`} rel="noopener noreferrer" target="_blank" download={`${pdfitem.name}.pdf`}>{`${pdfitem.name}.pdf`}</a>
     </div>)

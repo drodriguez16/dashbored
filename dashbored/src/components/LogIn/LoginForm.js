@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './LoginForm.scss'
-import { fauth, firebase } from '../Store';
-import useForm from '../hooks/useForm'
-import validateEmail from '../Store/utils'
+import { fauth, firebase } from '../../Store';
+import useForm from '../../hooks/useForm'
+import validateEmail from '../../Store/utils'
 import SigninProviders from './SigninProviders'
 
 
