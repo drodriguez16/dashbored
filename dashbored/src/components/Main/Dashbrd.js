@@ -80,7 +80,7 @@ function Dashbrd(props) {
                   {new Date(pdfitem.createdAt).toLocaleDateString('en-US')}
                 </div>
                 <div className="settings-pdfs-list">
-                  <FileSettings classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} />
+                  {/* <FileSettings classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} /> */}
                   <div>
                     <IconButton aria-label="delete" className={classes.margin} onClick={e => removepdf(pdfitem.id)}>
                       <DeleteIcon fontSize="small" />

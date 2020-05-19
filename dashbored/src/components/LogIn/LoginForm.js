@@ -46,7 +46,7 @@ const LoginForm = () => {
     }
     return (
         <div className="LoginForm">
-            {(islocal) ?
+            {/* {(islocal) ?
                 (<>
                     <div>Username</div>
                     <div>
@@ -65,12 +65,12 @@ const LoginForm = () => {
                         <button onClick={!fields.isNew ? login : create}>{!fields.isNew ? "Login" : "create one"}</button>
                     </div>
                 </>) :
-                (<>
+                (<> */}
                     <SigninProviders />
-                </>)}
-            <div className="Loginbtns">
+                {/* </>)} */}
+           {/* <div className="Loginbtns">
                 <button onClick={e => setIslocal(prv => !prv)}>{islocal ? "Signin with..." : "switch back"}</button>
-            </div>
+            </div> */}
         </div>
     );
 }

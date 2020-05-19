@@ -34,13 +34,13 @@ const Settings = () => {
     }
     const classes = useStyles();
     return (<div className="Settings">
-        <input type="text" name="fullname" onChange={setFields} value={fields.fullname} placeholder="Enter Full Name" />
-        <div>
-            <Fab variant="extended" onClick={save} className={classes.extendedIcon}>
+        {/* <input type="text" name="fullname" onChange={setFields} value={fields.fullname} placeholder="Enter Full Name" /> */}
+        {/* <div>
+            <Fab variant="extended" onClick={save} className={classes.extendedIcon}>    
                 <MdSave />
                 Save
             </Fab>
-        </div>
+        </div> */}
         <div className="Logoutbox">
             <Fab variant="extended" onClick={signout} className={classes.extendedIcon}>
                 <RiLogoutBoxLine />
