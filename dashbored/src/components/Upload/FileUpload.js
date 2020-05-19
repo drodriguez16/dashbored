@@ -14,7 +14,7 @@ const FileUpload = () => {
     const hchange = e => {
         const upimage = e.target.files[0];
         debugger;
-        reset({ pdfname: upimage.name.split(".")[0] })
+        reset({ pdfname: upimage.name })
         setImage(upimage);
     }
     const up = e => {
@@ -68,7 +68,7 @@ const FileUpload = () => {
 
     return (
         <div className="fileUpload form-inline " data-file={(fields.pdfname === "" && !dragging) ? "no-file" : "file"}>
-            <div><input type="text" name="pdfname" placeholder="Title" value={fields.pdfname} onChange={setFields}
+            <div className="input-pdfname-box"><input type="text" name="pdfname" placeholder="Title" value={fields.pdfname} onChange={setFields}
             /></div>
             {(dragging) && (<div className="FileDropOverlay"
                 onDrop={handleDrop}
@@ -77,7 +77,7 @@ const FileUpload = () => {
                 onDragLeave={handleDragLeave}
             >
                 {(draggingOver) ? (<div className="DraggingOverContent">Drop it!</div>) : (<div className="DraggingOverContent">
-                    {(dropit && fields.image !== null) ? (<div>{`${fields.pdfname === "" ? 'WhatismynameBitch' : fields.pdfname}.pdf`}</div>) : (<div>Teasing me</div>)}
+                    {(dropit && fields.image !== null) ? (<div>{`${fields.pdfname === "" ? 'WhatismynameBitch' : fields.pdfname}`}</div>) : (<div>Teasing me</div>)}
                 </div>)}
             </div>)}
             <div className="item-drop-box"><input type="file"

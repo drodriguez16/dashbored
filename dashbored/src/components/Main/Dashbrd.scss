@@ -7,117 +7,140 @@
   // @include media("<=tablet") {}
 
 .Dashbrd{
-    // grid-area:Dashbrd;
     display: grid;
-    // grid-template-areas: 'fileUpload files';
     grid-template-columns: 3fr 7fr;
     @include media("<=tablet") {
         grid-template-areas:    'fileUpload'
                                 'files';
         grid-template-columns: 100%;
     }
-    
-   
-    .files{        
-        background-color: white;
-        height: 55vh;
-        margin: 60px;
-        padding: 60px;
-        border-radius:10px;
-        
-        @include media("<=tablet") {
-            margin: 0px;
-            padding: 30px;
-            height: 100%;
-        }
-        .file-header{
-            // grid-area:file-header;
-            // display:grid;
-            // grid-template-areas:"header-title header-date";
-            border-bottom:1px solid #c7c7c7;
-        }
-        .header-title{grid-area:header-title;}
-        .header-date{grid-area:header-date;}
+    .files-box
+    {
+        margin-bottom: 50px;
+ 
+        .files{        
+            background-color: white;
+            height: 55vh;
+            margin: 60px;
+            padding: 60px;
+            border-radius:10px;
+            
+            @include media("<=tablet") {
+                margin: 0px;
+                padding: 30px;
+                height: 100%;
+            }
+            .file-header{           
+                border-bottom:1px solid #c7c7c7;
+            }
+            .header-title{grid-area:header-title;}
+            .header-date{grid-area:header-date;}
+            }
     }
     .file-rows
-    {
-        // grid-area:file-rows;
-        // height: 100%;
+    {        
+        display:grid;
         .the-file-row
         {
-            grid-area:the-file-row;
             border-bottom:0.5px solid #c7c7c7;
             display:grid;
             grid-template-columns: 11fr 9fr 4fr 4fr;
             grid-template-rows:45px;
-            grid-auto-rows:  minmax(100px, auto);
-            grid-template-areas:"the-file Recipient the-file-date settings-pdfs-list the-file-delete";
+           
             @include media("<=tablet") {
-                
-                grid-template-areas:    "the-file the-file-date settings-pdfs-list"
-                                        "Recipient Recipient the-file-delete"                                                                              
-                                        ;
-                grid-template-columns: 7fr 2fr 1fr;
-                grid-template-rows:30px 90px;
-                grid-auto-rows:  minmax(70px, auto);
+                grid-template-columns: 10fr;
+                grid-template-rows:40px 40px 40px;
             }
+            .the-file{
+                // grid-area:the-file;
+                display:grid;
+                grid-template-columns:50px auto;
+                align-content:center;
+                @include media("<=tablet") {
+                    align-self: center;
+                    justify-self: start;
+                    font-size:0.9em;
+                    grid-row:1;
+                    grid-column: 1/3;
+                }
+                 a{
+                    text-decoration: none;
+                    font-size:1.0em;
+                    font-weight:600;
+                    letter-spacing: 0.5px;
+                    color:grey;
+                    justify-self: start;
+                    -ms-flex-item-align: center;
+                        align-self: center;
+            
+                        @include media("<=tablet") {
+                            font-size:0.8em;
+                        }
+                }
+                 a:hover{
+                    color:orangered;
+                }
+                
+            }
+            .the-file-date{
+                display:grid;
+                align-self: center;
+                @include media("<=tablet") {
+                    font-size:0.9em;
+                    align-self: center;
+                    justify-self: start;
+                    grid-row:3;
+                    grid-column: 1/3;
+                    margin-left: 17px;
+
+                }
+            }
+            
+            .Recipient{
+                display:grid;
+                grid-template-columns:auto auto auto;
+                
+                align-self:center;
+                align-content: center;
+                justify-content: start;
+                @include media("<=tablet") {
+                    align-self: center;
+                    justify-self: start;
+                    font-size:0.8em;
+                    grid-row:2;
+                    grid-column: 1/3;
+                    margin-left: 7px;
+                    button{
+                        box-shadow: none;
+                    }
+                }
+            }
+            .the-file-delete
+            {
+                @include media("<=tablet")
+                {
+                    align-self: center;
+                    grid-column: 1/3;
+                    justify-self: end;
+                    grid-row:3;
+                }
+            }
+            
         }
         .mobile-header-title
         {
-            
             justify-self:start;
             align-self: center;
             grid-area:the-file-delete;
         }
-        .the-file-date{
-            display:grid;
-            grid-area:the-file-date;
-            align-self: center;
-            @include media("<=tablet") {
-                align-self: start;
-            }
-        }
-        .settings-pdfs-list
-        {
-            display:grid;
-            grid-area:settings-pdfs-list;
-            align-content: center;
-            display:grid;
-            grid-template-columns:1fr 1fr;
-        }
-        .the-file-delete
-        {
-            grid-area:the-file-delete;
-        }
-    }
-    .the-file{
-        grid-area:the-file;
-        display:grid;
-        grid-template-columns:50px auto;
-        align-content:center;
-    }
-    .the-file > a{
-        text-decoration: none;
-        font-size:1.0em;
-        font-weight:600;
-        letter-spacing: 0.5px;
-        color:grey;
-        justify-self: start;
-        -ms-flex-item-align: center;
-            align-self: center;
-    }
-    .the-file > a:hover{
-        color:orangered;
-    }
-    .Recipient{
-        grid-area:Recipient;
-        display:grid;
-        grid-template-columns:auto auto auto;
+       
+       
         
-        align-self:center;
-        align-content: center;
-        justify-content: start;
+       
     }
+    
+    // .the-file 
+    // .the-file 
     .mobile-header-date
     {
         align-self: center;

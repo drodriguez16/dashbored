@@ -8,10 +8,12 @@
   // @include media("<=tablet") {}
 
 [data-file="no-file"]{
-  --fileupload-content:'You can also drag \00000a item here to upload'
+  --fileupload-content:'You can also drag \00000a item here to upload';
+  
 }
 [data-file="file"]{
-  --fileupload-content:''
+  --fileupload-content:'';
+  
 }
 
 .fileUpload{
@@ -19,12 +21,17 @@
   padding:60px;
   grid-template-columns:100%;
   justify-self: start;
-  grid-template-rows:62px 227px 53px;
+  grid-template-rows:62px 227px 99px;
   @include media("<=tablet") {
     grid-template-columns:100%;
     margin: 0;
-    padding: 0;
-    grid-template-rows: 44px 152px;
+    padding: 10px 34px;
+    grid-template-rows:107px 70px 137px;
+  }
+  .input-pdfname-box
+  {
+    align-self: end;
+    width:100%;
   }
   div:nth-child(1) input {
     background: none;
@@ -41,31 +48,68 @@
     @include media("<=tablet") {    
     }
   }
+  .FileDropOverlay
+  {
+    grid-column: 1;
+    grid-row: 2;
+    display: grid; 
+    background-color: #67bdf175;
+    justify-content: center;
+    align-content: center;
+    color: #366891;
+    font-size: 1.5em;
+    font-weight: 700;
+
+    @include media("<=tablet") {
+      // width: 82vw;
+    }
+  }
+  
   .item-drop-box{
+    grid-column: 1;
+    grid-row: 2;
     padding:0px;
     position: relative;
-     
+    
+    
+
+  
   #item-drop::-webkit-file-upload-button {
     visibility:hidden;
     @include media("<=tablet")
     {
+      justify-self: center;
+      position: absolute;
+      background-image:url('../../assets/xdassets/SelectFileIcon.svg') ;  
+      background-size:4em;
+      background-position: top;
+      background-repeat: no-repeat;
       visibility: visible;
+      top:14%;
+      margin:10px auto;
+      background-color:transparent;
+      color: transparent;
+      border:none;
+      height:100px;    
     }
   }
   #item-drop {
-    position:absolute;
+    
+    
     outline: 1px dashed #fff;
-    height: 200px;
+    height: 100%;
     width: 100%;
     color: transparent;
     @include media("<=tablet") {
-      width:90vw;
+      width:100%;
       color:black;
       height: 100px;
+      outline:none;
     }
   }
   #item-drop::before
     {
+    
     display: grid;
     cursor: pointer;
     text-align: center;
@@ -100,23 +144,7 @@
   grid-template-rows: 40px auto;
 }
 
-.FileDropOverlay
-{
-  display: grid;
-  position: absolute;
-  height: 200px;
-  width: 400px;
-  margin-top: 51px;
-  background-color: #67bdf175;
-  justify-content: center;
-  align-content: center;
-  color: #366891;
-  font-size: 1.5em;
-  font-weight: 700;
-  @include media("<=tablet") {
-    width: 82vw;
-  }
-}
+
 .form-inline input:focus {
   outline: none;
 }
@@ -142,6 +170,7 @@
     background-color: #3b9eda8c;
     justify-self: center;
     padding: 8px 25px;
+    align-self: center;
     border-radius: 6px;
     text-transform: uppercase;
     color: white;

@@ -1,3 +1,6 @@
+
+@import '../../Styles/Breakpoint.scss';
+@import "../../global.scss";
 .HeaderInCog{
     font-size:35px;
 }
@@ -5,4 +8,10 @@
     padding: 10px 0px;
     color: white;
     font-weight: 600;
+
+    @include media("<=tablet")
+    {
+        color: black;
+    }
+
 }

@@ -65,33 +65,36 @@ function Dashbrd(props) {
   return (
     <div className="Dashbrd">
       <div><FileUpload /></div>
-      <div>      <div className="files">
-        <div className="file-header">
-          <div className="header-title">Title</div>
-          <div className="header-date"></div>
-        </div>
-        {<div className="file-rows">
-          {state.pdfs.map((pdfitem, key) => {
-            return (
-              <div key={key} className="the-file-row">
-                <SendFile classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} />
-                <Recipient classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} fdb={fdb} />
-                <div className="the-file-date">
-                  {new Date(pdfitem.createdAt).toLocaleDateString('en-US')}
-                </div>
-                <div className="settings-pdfs-list">
-                  {/* <FileSettings classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} /> */}
-                  <div>
-                    <IconButton aria-label="delete" className={classes.margin} onClick={e => removepdf(pdfitem.id)}>
-                      <DeleteIcon fontSize="small" />
-                    </IconButton>
+      <div className="files-box">
+        <div className="files">
+          <div className="file-header">
+            <div className="header-title">Title</div>
+            <div className="header-date"></div>
+          </div>
+          {<div className="file-rows">
+            {state.pdfs.map((pdfitem, key) => {
+              return (
+                <div key={key} >
+                  <div className="the-file-row">
+                    <SendFile classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} />
+                    <Recipient classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} fdb={fdb} />
+                    <div className="the-file-date">
+                      {new Date(pdfitem.createdAt).toLocaleDateString('en-US')}
+                    </div>
+                    <div className="the-file-delete">
+                      {/* <FileSettings classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} /> */}
+                      <div>
+                        <IconButton aria-label="delete" className={classes.margin} onClick={e => removepdf(pdfitem.id)}>
+                          <DeleteIcon fontSize="small" />
+                        </IconButton>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>);
-          })}
+                </div>);
+            })}
+          </div>
+          }
         </div>
-        }
-      </div>
       </div>
     </div>
   );

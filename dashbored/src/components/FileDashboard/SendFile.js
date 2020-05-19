@@ -64,7 +64,7 @@ const SendFile = (props) => {
                 <SendIcon fontSize="small" />  {loading && <CircularProgress size={26} className={classes.fabProgress} />}
             </IconButton>
         </div>
-        <a href={`${pdfitem.downloadUrl}`} rel="noopener noreferrer" target="_blank" download={`${pdfitem.name}.pdf`}>{`${pdfitem.name}.pdf`}</a>
+        <a href={`${pdfitem.downloadUrl}`} rel="noopener noreferrer" target="_blank" download={`${pdfitem.name}.pdf`}>{`${pdfitem.name}`}</a>
     </div>)
 }
 export default SendFile;
