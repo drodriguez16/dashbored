@@ -12,7 +12,7 @@ import './Header.scss'
 
 const useStyles = makeStyles(() => ({
     HeaderInCog: { backgroundColor: '#dcdcdc' },
-    Avatar: { fontSize: '55px' },
+    Avatar: { fontSize: '55px', borderRadius: '50%' },
 }));
 const HeaderAuthIn = () => {
     const { state, dispatch } = useContext(db)
@@ -23,18 +23,22 @@ const HeaderAuthIn = () => {
             <img src={Logo} alt="" />
             <div id="InCog">
 
-                {!state.Settings.isSettings && <Fab color="primary" aria-label="add" onClick={settings} className={classes.HeaderInCog}>
-                    <>
-                        {state.Settings.AvatarName === "" ?
-                            <AccountCircleIcon className={classes.Avatar} /> :
-                            <Avatar alt="Cindy Baker" src={avaImg.replace("Avatar.jpg", state.Settings.AvatarName)} />}
-                    </>
-                </Fab>}
+                {!state.Settings.isSettings &&
+                    <Fab color="primary" aria-label="add" onClick={settings} className={classes.HeaderInCog}>
+                        <>
+                            {state.CurrentUser.avatar !== "" ?
+                                <img src={state.CurrentUser.avatar} alt="" className={classes.Avatar} /> :
+                                <Avatar alt="Cindy Baker" />
+                            }
+                        </>
+                    </Fab>}
 
-                {state.Settings.isSettings && <Fab color="primary" aria-label="add" onClick={settings} className={classes.HeaderInCog}>
-                    <MdClose className="HeaderInCog" />
-                </Fab>}
-                {state.Settings.fullname !== "" && (<div className="Greetings">Hi, {state.Settings.fullname}</div>)}
+                {state.Settings.isSettings &&
+                    <Fab color="primary" aria-label="add" onClick={settings} className={classes.HeaderInCog}>
+                        <MdClose className="HeaderInCog" />
+                    </Fab>
+                }
+                {state.CurrentUser.name !== "" && (<div className="Greetings">Hi, {state.CurrentUser.name.split(" ")[0]}</div>)}
             </div>
         </div>
     )

@@ -6,6 +6,7 @@ const documents = {
     transactions: ({ user, pdfId }) => { return `Accounts/${user.email.replace(".", "")}/pdfs/${pdfId}/Transactions` },//todo: Parameter no resolved
     transaction: ({ user, pdfId, transId }) => { return `Accounts/${user.email.replace(".", "")}/pdfs/${pdfId}/Transactions/${transId}` },//todo: Parameter no resolved
     settings: (user) => { return `Accounts/${user.email.replace(".", "")}/Settings` },
+    CurrentUser: (user) => { return `Accounts/${user.email.replace(".", "")}/User` },
     contactBook: (user) => { return `Accounts/${user.email.replace(".", "")}/ContactBooks/` },
 
 }

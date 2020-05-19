@@ -43,7 +43,7 @@ const Recipient = (props) => {
     // const [Addnew, SetAddNew] = React.useState(state.AddNew);
 
     React.useMemo(() => {
-        debugger;
+
         dispatch({ type: actions.InputRecipient, value: recipient })
     }, [recipient])
     React.useMemo(() => {

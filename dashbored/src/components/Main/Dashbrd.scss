@@ -1,243 +1,124 @@
+@import '../../Styles/Breakpoint.scss';
+@import "../../global.scss";
+  // @include media("<=1560px") {}
+  // @include media("<=desktop") {}
+  // @include media("<=1080px") {}
+  // @include media("<=phone") {}
+  // @include media("<=tablet") {}
 
-[data-theme="web-large"]
-{
-    --Dashbrd-grid-template-columns: 8fr 28fr;
-    --Dashbrd-grid-template-areas: 'fileUpload files';
-    --file-header-grid-template-areas:"header-title header-date";
-    --the-file-row-grid-template-areas:"the-file Recipient the-file-date settings-pdfs-list";
-    --the-file-row-grid-template-columns: 11fr 9fr 4fr 4fr;
-    --the-file-row-grid-template-rows:45px;
-    --the-file-row-grid-auto-rows: minmax(100px, auto);
-
-    --the-file-send-button-justify-self: center;
-    --the-file-send-button-align-self: center;
-
-    --files-grid-template-areas:    "file-header"
-                                    "file-rows";
-
-    --files-grid-template-rows: 40px auto;
-    --the-file-delete-button-margin-right:0px;
-    --the-file-delete-button-justify-self:center;
-    --the-file-date-align-self: center;
-}
-
-[data-theme="mobile"]
-{
-    --Dashbrd-grid-template-columns: 100vw;
-    --Dashbrd-grid-template-areas: 'fileUpload'
-                                    'files';
-    // --file-header-grid-template-areas:  "header-title"
-    //                                     " header-date";
-    --the-file-row-grid-template-areas: "settings-pdfs-list"
+.Dashbrd{
+    // grid-area:Dashbrd;
+    display: grid;
+    // grid-template-areas: 'fileUpload files';
+    grid-template-columns: 3fr 7fr;
+    @include media("<=tablet") {
+        grid-template-areas:    'fileUpload'
+                                'files';
+        grid-template-columns: 100%;
+    }
+    
+   
+    .files{        
+        background-color: white;
+        height: 55vh;
+        margin: 60px;
+        padding: 60px;
+        border-radius:10px;
+        
+        @include media("<=tablet") {
+            margin: 0px;
+            padding: 30px;
+        }
+        .file-header{
+            // grid-area:file-header;
+            // display:grid;
+            // grid-template-areas:"header-title header-date";
+            border-bottom:1px solid #c7c7c7;
+        }
+        .header-title{grid-area:header-title;}
+        .header-date{grid-area:header-date;}
+    }
+    .file-rows
+    {
+        // grid-area:file-rows;
+        // height: 100%;
+        .the-file-row
+        {
+            grid-area:the-file-row;
+            border-bottom:0.5px solid #c7c7c7;
+            display:grid;
+            grid-template-columns: 11fr 9fr 4fr 4fr;
+            grid-template-rows:45px;
+            grid-auto-rows:  minmax(100px, auto);
+            grid-template-areas:"the-file Recipient the-file-date settings-pdfs-list";
+            @include media("<=tablet") {
+                grid-template-areas:    "settings-pdfs-list"
                                         "the-file"
                                         "Recipient"
                                         "mobile-header-date"
                                         "the-file-date";
-    --the-file-row-grid-template-columns: 1fr;
-    --the-file-row-grid-template-rows:60px;
-    --the-file-row-grid-auto-rows: minmax(70px, auto);
-
-    --the-file-send-button-justify-self: none;
-    --the-file-send-button-align-self: none;
-    --files-grid-template-areas:    "file-rows";
-    --files-grid-template-rows:auto;
-    --the-file-delete-button-margin-right:40px;
-    --the-file-delete-button-justify-self:end;
-    --the-file-date-align-self: start;
-}
-.Dashbrd{
-    grid-area:Dashbrd;
-    display: grid;
-    grid-template-areas: var(--Dashbrd-grid-template-areas);
-    grid-template-columns: var(--Dashbrd-grid-template-columns);
-
-  }
-  .fileUpload{
-  grid-area:fileUpload;
-
-  }
-
- //Grand Parent
-.files{
-    grid-area:files;
-    background-color: white;
-    margin:6%;
-    padding:6%;
-    border-radius:10px;
-
-    display:grid;
-    grid-template-areas: var(--files-grid-template-areas);
-    grid-template-rows: var(--files-grid-template-rows);
-
-}
-//Parent
-.file-header
-{
-    grid-area:file-header;
-
-    display:grid;
-    grid-template-areas:var(--file-header-grid-template-areas);
-    border-bottom:1px solid #c7c7c7;
-}
-.header-title
-{
-    grid-area:header-title;
-}
-
-.header-date{
-    grid-area:header-date;
-}
-.file-rows
-{
-    grid-area:file-rows;
-    height: 100%;
-}
-.the-file-row
-{
-    grid-area:the-file-row;
-    border-bottom:0.5px solid #c7c7c7;
-    display:grid;
-    grid-template-columns: var(--the-file-row-grid-template-columns);
-    grid-template-rows:var(--the-file-row-grid-template-rows);
-    grid-auto-rows: var(--the-file-row-grid-auto-rows);
-    grid-template-areas:var(--the-file-row-grid-template-areas)
-}
-.the-file{
-    grid-area:the-file;
-    display:grid;
-    grid-template-columns:50px auto;
-    align-content:center;
-}
-.the-file > a{
-   text-decoration: none;
-   font-size:1.0em;
-   font-weight:600;
-   letter-spacing: 0.5px;
-   color:grey;
-   justify-self: start;
-    -ms-flex-item-align: center;
+                grid-template-columns: 1fr;
+                grid-template-rows:60px;
+                grid-auto-rows:  minmax(70px, auto);
+            }
+        }
+        .mobile-header-title
+        {
+            justify-self:start;
+            align-self: center;
+            grid-area:the-file-delete;
+        }
+        .the-file-date{
+            display:grid;
+            grid-area:the-file-date;
+            align-self: center;
+            @include media("<=tablet") {
+                align-self: start;
+            }
+        }
+        .settings-pdfs-list
+        {
+            display:grid;
+            grid-area:settings-pdfs-list;
+            align-content: center;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+        }
+    }
+    .the-file{
+        grid-area:the-file;
+        display:grid;
+        grid-template-columns:50px auto;
+        align-content:center;
+    }
+    .the-file > a{
+        text-decoration: none;
+        font-size:1.0em;
+        font-weight:600;
+        letter-spacing: 0.5px;
+        color:grey;
+        justify-self: start;
+        -ms-flex-item-align: center;
+            align-self: center;
+    }
+    .the-file > a:hover{
+        color:orangered;
+    }
+    .Recipient{
+        grid-area:Recipient;
+        display:grid;
+        grid-template-columns:auto auto auto;
+        
+        align-self:center;
+        align-content: center;
+        justify-content: start;
+    }
+    .mobile-header-date
+    {
         align-self: center;
-}
-.the-file > a:hover{
-    color:orangered;
- }
-.Recipient{
-    grid-area:Recipient;
-    display:grid;
-    grid-template-columns:auto auto auto;
+        grid-area:mobile-header-date;
+    }
     
-    align-self:center;
-    align-content: center;
-    justify-content: start;
-}
-// .the-file-send  button{
-//     justify-self: var(--the-file-send-button-align-self);
-//     -ms-flex-item-align: var(--the-file-send-button-align-self);
-//         align-self: var(--the-file-send-button-align-self);
-//     border:none;
-//     background-color:#2bb0ff;
-//     border-radius: 14px;
-//     padding:4px 20px;
-//     margin-right:4px;
-// }
-.the-file-date{
-    display:grid;
-    grid-area:the-file-date;
-    align-self: var(--the-file-date-align-self);
-}
-.mobile-header-date
-{
-    align-self: center;
-    grid-area:mobile-header-date;
-}
-// .the-file-delete{
-//     display:grid;
-//     grid-area:the-file-delete;
-//  align-content: center;
-// }
+  
+  }
 
-.mobile-header-title
-{
-    justify-self:start;
-    align-self: center;
-    grid-area:the-file-delete;
-
-
-}
-
-
-.settings-pdfs-list
-{
-    display:grid;
-    grid-area:settings-pdfs-list;
- align-content: center;
- display:grid;
- grid-template-columns:1fr 1fr;
-}
-// .the-file-delete button{
-//     justify-self: var(--the-file-delete-button-justify-self);
-//     background: none;
-//     border:none;
-//     padding:0px;
-//     position: relative;
-//     top:-6px;
-//     margin-right:var(--the-file-delete-button-margin-right);
-// }
-// .the-file-delete > button div:nth-child(1){
-//     position: absolute;
-//     border-bottom:1px solid red;
-//     border-left:1px solid red;
-//     border-top-left-radius:4px;
-//     border-bottom-right-radius:4px;
-//     height:15px;
-//     width:15px;
-//     -webkit-transform: scale(1.3) rotate(21deg) translate(14px, 0px) skew(-36deg, 10deg);
-//     transform: scale(1.32) rotate(30deg) translate(3px, -2.5px) skew(-20deg, 10deg);
-//     z-index:1;
-// }
-// .the-file-delete > button div:nth-child(1):hover{
-//     color:white;
-//     background-color: red;
-// }
-// .the-file-delete > button div:nth-child(2){
-//     position: absolute;
-//     display:grid;
-//     -ms-flex-line-pack: center;
-//     align-content: center;
-//     border-top:1px solid red;
-//     border-right:1px solid red;
-//     border-bottom:1px solid red;
-//     color:red;
-//     height:22px;
-//     width:25px;
-//     z-index:2;
-//     margin-left:10px;
-//     -webkit-transform: scale(1) translate(2px, -5px);
-//     transform: scale(1) translate(2px, -5px);
-// }
-// .the-file-delete > button div:nth-child(2):hover{
-//     color:orange;
-//     background-color: red;
-// }
-// .SendTo input
-// {
-//     padding-left:10px;
-//     padding-right:10px;
-//     border-radius: 10px;
-//     border:none;
-//     box-shadow: 1px 1px 3px -1px #4b3939;
-// }
-// .SendTo input:focus
-// {
-//     outline: none;
-//     border-radius: 10px;
-//     border:0.5px solid #0091EA;
-//     box-shadow: 1px 1px 3px -1px #4b3939;
-// }
-// .SendTo
-// {
-//     display:grid;
-//     grid-template-columns: 4fr 1fr;
-//     align-content: center;
-//     grid-gap:14px;
-// }

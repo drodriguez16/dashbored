@@ -1,6 +1,37 @@
-.LoginForm {
-    color:white;
-    width: 250px;
+@import '../../Styles/Breakpoint.scss';
+@import "../../global.scss";
+
+.LoggedOut{
+    display:grid;
+    grid-template-rows: 4fr 6fr;
+    height:96vh;
+    @include media("<=tablet")
+    {
+        grid-template-rows: 2fr 6fr;
+    }
+    .Logo-Section
+    {
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        @include media("<=tablet"){
+            display: grid;
+            justify-content: center;
+            padding: 60px;
+            
+        }
+    }  
+    .LoginForm {
+        justify-self: center;
+        color:white;
+        width: 279px;
+        @include media("<=tablet")
+        {
+            width: 88%;
+            padding: 30px 6%;
+            align-self: start;
+        }
+    }
 }
 input[type="email"]{
     width: 100%;
@@ -9,7 +40,6 @@ input[type="email"]{
     border: none;
     color: white;
     border-bottom: 1px solid #7ac3ff;
-
     margin-top: 17px;
 }
 

@@ -1,16 +1,11 @@
-[data-theme="web-large"]
-{
-  --fileUpload-margin: 6%;
-  --fileUpload-padding: 6%;
-  --fileUpload-grid-template-columns: 100%;
-  --fileUpload-div-nth-child2-padding:0px;
-  --fileUpload-div-nth-child1-margin-left: 0px;
-  --fileUpload-div-nth-child1-item-drop-width:400px;
-  --item-drop-width:400px;
-  --webkit-file-upload-button-visibility:hidden;
 
-  --item-drop-color: transparent;
-}
+@import '../../Styles/Breakpoint.scss';
+@import "../../global.scss";
+  // @include media("<=1560px") {}
+  // @include media("<=desktop") {}
+  // @include media("<=1080px") {}
+  // @include media("<=phone") {}
+  // @include media("<=tablet") {}
 
 [data-file="no-file"]{
   --fileupload-content:'You can also drag \00000a item here to upload'
@@ -19,53 +14,22 @@
   --fileupload-content:''
 }
 
-[data-theme="mobile"]
-{
-  --fileUpload-margin: 0%;
-  --fileUpload-padding: 0%;
-  --fileUpload-grid-template-columns: 100vw;
-  --fileUpload-div-nth-child1-item-drop-width:77vw;
-  --item-drop-width:82vw;
-  --fileUpload-div-nth-child1-padding:10px 10px;
-  --fileUpload-div-nth-child2-padding:0px 7vw;
-
-  --fileUpload-div-nth-child1-margin-left: 7vw;
-  --webkit-file-upload-button-visibility:visible;
-
-  --item-drop-color: black;
-  --fileupload-content:'';
-}
-
-
-.fileUpload div:nth-child(2){
-  padding:var(--fileUpload-div-nth-child2-padding);
-}
 .fileUpload{
-  display: grid;
-
-  grid-template-columns:var(--fileUpload-grid-template-columns);
-  justify-self: center;
-  grid-template-rows: 50px 237px 46px;
-  margin: var(--fileUpload-margin);
-  padding: var(--fileUpload-padding);
-}
-.file-fileUpload{
-  grid-area:files;
-  background-color: white;
-  margin:6%;
-  padding:6%;
-  border-radius:10px;
-  display:grid;
-  grid-template-areas:    "file-header"
-                          "file-rows";
-                          grid-template-rows: 40px auto;
-
-}
-
-.form-inline  div:nth-child(1) input {
+  display: grid; 
+  padding:60px;
+  grid-template-columns:100%;
+  justify-self: start;
+  grid-template-rows: 62px 142px 43px;
+  @include media("<=tablet") {
+    grid-template-columns:100%;
+    margin: 0;
+    padding: 0;
+    grid-template-rows: 44px 152px;
+    
+  }
+  div:nth-child(1) input {
     background: none;
     font-size: 18px;
-    padding: var(--fileUpload-div-nth-child1-padding);
     display: block;
     border: none;
     border-radius: 0;
@@ -73,68 +37,42 @@
     color: #fff;
     margin-bottom: 4vh;
     z-index:2;
-    width:var(--fileUpload-div-nth-child1-item-drop-width);
-    margin-left: var(--fileUpload-div-nth-child1-margin-left)
-
-
+    width:100%;
+    margin-left: 0px;
+    @include media("<=tablet") {    
+    }
   }
-
-  .FileDropOverlay
-  {
-    display: grid;
-    position: absolute;
-    height: 200px;
-    width: var(--item-drop-width);
-    margin-top: 51px;
-    background-color: #67bdf175;
-
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -ms-flex-line-pack: center;
-        align-content: center;
-    color: #366891;
-    font-size: 1.5em;
-    font-weight: 700;
+  div:nth-child(2){
+    padding:0px;
+    
+    @include media("<=tablet") {
+      // padding:0px 7vw;
+      
+      
+    }
   }
-
-  .form-inline input:focus {
-    outline: none;
-  }
-
-  .form-inline input::-webkit-input-placeholder {
-    color: #fff;
-  }
-
-  .form-inline input:-ms-input-placeholder {
-    color: #fff;
-  }
-
-  .form-inline input::-ms-input-placeholder {
-    color: #fff;
-  }
-
-  .form-inline input::placeholder {
-    color: #fff;
-  }
+    
   #item-drop::-webkit-file-upload-button {
-    visibility:var(--webkit-file-upload-button-visibility);
+    visibility:hidden;
+    @include media("<=tablet")
+    {
+      visibility: visible;
+    }
   }
-
   #item-drop {
     position:absolute;
-      outline: 1px dashed #fff;
-      height: 200px;
-      width: var(--item-drop-width);
-
-      color: var(--item-drop-color);
-
-
+    outline: 1px dashed #fff;
+    height: 200px;
+    width: 400px;
+    color: transparent;
+    @include media("<=tablet") {
+      width:90vw;
+      color:black;
+      height: 100px;
+    }
   }
   #item-drop::before
-   {
-   // content: 'You can also drag \00000a item here to upload';
-    content: var(--fileupload-content);
+    {
     display: grid;
     cursor: pointer;
     text-align: center;
@@ -144,16 +82,65 @@
     align-content: center;
     height: 100%;
     letter-spacing: 1.5px;
+    @include media("<=tablet")
+    {
+      content:'';
+    }
   }
   #item-drop::after
   {
-     content: '';
-     display: inline-block;
-     cursor: pointer;
- }
-  .upload-pdf{
-    display:grid;
+      content: '';
+      display: inline-block;
+      cursor: pointer;
   }
+}
+.file-fileUpload{
+  grid-area:files;
+  background-color: white;
+  // margin:6%;
+  // padding:6%;
+  border-radius:10px;
+  display:grid;
+  grid-template-areas:    "file-header"
+                          "file-rows";
+  grid-template-rows: 40px auto;
+}
+// .form-inline  
+.FileDropOverlay
+{
+  display: grid;
+  position: absolute;
+  height: 200px;
+  width: 400px;
+  margin-top: 51px;
+  background-color: #67bdf175;
+  justify-content: center;
+  align-content: center;
+  color: #366891;
+  font-size: 1.5em;
+  font-weight: 700;
+  @include media("<=tablet") {
+    width: 82vw;
+  }
+}
+.form-inline input:focus {
+  outline: none;
+}
+.form-inline input::-webkit-input-placeholder {
+  color: #fff;
+}
+.form-inline input:-ms-input-placeholder {
+  color: #fff;
+}
+.form-inline input::-ms-input-placeholder {
+  color: #fff;
+}
+.form-inline input::placeholder {
+  color: #fff;
+}
+.upload-pdf{
+  display:grid;
+}
 .upload-pdf button
 {
     background: none;
