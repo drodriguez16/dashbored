@@ -1,0 +1,59 @@
+
+@mixin breakpoint($point) {    
+    @if($point == web) {
+        @media(min-width:701px){@content;}
+    }   
+    @else if($point == mobile) {
+        @media(max-width:700px){@content;}
+    }   
+}
+
+
+@mixin Registration {
+     [data-registration="true"] {
+        @content;
+    }
+}
+@mixin QueueTheme {
+     [data-queuetheme="true"] {
+        @content;
+    }
+}
+
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++gl animations
+
+@keyframes kf-fadeIn
+{
+    50%{
+        
+        transform: translate(0px, 100px);
+        transform: scale(0.9,0.5);
+    }
+    100%{opacity: 1;
+        
+        transform: translate(0px, 0px);
+        transform: scale(1,1);
+    }
+}
+//++++++++++++++++++++++++++++++++++++++++++++++++++gl animation props
+
+@mixin delay-animation($elem) {
+    @for $i from 1 through 10 {
+        #{$elem}:nth-child(#{$i}) {           
+             animation-delay: $i * 0.03s; 
+          }
+      }
+    
+}
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++gl Variables
+
+$Registration-background: "assets/Signup-Registration-Companyinfo.png";    
+$QueueTheme-background: "assets/QueueTheme/QueueThemeBk.jpg";    
+
+
+
+

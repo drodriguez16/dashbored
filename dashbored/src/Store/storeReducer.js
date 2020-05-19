@@ -1,3 +1,5 @@
+let Settings = {}
+
 const storeReducer = (state, action) => {
     switch (action.type) {
         case "ResetInputRecipient":
@@ -83,8 +85,9 @@ const storeReducer = (state, action) => {
             const Pdfsettings = { ...state.PdfSettings, isSettings: !state.PdfSettings.isSettings }
             return { ...state, PdfSettings: Pdfsettings }
         case "isSettings":
-            const settings = { ...state.Settings, isSettings: !state.Settings.isSettings }
-            return { ...state, Settings: settings }
+            Settings = state.Settings;
+            Settings.isSettings = !state.Settings.isSettings;
+            return { ...state, Settings: Settings }
         case "SetSettings":
 
             return { ...state, Settings: action.settings }
@@ -95,10 +98,12 @@ const storeReducer = (state, action) => {
 
 
             return {
+                InputRecipient: "",
+                AddNew: false,
                 Contacts: [{ email: 'Dioscarr@gmail.com' }, { email: 'KellenOcana87@gmail.com' }, { email: 'DionelRodriguez16@gmail.com' }, { email: '3472009415@tmomail.net' }],
-                Settings: { isSettings: false, fullname: '', AvatarName: 'Avatar.jpg' },
+                Settings: { isSettings: false },
                 PdfSettings: { isSettings: false, AssignRecipient: false, Recipient: '' },
-                CurrentUser: {},
+                CurrentUser: { email: "", avatar: "", name: "", logged: false },
                 fdbInitialized: false,
                 SignedIn: false,
                 Loading: true,
@@ -116,6 +121,9 @@ const storeReducer = (state, action) => {
             return { ...state, SignedIn: true }
         case "SetCurrentUser":
 
+            // Settings = state.Settings;
+            // Settings.AvatarName = action.avatar
+            // Settings.fullname = action.name
             return { ...state, CurrentUser: action.CurrentUser }
         case "SignedOut":
             return { ...state, SignedOut: false }
@@ -129,7 +137,7 @@ const storeReducer = (state, action) => {
             templPdfs.push(action.pdf);
             return { ...state, pdfs: templPdfs, Loading: false }
         case "SetPdfs":
-            debugger;
+
             return { ...state, pdfs: action.pdfs, Loading: action.Loading }
         default:
             return { ...state }

@@ -1,3 +1,10 @@
+@import '../../Styles/Breakpoint.scss';
+@import "../../global.scss";
+  // @include media("<=1560px") {}
+  // @include media("<=desktop") {}
+  // @include media("<=1080px") {}
+  // @include media("<=phone") {}
+  // @include media("<=tablet") {}
 .MoreRecipientsNumber
 {
     position: relative;

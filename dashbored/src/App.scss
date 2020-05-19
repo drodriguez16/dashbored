@@ -1,119 +1,133 @@
-@import url("https://use.typekit.net/iiq8orb.css");
+// @import url("https://use.typekit.net/iiq8orb.css");
+@import './Styles/Breakpoint.scss';
+@import "./global.scss";
 
-[data-theme="web-large"]
-{
-  --Sender-Render-background-color: #0091EA;
-  --Sender-Render-background: #0091EA url("./assets/bkcloud.svg");
-  --Sender-Render-background-repeat: no-repeat;
-  --Sender-Render-background-size: auto;
-  --Sender-Render-background-position: -500px -405px;
-  --Sender-Render-grid-template-rows: 20vh 80vh;
-  --Logo-Section-margin-left: 6%;
-  --Logo-Section-justify-self: start;
-  --Logo-Section-img-width:100%;
 
-  --Logo-Section-img-justify-self: start;
-  --Logo-Section-img-align-self: start;
-  --Logo-Section-grid-template-rows: auto;
+body{
+  background-color:#0091EA;
+  background: #0091EA url("./assets/bkcloud.svg");
+  background-repeat: no-repeat;
+  background-size:auto;
+  background-position: -500px -405px;
+  padding: 2vh 3vw;
 }
 
-[data-theme="mobile"]
-{
-  --Sender-Render-background-color: #0091EA;
-  --Sender-Render-background: #0091EA url("./assets/bkcloud.svg");
-  --Sender-Render-background-repeat: no-repeat;
-  --Sender-Render-background-size: auto;
-  --Sender-Render-background-position: -500px -405px;
-  --Sender-Render-grid-template-rows: none;
-  --Logo-Section-margin-left: 0;
-  --Logo-Section-justify-self: center;
-  --Logo-Section-img-width:50%;
-
-  --Logo-Section-img-justify-self: center;
-  --Logo-Section-img-align-self: center;
-  --Logo-Section-grid-template-rows: 136px;
-}
 
 .Sender-Render {
   display:grid;
-  grid-template-rows: var(--Sender-Render-grid-template-rows);
-  grid-template-areas: 'Sender-Component'
-                        'Dashbrd';
-  background-color: var(--Sender-Render-background-color);
-  background:var(--Sender-Render-background);
-  background-repeat: var(--Sender-Render-background-repeat);
-  background-size: var(--Sender-Render-background-size);
-  background-position: var(--Sender-Render-background-position);
-}
-#InCog{
- grid-column:3; 
+  
+  grid-template-rows:  14vh 82vh;
+  grid-template-columns:100%;
+  // grid-template-areas: 'Sender-Component'
+  //                       'Dashbrd';
+  
+    
+  @include media("<=phone") {
+    grid-template-columns:100%;
+  }
+
+  // @include media("<=1560px") {}
+  // @include media("<=desktop") {}
+  // @include media("<=1080px") {}
+  // @include media("<=phone") {}
+  // @include media("<=tablet") {}
+
+
+  // .Dashbrd{
+  //   grid-area:Dashbrd;
+  // }
+  .Logo-Section {
+    display: grid;
+    align-self: center;  
+    grid-template-columns: 200px auto 200px;
+  
+    @include media("<=tablet")
+    {
+      grid-template-columns:170px auto 98px;
+    }
+  
+    #InCog{
+      display: grid;
+      grid-column: 3;
+      justify-content: end;
+      @include media("<=tablet")
+      {
+        grid-column: 3;
+      }
+      button{
+        justify-self: center;
+      }
+    }
+  
+    img:nth-child(1) {
+      width: 100%;
+      justify-self: start;
+      @include media("<=phone") {
+        width: 100%;
+        justify-self: center;
+      }
+    }
+    img:nth-child(2) {
+      width: 13%;
+      height: 22%;
+    }
+  }
+  
+  .LoggedOut
+  {
+    height:100vh;
+    width:100vw;
+    display:grid;
+  
+    background-color:#0091EA;
+    background: #0091EA url("./assets/bkcloud.svg");
+    background-repeat: no-repeat;
+    background-size:auto;
+    background-position: -500px -405px;
+      
+    @include media("<=phone") {
+      background: #0091EA url("./assets/bkcloud.svg");
+      grid-template-rows:none;
+      background-position:-500px -405px;
+      background-color:#0091EA;
+      background-size:auto;
+      background-repeat: no-repeat;
+    }
+  }
+  
+  .LoginForm
+  {
+    justify-self: center;
+  }
+  
+  
+  .LoggedOut > .Logo-Section{
+    display:grid;
+    justify-self:center;
+    -ms-flex-item-align: center;
+    align-self: center;
+        margin-left: 0px;
+    grid-template-rows: 136px;
+  
+  }
+  .LoggedOut img {
+    width: 100%;
+    justify-self: start;
+   
+    @include media("<=phone") {
+      width: 50%;
+      justify-self: center;
+    }
+  }
+  
+  .logout{
+    width: 50px;
+    height: 50px;
+    grid-column: 3;
+    justify-self: center;
+    align-self: center;
+  }
+
 }
 
 
-.Dashbrd{
-  grid-area:Dashbrd;
-}
-.Sender-Component{
-  grid-area:Sender-Component;
-}
-.Logo-Section {
-  display: grid;
-  align-self: center;
-  grid-template-rows: 136px;
-  grid-template-columns: 200px auto 200px;
-
-}
-.Logo-Section img:nth-child(1) {
-  width: var(--Logo-Section-img-width);
-  justify-self: var(--Logo-Section-img-justify-self);
-  -ms-flex-item-align: var(--Logo-Section-img-align-self);
-      align-self: var(--Logo-Section-img-align-self);
-}
-.Logo-Section img:nth-child(2) {
-  width: 13%;
-  height: 22%;
-}
-
-
-.LoggedOut
-{
-  height:100vh;
-  width:100vw;
-  display:grid;
-
-  background-color: var(--Sender-Render-background-color);
-  background:var(--Sender-Render-background);
-  background-repeat: var(--Sender-Render-background-repeat);
-  background-size: var(--Sender-Render-background-size);
-  background-position: var(--Sender-Render-background-position);
-}
-
-.LoginForm
-{
-  justify-self: center;
-}
-
-
-.LoggedOut > .Logo-Section{
-  display:grid;
-  justify-self:center;
-  -ms-flex-item-align: center;
-  align-self: center;
-      margin-left: 0px;
-  grid-template-rows: 136px;
-
-}
-.LoggedOut img {
-  width: var(--Logo-Section-img-width);
-  justify-self: var(--Logo-Section-img-justify-self);
-  -ms-flex-item-align: var(--Logo-Section-img-align-self);
-      align-self: var(--Logo-Section-img-align-self);
-}
-
-.logout{
-  width: 50px;
-  height: 50px;
-  grid-column: 3;
-  justify-self: center;
-  align-self: center;
-}
