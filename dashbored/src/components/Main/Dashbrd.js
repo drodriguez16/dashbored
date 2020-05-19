@@ -81,11 +81,11 @@ function Dashbrd(props) {
                 </div>
                 <div className="settings-pdfs-list">
                   <FileSettings classes={classes} state={state} dispatch={dispatch} actions={actions} pdfitem={pdfitem} />
-                  <div>
-                    <IconButton aria-label="delete" className={classes.margin} onClick={e => removepdf(pdfitem.id)}>
-                      <DeleteIcon fontSize="small" />
-                    </IconButton>
-                  </div>
+                </div>
+                <div className="the-file-delete">
+                  <IconButton aria-label="delete" className={classes.margin} onClick={e => removepdf(pdfitem.id)}>
+                    <DeleteIcon fontSize="small" />
+                  </IconButton>
                 </div>
               </div>);
           })}
