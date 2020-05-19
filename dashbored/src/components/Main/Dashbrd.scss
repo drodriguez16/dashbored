@@ -28,6 +28,7 @@
         @include media("<=tablet") {
             margin: 0px;
             padding: 30px;
+            height: 100%;
         }
         .file-header{
             // grid-area:file-header;
@@ -50,20 +51,20 @@
             grid-template-columns: 11fr 9fr 4fr 4fr;
             grid-template-rows:45px;
             grid-auto-rows:  minmax(100px, auto);
-            grid-template-areas:"the-file Recipient the-file-date settings-pdfs-list";
+            grid-template-areas:"the-file Recipient the-file-date settings-pdfs-list the-file-delete";
             @include media("<=tablet") {
-                grid-template-areas:    "settings-pdfs-list"
-                                        "the-file"
-                                        "Recipient"
-                                        "mobile-header-date"
-                                        "the-file-date";
-                grid-template-columns: 1fr;
-                grid-template-rows:60px;
+                
+                grid-template-areas:    "the-file the-file-date settings-pdfs-list"
+                                        "Recipient Recipient the-file-delete"                                                                              
+                                        ;
+                grid-template-columns: 7fr 2fr 1fr;
+                grid-template-rows:30px 90px;
                 grid-auto-rows:  minmax(70px, auto);
             }
         }
         .mobile-header-title
         {
+            
             justify-self:start;
             align-self: center;
             grid-area:the-file-delete;
@@ -83,6 +84,10 @@
             align-content: center;
             display:grid;
             grid-template-columns:1fr 1fr;
+        }
+        .the-file-delete
+        {
+            grid-area:the-file-delete;
         }
     }
     .the-file{
