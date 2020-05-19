@@ -51,7 +51,7 @@ function SimpleDialog(props) {
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-            <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+            <DialogTitle id="simple-dialog-title">Contacts</DialogTitle>
             <List>
                 {state.Contacts.map((contact) => (
                     <ListItem button onClick={() => handleListItemClick(contact.email)} key={contact.email}>
