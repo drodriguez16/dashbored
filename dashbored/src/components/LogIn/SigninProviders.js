@@ -3,6 +3,7 @@ import './LoginForm.scss'
 import { auth, fdb } from '../../API/firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import { db, actions, documents } from '../../Store';
+import './SigninProviders.scss'
 
 const SigninProviders = () => {
     const { state, dispatch } = useContext(db);
@@ -56,7 +57,7 @@ const SigninProviders = () => {
             }
         };
     }
-    return (<StyledFirebaseAuth uiConfig={uiConfig()} firebaseAuth={auth()} />);
+    return (<StyledFirebaseAuth className="providers-filebyrd" uiConfig={uiConfig()} firebaseAuth={auth()} />);
 }
 
 export default SigninProviders; 
