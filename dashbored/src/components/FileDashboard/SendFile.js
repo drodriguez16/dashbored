@@ -77,52 +77,6 @@ const SendFile = (props) => {
                     // .update({ id: transId, SendTo: "", DownloadUrl: "", isLink: false, LinkOff: false, CreatedAt: Date.now(), init: true });
 
 
-                    fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/Devices/`).on("value", children => {
-                        const token = children.val().deviceTk;
-
-
-                        const mode = "cors";
-                        const method = "POST"
-                        const headers = {
-                            "authorization": `key=${servId}`,
-                            "content-type": "application/json"
-                        }
-                        const notification = {
-                            "body": "",
-                            "title": "File brought to you by FileByrd",
-                            "icon": "https://user-images.githubusercontent.com/6876354/82510739-5140bf80-9ad9-11ea-8a15-f3194894b39b.png"
-                        }
-                        const data = {
-                            "body": "Body of Your Notification in Data",
-                            "title": "Title of Your Notification in Title",
-                            "key_1": "Value for key_1",
-                            "key_2": "Value for key_2"
-                        }
-                        const body = {
-                            "collapse_key": "type_a",
-                            "notification": notification,
-                            "data": data,
-                            "to": `${token}`
-                        }
-
-
-                        const notif = {
-                            "mode": mode,
-                            "method": method,
-                            "headers": headers,
-                            "body": JSON.stringify(body)
-                        }
-
-                        fetch("https://fcm.googleapis.com/fcm/send", notif)
-                            .then(response => {
-
-                                response.json()
-                            })
-                            .then(data => {
-                                debugger
-                                console.log(data)
-                            });
-                    });
 
 
                 }, 2000);
