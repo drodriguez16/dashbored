@@ -33,6 +33,7 @@ function SimpleDialog(props) {
     };
 
     const handleListItemClick = (value) => {
+
         if (value === "addAccount") {
             dispatch({ type: actions.AddNewAccount, AddNew: true });
             value = "";

@@ -33,7 +33,7 @@ const StyledBadge = withStyles((theme) => ({
 }))(Badge);
 
 const Recipient = (props) => {
-    const { classes, state, dispatch, actions, pdfitem, fdb } = props;
+    const { classes, state, dispatch, actions, pdfitem, fdb, direction } = props;
     const [open, setOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -42,27 +42,26 @@ const Recipient = (props) => {
     const [recipient, SetRecipient] = React.useState(state.InputRecipient)
     // const [Addnew, SetAddNew] = React.useState(state.AddNew);
 
-    React.useMemo(() => {
+    React.useEffect(() => {
 
         dispatch({ type: actions.InputRecipient, value: recipient })
     }, [recipient])
-    React.useMemo(() => {
-        SetRecipient("")
-    }, [state.AddNew])
+    // React.useMemo(() => {
+    //     SetRecipient("")
+    // }, [state.AddNew])
 
 
     const handleClickOpen = () => {
         setOpen(prv => !prv);
-
     };
     const handleClose = (value) => {
         setOpen(false);
         setAnchorEl(null);
         if (value !== "")
-            dispatch({ type: actions.TransactionQueue, Queue: { id: 0, SendTo: value, isLink: false, LinkOff: false, CreatedAt: Date.now(), init: true }, pdfId: pdfitem.id })
+            dispatch({ type: actions.TransactionQueue, Queue: { id: 0, SendTo: value, isLink: false, LinkOff: false, CreatedAt: Date.now(), init: true }, pdfId: pdfitem.id, direction: direction })
     };
     const clear = () => {
-        dispatch({ type: actions.CelearAssigned, pdfId: pdfitem.id })
+        dispatch({ type: actions.CelearAssigned, pdfId: pdfitem.id, direction: direction })
     }
     const handlePopoverOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -74,8 +73,13 @@ const Recipient = (props) => {
         const TransactionQueue = pdfitem.TransactionQueue;
         TransactionQueue.LinkOff = !TransactionQueue.LinkOff;
 
-        fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/${pdfitem.id}/Transactions/${TransactionQueue.id}`).update(TransactionQueue);
-        dispatch({ type: actions.LinkOff, pdfId: pdfitem.id, TransactionQueue: TransactionQueue })
+        if (direction === "outbox") {
+            fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/pdfs/${pdfitem.id}/Transactions/${TransactionQueue.id}`).update(TransactionQueue);
+        }
+        else {
+            fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/filebyrd/${pdfitem.id}/Transactions/${TransactionQueue.id}`).update(TransactionQueue);
+        }
+        dispatch({ type: actions.LinkOff, pdfId: pdfitem.id, TransactionQueue: TransactionQueue, direction: direction })
     }
     const ShowTransMenu = (value) => {
 
@@ -87,7 +91,8 @@ const Recipient = (props) => {
     }
     const SwitchTransac = (tran) => {
         setIsMenu(prev => !prev);
-        dispatch({ type: actions.SwitchTransac, pdfId: pdfitem.id, TransactionQueue: tran })
+        debugger;
+        dispatch({ type: actions.SwitchTransac, pdfId: pdfitem.id, TransactionQueue: tran, direction: direction })
     }
     const openPopover = Boolean(anchorEl);
     return (
@@ -107,7 +112,7 @@ const Recipient = (props) => {
                         </>}
                 </div> :
                 <div className="SendTo" style={{ fontSize: '10px' }}>
-                    <Fab variant="extended" onClick={() => { dispatch({ type: actions.AssignRecipient }) }} className={classes.recipient}>
+                    <Fab variant="extended" onClick={() => { dispatch({ type: actions.AssignRecipient, direction: direction }) }} className={classes.recipient}>
                         <ContactMailIcon fontSize="small" className={classes.contactIcon} />
                         {pdfitem.TransactionQueue.SendTo}
                         {pdfitem.TransactionQueue.isLink && pdfitem.TransactionQueue.LinkOff && <LinkOffIcon className={classes.LinkOffIcon} onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose} onClick={LinkOff} />}

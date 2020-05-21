@@ -14,13 +14,15 @@ const actions = {
    Sent: "Sent",
    LinkOff: "LinkOff",
    CelearAssigned: "CelearAssigned",
+   InboxCelearAssigned: "InboxCelearAssigned",
    TransactionQueue: "TransactionQueue",
    SwitchTransac: "SwitchTransac",
    SetSettings: "SetSettings",
    SetContacts: "SetContacts",
    AddNewAccount: "AddNewAccount",
    InputRecipient: "InputRecipient",
-   ResetInputRecipient: "ResetInputRecipient"
+   ResetInputRecipient: "ResetInputRecipient",
+   Setfilebyrd: "Setfilebyrd"
 }
 
 export default actions

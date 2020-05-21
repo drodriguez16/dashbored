@@ -7,6 +7,20 @@ import Setting from './components/Header/Settings'
 import HeaderAuthIn from './components/Header/HeaderAuthIn'
 import HeaderAuthOut from './components/LogIn/HeaderAuthOut'
 import { useAuth } from './hooks'
+
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("./firebase-messaging-sw.js")
+    .then(function (registration) {
+      console.log("Registration successful, scope is:", registration.scope);
+    })
+    .catch(function (err) {
+      console.log("Service worker registration failed, error:", err);
+    });
+}
+
+
 function App() {
   const [state, dispatch] = useReducer(storeReducer, data);
   const user = useAuth();

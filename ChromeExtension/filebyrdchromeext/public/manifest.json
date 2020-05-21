@@ -1,6 +1,6 @@
 {
-  "short_name": "FileByrd",
-  "name": "Share and un-share",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
@@ -13,12 +13,11 @@
       "sizes": "192x192"
     },
     {
-      "src": "icons512.png",
+      "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "gcm_sender_id": "103953800507",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",

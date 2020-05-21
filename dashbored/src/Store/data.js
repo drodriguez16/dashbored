@@ -1,4 +1,5 @@
-const data = {
+
+const init = {
   InputRecipient: "",
   AddNew: false,
   Contacts: [{ email: 'Dioscarr@gmail.com' }, { email: 'KellenOcana87@gmail.com' }, { email: 'DionelRodriguez16@gmail.com' }, { email: '3472009415@tmomail.net' }],
@@ -9,6 +10,7 @@ const data = {
   SignedIn: false,
   Loading: true,
   pdfs: [],
+  filebyrd: [],
   pdf: {
     name: "",
     uploadedBy: "",
@@ -16,4 +18,6 @@ const data = {
     size: 0
   }
 }
+const data = { ...init }
+export { init }
 export default data

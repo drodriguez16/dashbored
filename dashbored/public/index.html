@@ -7,6 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="File byrd" />
+  <!-- Tell the browser it's a PWA -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Tell iOS it's a PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -75,21 +79,21 @@
   <p class="page-info">
     Loading...
   </p> -->
-  <!-- <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('worker.js').then(function (registration) {
-          console.log('Worker registration successful', registration.scope);
-        }, function (err) {
-          console.log('Worker registration failed', err);
-        }).catch(function (err) {
-          console.log(err);
-        });
-      });
-    } else {
-      console.log('Service Worker is not supported by browser.');
-    }
-  </script> -->
+  <script>
+    // if ('serviceWorker' in navigator) {
+    //   window.addEventListener('load', function () {
+    //     navigator.serviceWorker.register('worker.js').then(function (registration) {
+    //       console.log('Worker registration successful', registration.scope);
+    //     }, function (err) {
+    //       console.log('Worker registration failed', err);
+    //     }).catch(function (err) {
+    //       console.log(err);
+    //     });
+    //   });
+    // } else {
+    //   console.log('Service Worker is not supported by browser.');
+    // }
+  </script>
   <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
