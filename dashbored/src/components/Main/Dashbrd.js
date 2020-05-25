@@ -121,9 +121,8 @@ function Dashbrd(props) {
     fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/filebyrd/`).on("value", children => {
 
       fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/Devices/`).on("value", children => {
+
         const token = children.val().deviceTk;
-
-
         const mode = "cors";
         const method = "POST"
         const headers = {
