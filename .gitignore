@@ -2,3 +2,5 @@ fnc/functions/node_modules/
 dashbored/.env.staging
 dashbored/.env.production
 dashbored/.env
+fnc/r.bat
+dashbored/firebase-debug.log
