@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import useForm from '../../hooks/useForm'
 import { db, actions, fauth, firebase, documents } from '../../Store'
 import './Settings.scss'
-import { MdSave } from 'react-icons/md'
 import { RiLogoutBoxLine } from 'react-icons/ri'
 import Fab from '@material-ui/core/Fab';
 import { makeStyles } from '@material-ui/core/styles';

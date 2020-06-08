@@ -1,26 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { db, actions } from '../../Store'
+import React, { useEffect, useState } from 'react';
+import { actions } from '../../Store'
 import { fdb, fstorage, messaging } from '../../API/firebase';
 import FileUpload from '../Upload/FileUpload';
 import Recipient from '../FileDashboard/Recipient'
 import "./Dashbrd.scss";
 import useViewport from '../../hooks/useViewport'
-import useForm from '../../hooks/useForm'
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import SettingsIcon from '@material-ui/icons/Settings';
-import SendIcon from '@material-ui/icons/Send';
 import SendFile from '../FileDashboard/SendFile'
-import FileSettings from '../FileDashboard/FileSettings'
-import { green } from '@material-ui/core/colors';
 import DashbrdStyles from './DashbrdStyles'
 import SwipeableViews from 'react-swipeable-views';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { ReactComponent as Byrdlogo } from '../../assets/Byrd.svg'
-import Nofitication from '../Notification'
 
-const servId = "AAAAQ7h9wjc:APA91bEzr1ut4NE1Vhndclw0MuD7WrbKIf1_Q2sJpx246FUm4AQC4uQlqNpcokTNfhaMUBpVtLI6lUbJ8g5ljsOtvhiOm9Bzq-nP9sb16qf5FppbANBTV6vJFXVfsN7tVmQVx06U6IXE";
+const servId = process.env.REACT_APP_SERVICE_ID;
 
 function Dashbrd(props) {
   const { user, state, dispatch } = props
@@ -121,49 +115,47 @@ function Dashbrd(props) {
     fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/filebyrd/`).on("value", children => {
 
       fdb.ref(`Accounts/${state.CurrentUser.email.replace(".", "")}/Devices/`).on("value", children => {
+        if (children.val() !== null ) { 
+          const token = children.val().deviceTk;
+          const mode = "cors";
+          const method = "POST"
+          const headers = {
+            "authorization": `key=${servId}`,
+            "content-type": "application/json"
+          }
+          const notification = {
+            "body": "",
+            "title": "File brought to you by FileByrd",
+            "icon": "https://user-images.githubusercontent.com/6876354/82510739-5140bf80-9ad9-11ea-8a15-f3194894b39b.png"
+          }
+          const data = {
+            "body": "Body of Your Notification in Data",
+            "title": "Title of Your Notification in Title",
+            "key_1": "Value for key_1",
+            "key_2": "Value for key_2"
+          }
+          const body = {
+            "collapse_key": "type_a",
+            "notification": notification,
+            "data": data,
+            "to": `${token}`
+          }
 
-        const token = children.val().deviceTk;
-        const mode = "cors";
-        const method = "POST"
-        const headers = {
-          "authorization": `key=${servId}`,
-          "content-type": "application/json"
-        }
-        const notification = {
-          "body": "",
-          "title": "File brought to you by FileByrd",
-          "icon": "https://user-images.githubusercontent.com/6876354/82510739-5140bf80-9ad9-11ea-8a15-f3194894b39b.png"
-        }
-        const data = {
-          "body": "Body of Your Notification in Data",
-          "title": "Title of Your Notification in Title",
-          "key_1": "Value for key_1",
-          "key_2": "Value for key_2"
-        }
-        const body = {
-          "collapse_key": "type_a",
-          "notification": notification,
-          "data": data,
-          "to": `${token}`
-        }
+          const notif = {
+            "mode": mode,
+            "method": method,
+            "headers": headers,
+            "body": JSON.stringify(body)
+          }
 
-
-        const notif = {
-          "mode": mode,
-          "method": method,
-          "headers": headers,
-          "body": JSON.stringify(body)
-        }
-
-        fetch("https://fcm.googleapis.com/fcm/send", notif)
+          fetch("https://fcm.googleapis.com/fcm/send", notif)
           .then(response => {
-
             response.json()
           })
           .then(data => {
-            debugger
             console.log(data)
           });
+        }
       });
 
       if (!state.fdbInitialized) {

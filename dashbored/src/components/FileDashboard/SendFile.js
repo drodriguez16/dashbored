@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react'
 import IconButton from '@material-ui/core/IconButton';
 import SendIcon from '@material-ui/icons/Send';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { fdb, fstorage, messaging } from '../../API/firebase';
+import { fdb } from '../../API/firebase';
 import validateEmail from '../../Store/utils/index'
-
-const CloudFuncSendEmail = process.env.REACT_APP_FUNCSENDEMAIL;
-const servId = "AAAAQ7h9wjc:APA91bEzr1ut4NE1Vhndclw0MuD7WrbKIf1_Q2sJpx246FUm4AQC4uQlqNpcokTNfhaMUBpVtLI6lUbJ8g5ljsOtvhiOm9Bzq-nP9sb16qf5FppbANBTV6vJFXVfsN7tVmQVx06U6IXE";
 
 const SendFile = (props) => {
     const { classes, state, dispatch, actions, pdfitem, direction } = props;

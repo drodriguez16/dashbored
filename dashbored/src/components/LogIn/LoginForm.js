@@ -1,24 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './LoginForm.scss'
-import { fauth, firebase } from '../../Store';
-import useForm from '../../hooks/useForm'
-import validateEmail from '../../Store/utils'
+//import { fauth } from '../../Store';
+//import useForm from '../../hooks/useForm'
+//import validateEmail from '../../Store/utils'
 import SigninProviders from './SigninProviders'
 
 
 const LoginForm = () => {
-    const [usernameErr, setUsernameErr] = useState('')
-    const [pwdErr, setPwdErr] = useState('')
-    const [fields, setFields, reset, isNew] = useForm({ username: '', password: '', confirmPassword: '', isNew: false })
-    const [islocal, setIslocal] = useState(true);
-    const newAccount = () => {
+    //const [usernameErr, setUsernameErr] = useState('')
+    //const [pwdErr, setPwdErr] = useState('')
+    //const [fields, setFields, reset, isNew] = useForm({ username: '', password: '', confirmPassword: '', isNew: false })
+    //const [islocal, setIslocal] = useState(true);
+    /*const newAccount = () => {
         isNew(!fields.isNew);
     }
     const login = () => {
 
         if (validateEmail(fields.username) && fields.password !== "") {
             fauth.signInWithEmailAndPassword(fields.username, fields.password).then(r => {
-
                 setPwdErr("")
                 setUsernameErr("")
             }).catch(err => {
@@ -43,7 +42,8 @@ const LoginForm = () => {
                 console.log("signedIn " + r.additionalUserInfo)
             });
         }
-    }
+    }*/
+
     return (
         <div className="LoginForm">
             {/* {(islocal) ?

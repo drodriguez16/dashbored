@@ -4,23 +4,18 @@ import ContactMailIcon from '@material-ui/icons/ContactMail';
 import Fab from '@material-ui/core/Fab';
 import CloseIcon from '@material-ui/icons/Close';
 import { SimpleDialog } from './SelectSendTo';
-import DoneIcon from '@material-ui/icons/Done';
 import LinkOffIcon from '@material-ui/icons/LinkOff';
 import Popover from '@material-ui/core/Popover';
 import LinkOutlinedIcon from '@material-ui/icons/LinkOutlined';
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Fade from '@material-ui/core/Fade'
 import Paper from '@material-ui/core/Paper';
-import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import SendIcon from '@material-ui/icons/Send';
 import Avatar from '@material-ui/core/Avatar';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import './Recipient.scss'
 const StyledBadge = withStyles((theme) => ({
